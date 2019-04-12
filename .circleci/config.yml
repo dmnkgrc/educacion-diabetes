@@ -66,15 +66,15 @@ jobs:
     working_directory: ~/repo
     steps:
       - restore_cache:
-        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Copy to Server
           command: scp -o StrictHostKeyChecking=no -r ./dist/* root@159.65.75.69://var/www/html/educamed
 
 workflows:
-    version: 2
-    # The build and deploy workflow
-    build_and_deploy:
-        jobs:
-            - build
-            - deploy
+  version: 2
+  # The build and deploy workflow
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy
