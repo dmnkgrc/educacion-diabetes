@@ -66,3 +66,10 @@ jobs:
           name: Copy to Server
           command: scp -o StrictHostKeyChecking=no -r ./dist/* root@159.65.75.69://var/www/html/educamed
 
+workflows:
+    version: 2
+    # The build and deploy workflow
+    build_and_deploy:
+        jobs:
+            - build
+            - deploy
