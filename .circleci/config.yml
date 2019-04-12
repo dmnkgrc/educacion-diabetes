@@ -8,6 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
+      - image: selenium/standalone-chrome:3.1.0
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -45,7 +46,7 @@ jobs:
 
       # run tests!
       - run:
-          name: Tets
+          name: Tests
           command: yarn run test
 
       - run:
