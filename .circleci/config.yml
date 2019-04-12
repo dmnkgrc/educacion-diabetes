@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11.2-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -45,8 +45,8 @@ jobs:
 
       # run tests!
       - run:
-          name: Tets
-          command: yarn test --watch=false
+          name: Tests
+          command: yarn run test
 
       - run:
           name: Build Angular
