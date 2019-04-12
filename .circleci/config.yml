@@ -46,7 +46,7 @@ jobs:
       # run tests!
       - run:
           name: Tets
-          command: yarn test
+          command: yarn test --watch false
 
       - run:
           name: Build Angular
