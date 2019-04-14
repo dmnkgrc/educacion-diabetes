@@ -69,7 +69,7 @@ jobs:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Copy to Server
-          command: scp -o StrictHostKeyChecking=no -r ./dist/educamed/* root@159.65.75.69://var/www/html/educamed
+          command: scp -o StrictHostKeyChecking=no -r ./dist/educamed/* root@165.22.137.34://var/www/html/educamed
 
 workflows:
   version: 2
