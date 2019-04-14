@@ -3,3 +3,36 @@ $blue: #113F67;
 .navbar {
   background: $blue;
 }
+
+
+body {
+  padding-top: 60px;
+}
+
+.card {
+  color: #113F67;
+  border-radius: 10px;
+  border-width: 2px;
+}
+
+.big-icon {
+  font-size: 4.2rem;
+  margin-left: 30%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-content{
+  margin-top: 10%;
+  height: 35vh;
+  width: 20vw;
+}
+
+.link-bottom{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
