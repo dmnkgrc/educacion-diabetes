@@ -31,7 +31,7 @@ body {
   left: 0px;
 }
 
-/* 
+/*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
@@ -45,17 +45,17 @@ body {
     margin-left: 5%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
-  
+
   .logo{
     max-width: 12vw;
     height: auto;
   }
-  
+
   .cover{
-    max-height: 80%;
+    max-height: 70%;
   }
 
   h2{
@@ -70,7 +70,7 @@ body {
   }
 }
 
-/* 
+/*
   ##Device = Laptops, Desktops
   ##Screen = B/w 1025px to 1280px
 */
@@ -84,15 +84,15 @@ body {
     margin-left: 4%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
-  
+
   .logo{
     max-width: 15vw;
     height: auto;
   }
-  
+
   .cover{
     max-height: 80%;
   }
@@ -112,7 +112,7 @@ body {
   }
 }
 
-/* 
+/*
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
@@ -122,19 +122,19 @@ body {
     margin-left: 10%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
 
   .first-col{
     margin-left: 4%;
   }
-  
+
   .logo{
     max-width: 30vw;
     height: auto;
   }
-  
+
   .cover{
     max-height: 80%;
   }
@@ -151,7 +151,7 @@ body {
   }
 }
 
-/* 
+/*
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
@@ -161,15 +161,15 @@ body {
     margin-left: 15%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
-  
+
   .logo{
     max-width: 10vw;
     height: auto;
   }
-  
+
   .cover{
     max-height: 80%;
   }
@@ -187,7 +187,7 @@ body {
   }
 }
 
-/* 
+/*
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
   ##Screen = B/w 481px to 767px
 */
@@ -197,15 +197,15 @@ body {
     margin-left: 42%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
-  
+
   .logo{
     max-width: 25vw;
     height: auto;
   }
-  
+
   .cover{
     max-height: 80%;
   }
@@ -222,7 +222,7 @@ body {
   }
 }
 
-/* 
+/*
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */
@@ -232,10 +232,10 @@ body {
     margin-left: 38%;
   }
 
-  .section—first { 
-    height: 90vh; 
+  .section—first {
+    height: 90vh;
   }
-  
+
   .logo{
     max-width: 25vw;
     height: auto;
@@ -245,7 +245,7 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
   }
-  
+
   .cover{
     max-height: 80%;
   }
@@ -255,4 +255,12 @@ body {
     height: 25vh;
     width: 100%;
   }
+}
+
+.img-section {
+  margin-top: 60px;
+  height: calc(90vh - 60px);
+  background: url(./assets/cover.jpg);
+  background-position: center;
+  background-size: cover;
 }
