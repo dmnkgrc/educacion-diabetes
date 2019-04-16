@@ -6,28 +6,22 @@ $blue: #113F67;
 
 
 body {
-  padding-top: 60px;
+  padding-top: 1vh;
 }
 
 .card {
-  color: #113F67;
+  color: $blue;
   border-radius: 10px;
   border-width: 2px;
 }
 
 .big-icon {
   font-size: 4.2rem;
-  margin-left: 30%;
+  color: $blue;
 }
 
 .text-center {
   text-align: center;
-}
-
-.text-content{
-  margin-top: 10%;
-  height: 35vh;
-  width: 20vw;
 }
 
 .link-bottom{
@@ -35,4 +29,230 @@ body {
   bottom: 0px;
   right: 0px;
   left: 0px;
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  .big-icon {
+    margin-left: 30%;
+  }
+
+  .first-col{
+    margin-left: 5%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+  
+  .logo{
+    max-width: 12vw;
+    height: auto;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  h2{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 35vh;
+    width: 15vw;
+  }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .big-icon {
+    margin-left: 30%;
+  }
+
+  .first-col{
+    margin-left: 4%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+  
+  .logo{
+    max-width: 15vw;
+    height: auto;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  .col-md-3{
+    max-width: 60% !important;
+  }
+  h2{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 35vh;
+    width: 20vw;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .big-icon {
+    margin-left: 10%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+
+  .first-col{
+    margin-left: 4%;
+  }
+  
+  .logo{
+    max-width: 30vw;
+    height: auto;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  h2{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 25vh;
+    width: 20vw;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .big-icon {
+    margin-left: 15%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+  
+  .logo{
+    max-width: 10vw;
+    height: auto;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  h2{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 55vh;
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .big-icon {
+    margin-left: 42%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+  
+  .logo{
+    max-width: 25vw;
+    height: auto;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  h2{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 20vh;
+    width: 100%;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .big-icon {
+    margin-left: 38%;
+  }
+
+  .section—first { 
+    height: 90vh; 
+  }
+  
+  .logo{
+    max-width: 25vw;
+    height: auto;
+  }
+
+  h2{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .cover{
+    max-height: 80%;
+  }
+
+  .text-content{
+    margin-top: 10%;
+    height: 25vh;
+    width: 100%;
+  }
 }
