@@ -7,25 +7,22 @@ import { config } from '../config';
 @Injectable({ providedIn: 'root' })
 
 
-export class SessionService {
+export class UserService {
     rootURL: string = config.rootURL;
-    authEndpoint: string = config.apiEndPoints.auth;
+    userEndpoint: string = config.apiEndPoints.users;
+    signupEndpoint: string = config.apiEndPoints.signup;
     token: string;
     constructor(
         public http: HttpClient,
       ) {}
 
 
-    public authenticate(email: string, password: string): Observable<any> {
+    public signup(data: any): Observable<any> {
         const headers: HttpHeaders = new HttpHeaders({
           Accept: 'application/json',
           'Content-Type': 'application/json'
         });
-        const body: any = {
-          username: email,
-          password
-        };
-        return this.http.post(this.rootURL + this.authEndpoint, body, { headers })
+        return this.http.post(this.rootURL + this.signupEndpoint, data, { headers })
           .pipe(
             tap((res: any) => {
               this.token = res;

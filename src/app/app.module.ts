@@ -8,12 +8,15 @@ import { LoginComponent } from './login/login.compontent';
 import { SessionService } from './services/session.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SignupComponent } from './signup/signup.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
+    UserService,
     SessionService,
     HttpClient
   ],

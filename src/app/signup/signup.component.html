@@ -1,0 +1,136 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+        </a>
+    </nav>
+      <br>
+      <br>
+    <section>
+        <div class="card" style="width: 70%">
+                <div class="row">
+                    <div class="col-md-6 left-content" >
+                            <div class="left-text">
+                                    <h1 style="color: white">¿YA TIENES CUENTA?</h1>
+                                    <br><br>
+                                    <div class="form-group">
+                                            <button class="btn btn-lg btn-pink" style="color: white" [routerLink]="['../login']">
+                                                Iniciar sesión
+                                            </button>
+                                    </div>
+                                    
+                                </div>
+                        
+                    </div>
+                    <div class="col-md-6 right-content">
+                            <div class="right-text">
+                                    <form class="form-signin">
+                                        <div class="text-center mb-4">
+                                            <h1>Registro</h1>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                        <input type="text" id="inputName" class="form-control" placeholder="Nombre" required autofocus [(ngModel)]="name" name="name">
+                                                        <label for="inputName">Nombre</label>
+                                                    </div>
+                                            </div>
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                        <input type="text" id="inputLastName" class="form-control" placeholder="Apellido" required autofocus [(ngModel)]="lastName" name="lastName">
+                                                        <label for="inputLastName">Apellido</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                        <input type="text" id="inputSpecialty" class="form-control" placeholder="Especialidad" required autofocus [(ngModel)]="specialty" name="specialty">
+                                                        <label for="inputSpecialty">Especialidad</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="text" id="inputCity" class="form-control" placeholder="Ciuduad" required autofocus [(ngModel)]="city" name="city">
+                                                            <label for="inputCity">Ciudad</label>
+                                                        </div>
+                                            </div>
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="text" id="inputState" class="form-control" placeholder="Estado" required autofocus [(ngModel)]="state" name="state">
+                                                            <label for="inputState">Estado</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="text" id="inputAddress" class="form-control" placeholder="Dirección" required autofocus [(ngModel)]="address" name="address">
+                                                            <label for="inputAddress">Dirección</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="number" pattern="[0-9]*" id="inputTelephone" class="form-control"  placeholder="Teléfono" required autofocus [(ngModel)]="telephone" name="telephone">
+                                                            <label for="inputTelephone">Teléfono</label>
+                                                        </div>
+                                            </div>
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="number" pattern="[0-9]*" id="inputCellphone" class="form-control" placeholder="Celular" required autofocus [(ngModel)]="cellphone" name="cellphone">
+                                                            <label for="inputCellphone">Celular</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus [(ngModel)]="email" name="email">
+                                                            <label for="inputEmail">Correo electrónico</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required autofocus [(ngModel)]="password" name="password">
+                                                            <label for="inputPassword">Contraseña</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    <div class="form-label-group" style="text-align:start">
+                                                            <input type="text" id="inputProfessionalC" class="form-control" placeholder="Cédula profesional" required autofocus [(ngModel)]="professionalC" name="professionalC">
+                                                            <label for="inputProfessionalC">Cédula Profesional</label>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                    <div class="checkbox text-muted" style="text-align: left">
+                                                        <label>
+                                                                <input
+                                                                type="checkbox"
+                                                                [(ngModel)]="acceptance"
+                                                                [ngModelOptions]="{standalone: true}"/>  He leído y acepto los términos y condiciones de privacidad
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button [disabled]="!acceptance" class="btn btn-lg btn-pink" style="color: white" (click)="register()">
+                                                    Registrar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                            </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+      

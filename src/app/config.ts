@@ -1,6 +1,7 @@
 export const config: any = {
-    rootURL: 'localhost:3000/v1',
+    rootURL: 'https://api.dialogodiabetescare.com/v1',
     apiEndPoints: {
       auth: '/auth/',
+      signup: '/sign-up'
     }
   };
