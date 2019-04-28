@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     // tslint:disable:no-string-literal
-    this.sessionService.authenticate(this.loginForm.controls['email'].value, 
+    this.sessionService.authenticate(this.loginForm.controls['email'].value,
     this.loginForm.controls['password'].value).subscribe(result => {
       console.log(result);
       this.router.navigateByUrl('courses');

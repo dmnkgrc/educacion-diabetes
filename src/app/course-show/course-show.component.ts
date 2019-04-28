@@ -6,16 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-show.component.css']
 })
 export class CourseShowComponent implements OnInit {
-  select = 'first'
-  constructor(
-  ) { }
+  select = 'first';
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // tslint:disable-next-line:align
   changeSelect(select): void {
-      this.select = select;
+    this.select = select;
   }
-
 }
