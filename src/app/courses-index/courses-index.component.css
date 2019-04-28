@@ -1,0 +1,43 @@
+#sidebar {
+    position: fixed;
+    background-color: #252525;
+    height: 91.3vh;
+    text-align: center;
+    width: 15vw;
+    color: white;
+    font-weight: bold;
+    background-image: image()
+}
+.active{
+    background-color: #252525;
+    opacity: 80%;
+}
+.nav-item {
+    text-align: left;
+}
+.nav-link{
+    text-align: left;
+}
+
+.course-card{
+    height: 200px;
+    width: 858px;
+    border: 1px solid #C8C8C8;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+
+.card-text{
+    color: #113F67;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.btn-pink {
+    background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
+    display: inline-block;
+    margin-top: 10px;
+  }

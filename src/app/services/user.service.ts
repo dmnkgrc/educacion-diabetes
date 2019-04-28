@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { config } from '../config';
+import { SessionService } from './session.service';
 
 @Injectable({ providedIn: 'root' })
 
@@ -11,9 +12,9 @@ export class UserService {
     rootURL: string = config.rootURL;
     userEndpoint: string = config.apiEndPoints.users;
     signupEndpoint: string = config.apiEndPoints.signup;
-    token: string;
     constructor(
         public http: HttpClient,
+        public sessionService: SessionService
       ) {}
 
 
@@ -25,7 +26,8 @@ export class UserService {
         return this.http.post(this.rootURL + this.signupEndpoint, data, { headers })
           .pipe(
             tap((res: any) => {
-              this.token = res;
+              // tslint:disable-next-line:no-string-literal
+              this.sessionService.setCurrentUser(res['user']);
             }),
             catchError(error => of(error))
           );

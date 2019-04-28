@@ -10,27 +10,30 @@
             <div class="row">
                 <div class="col-md-6 left-content" >
                     <div class="left-text">
-                            <form class="form-signin">
+                            <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()">
                                 <div class="text-center mb-4">
                                     <h1>INICIA SESIÓN</h1>
                                 </div>
-                            
-                                <div class="form-label-group" style="text-align:start">
-                                    <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus [(ngModel)]="email" name="email">
-                                    <label for="inputEmail">Correo electrónico</label>
+                        
+                                <div class="form-group">
+                                        <div class="form-label-group" style="text-align:start">
+                                                <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus formControlName="email">
+                                                <label for="inputEmail">Correo electrónico</label>
+                                            </div>
                                 </div>
-                            
-                                <div class="form-label-group" style="text-align:start">
-                                    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required [(ngModel)]="password" name="password">
-                                    <label for="inputPassword">Contraseña</label>
+                                
+                                <div class="form-group">
+                                        <div class="form-label-group" style="text-align:start">
+                                                <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required formControlName="password">
+                                                <label for="inputPassword">Contraseña</label>
+                                            </div>
                                 </div>
-                            
                                 <div class="checkbox text-muted" style="text-align: left">
                                     <label>
                                     <input type="checkbox" value="remember-me"> Recordarme
                                     </label>
                                 </div>
-                                <button class="btn btn-lg btn-pink" type="button" (click)="login()" style="color: white">Sign in</button>
+                                <button class="btn btn-lg btn-pink" style="color: white">Inicia sesión</button>
                             </form>
                     </div>
                 </div>

@@ -23,94 +23,122 @@
                     </div>
                     <div class="col-md-6 right-content">
                             <div class="right-text">
-                                    <form class="form-signin">
+                                    <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="register()">
                                         <div class="text-center mb-4">
                                             <h1>Registro</h1>
                                         </div>
                                         <div class="row">
                                             <div class="col">
+                                                <div class="form-group">
                                                     <div class="form-label-group" style="text-align:start">
-                                                        <input type="text" id="inputName" class="form-control" placeholder="Nombre" required autofocus [(ngModel)]="name" name="name">
+                                                        <input type="text" id="inputName" formControlName="name" class="form-control" placeholder="Nombre" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required autofocus>
                                                         <label for="inputName">Nombre</label>
                                                     </div>
-                                            </div>
-                                            <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                        <input type="text" id="inputLastName" class="form-control" placeholder="Apellido" required autofocus [(ngModel)]="lastName" name="lastName">
-                                                        <label for="inputLastName">Apellido</label>
+                                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.name.errors.required">Email is required</div>
+                                                        <!--div *ngIf="f.name.errors.email">Email must be a valid email address</div--->
                                                     </div>
+                                                </div>        
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputLastName" formControlName="lastName" class="form-control" placeholder="Apellidos" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required autofocus>
+                                                                <label for="inputLastName">Apellido</label>
+                                                            </div>
+                                                </div>
+                                                    
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                        <input type="text" id="inputSpecialty" class="form-control" placeholder="Especialidad" required autofocus [(ngModel)]="specialty" name="specialty">
-                                                        <label for="inputSpecialty">Especialidad</label>
-                                                    </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputSpecialty" formControlName="specialty" class="form-control" placeholder="Especialidad" [ngClass]="{ 'is-invalid': submitted && f.specialty.errors }" required autofocus>
+                                                                <label for="inputSpecialty">Especialidad</label>
+                                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="text" id="inputCity" class="form-control" placeholder="Ciuduad" required autofocus [(ngModel)]="city" name="city">
-                                                            <label for="inputCity">Ciudad</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputCity" formControlName="city" class="form-control" placeholder="Ciudad" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" required autofocus>
+                                                                <label for="inputCity">Ciudad</label>
+                                                            </div>
+                                                </div>   
                                             </div>
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="text" id="inputState" class="form-control" placeholder="Estado" required autofocus [(ngModel)]="state" name="state">
-                                                            <label for="inputState">Estado</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputState" formControlName="state" class="form-control" placeholder="Estado" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" required autofocus>
+                                                                <label for="inputState">Estado</label>
+                                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="text" id="inputAddress" class="form-control" placeholder="Dirección" required autofocus [(ngModel)]="address" name="address">
-                                                            <label for="inputAddress">Dirección</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputAddress" formControlName="address" class="form-control" placeholder="Dirección" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" required autofocus>
+                                                                <label for="inputAddress">Dirección</label>
+                                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="number" pattern="[0-9]*" id="inputTelephone" class="form-control"  placeholder="Teléfono" required autofocus [(ngModel)]="telephone" name="telephone">
-                                                            <label for="inputTelephone">Teléfono</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="number" pattern="[0-9]*" id="inputTelephone" formControlName="telephone" class="form-control" placeholder="Teléfono" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" required autofocus>
+                                                                <label for="inputTelephone">Teléfono</label>
+                                                            </div>
+                                                </div>   
                                             </div>
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="number" pattern="[0-9]*" id="inputCellphone" class="form-control" placeholder="Celular" required autofocus [(ngModel)]="cellphone" name="cellphone">
-                                                            <label for="inputCellphone">Celular</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="number" pattern="[0-9]*" id="inputCellphone" formControlName="cellphone" class="form-control" placeholder="Celular" [ngClass]="{ 'is-invalid': submitted && f.cellphone.errors }" required autofocus>
+                                                                <label for="inputCellphone">Celular</label>
+                                                            </div>
+                                                </div>  
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus [(ngModel)]="email" name="email">
-                                                            <label for="inputEmail">Correo electrónico</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Correo electrónico" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required autofocus>
+                                                                <label for="inputEmail">Correo electrónico</label>
+                                                            </div>
+                                                </div>   
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required autofocus [(ngModel)]="password" name="password">
-                                                            <label for="inputPassword">Contraseña</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Contraseña" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required autofocus>
+                                                                <label for="inputPassword">Contraseña</label>
+                                                            </div>
+                                                </div>        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                    <div class="form-label-group" style="text-align:start">
-                                                            <input type="text" id="inputProfessionalC" class="form-control" placeholder="Cédula profesional" required autofocus [(ngModel)]="professionalC" name="professionalC">
-                                                            <label for="inputProfessionalC">Cédula Profesional</label>
-                                                        </div>
+                                                <div class="form-group">
+                                                        <div class="form-label-group" style="text-align:start">
+                                                                <input type="text" id="inputProfessionalC" formControlName="professionalC" class="form-control" placeholder="Cédula profesional" [ngClass]="{ 'is-invalid': submitted && f.professionalC.errors }" required autofocus>
+                                                                <label for="inputProfessionalC">Cédula Profesional</label>
+                                                            </div>
+                                                </div>
+                                                    
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                     <div class="checkbox text-muted" style="text-align: left">
                                                         <label>
                                                                 <input
@@ -121,9 +149,14 @@
                                                     </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <button [disabled]="!acceptance" class="btn btn-lg btn-pink" style="color: white" (click)="register()">
-                                                    Registrar
-                                                </button>
+                                                <div class="form-group">
+                                                        <button [disabled]="!acceptance" class="btn btn-lg btn-pink" style="color: white">
+                                                                Registrar
+                                                        </button>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="error" class="is-invalid">
+                                                Ocurrió un error al crear el usuario
                                             </div>
                                         </div>
                                         

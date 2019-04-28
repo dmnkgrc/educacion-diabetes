@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+    </a>
+</nav>
+<br>
+<br>
+<section>
+    <div class="row">
+        <div class="col-md-2">
+                <nav id="sidebar">
+                    <br>
+            
+                    <ul class="navbar-nav nav">
+                            <li class="nav-item">
+                                    <a class="nav-link active" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                            </li>
+                            <li class="active nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                            </li>
+                        </ul>
+            </nav>
+        </div>
+        <div class="col-md-10" style="background-color: #F2F2F2;">
+            <br>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h1 style="font-weight: bold; color: #113F67">
+                        ¡Bienvenido!
+                    </h1>
+                    <br>
+                    <p>En esta parte podrás acceder a todos los cursos disponibles para ti, revisar tu avance y consultar tus resultados en cada 
+                            uno de los cursos. Éxito!</p>
+                    <br>
+                    <div class="course-card"> <!---Tarjeta-->
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img src="https://via.placeholder.com/336x200.png" style="border-radius: 20px" alt="">
+                            </div>
+                            <div class="col-md-7 offset-md-4">
+                                <div class="row" style="font-weight: bold; color: #113F67; text-align: center">
+                                    <h1>Introducción a la diabetes</h1>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <p class="card-text">
+                                                    Antes de iniciar cualquier tema, es necesario entender que es la  diabetes
+                                                    y comprender la enfermedad y su tratamiento de una formal general.
+                                            </p>
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-md-9">
+                                            <button class="btn btn-lg btn-pink" style="color: white" [routerLink]="['../course-show']">
+                                                Iniciar
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--Fin tarjeta-->
+                    <br>
+                    <div class="course-card"> <!---Tarjeta-->
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img src="https://via.placeholder.com/336x200.png" style="border-radius: 20px" alt="">
+                            </div>
+                            <div class="col-md-7 offset-md-4">
+                                <div class="row" style="font-weight: bold; color: #113F67; text-align: center">
+                                    <h1>Diabetes Tipo I</h1>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <p class="card-text">
+                                                    Como lo vimos en el curso pasado, Existen 3 tipos de Diabetes, y cada uno necesita mucho detalle para poder entender.
+                                            </p>
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-md-9">
+                                            <button class="btn btn-lg btn-pink" style="color: white" [routerLink]="['../course-show']">
+                                                Iniciar
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--Fin tarjeta-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

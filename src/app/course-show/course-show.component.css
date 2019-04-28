@@ -1,0 +1,30 @@
+#sidebar {
+    position: fixed;
+    background-color: #252525;
+    height: 91.3vh;
+    text-align: center;
+    width: 16vw;
+    color: white;
+    font-weight: bold;
+    background-image: image()
+}
+.nav-item {
+    text-align: left;
+}
+.nav-link{
+    text-align: left;
+}
+
+a{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    line-height: 24px;
+}
+
+.active{
+    color: #113F67 !important;
+    border-bottom: solid;
+    border-bottom-color: #113F67;
+}

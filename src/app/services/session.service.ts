@@ -11,6 +11,7 @@ export class SessionService {
     rootURL: string = config.rootURL;
     authEndpoint: string = config.apiEndPoints.auth;
     token: string;
+    currentUser: any;
     constructor(
         public http: HttpClient,
       ) {}
@@ -22,15 +23,35 @@ export class SessionService {
           'Content-Type': 'application/json'
         });
         const body: any = {
-          username: email,
+          email,
           password
         };
         return this.http.post(this.rootURL + this.authEndpoint, body, { headers })
           .pipe(
             tap((res: any) => {
-              this.token = res;
+              this.setToken(res);
             }),
             catchError(error => of(error))
           );
     }
+
+    public setToken(token) {
+      this.token = token;
+    }
+
+    public getToken() {
+      return this.token;
+    }
+
+    public deleteToken() {
+      this.token = null;
+    }
+
+    public setCurrentUser(user) {
+         this.currentUser = user;
+     }
+
+    public getCurrentUser() {
+         return this.currentUser;
+     }
 }

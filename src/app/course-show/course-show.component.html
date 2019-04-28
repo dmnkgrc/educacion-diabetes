@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+        </a>
+    </nav>
+    <br>
+    <br>
+    <section>
+        <div class="row">
+            <div class="col-md-2">
+                    <nav id="sidebar">
+                        <br>
+                
+                        <ul class="navbar-nav nav">
+                                <li class="nav-item">
+                                        <a class="nav-link" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" [routerLink]="['../courses']" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                                </li>
+                        </ul>
+
+                        <ul class="navbar-nav nav">
+                            <li>
+                                    <a class="nav-link" style="position: absolute; bottom: 0; color: white; font-style: normal">Cerrar sesión <i class="fa fa-sign-out-alt"></i></a>
+                            </li>
+                        </ul>
+                </nav>
+            </div>
+            <div class="col-md-10" style="background-color: #F2F2F2;">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                            <img src="https://via.placeholder.com/989x408.png" alt="">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                        <ul class="nav nav-tabs">
+                                <li class="nav-item" >
+                                        <a [ngClass]="select == 'first' ? 'active' : ''" (click)="changeSelect('first')">Acerca De</a>
+                                </li>
+                            <li class="nav-item" >
+                                    <a [ngClass]="select == 'second' ? 'active' : ''" (click)="changeSelect('second')">Preguntas</a>
+                            </li>
+                                <li class="nav-item" >
+                                        <a [ngClass]="select == 'third' ? 'active' : ''" (click)="changeSelect('third')">Sugerencias</a>
+                                </li>
+                        </ul>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-10">
+                            <p *ngIf="select == 'first'">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar ultrices nisl eu dictum. Sed sapien nulla, auctor 
+                                    a neque vehicula, interdum efficitur purus. Pellentesque imperdiet, ligula vitae faucibus facilisis, justo neque ultricies neque, 
+                                    vitae ultricies augue mi id nunc. Integer commodo turpis purus, quis varius magna semper at. In vel arcu felis. Nunc facilisis 
+                                    dignissim erat sit amet rutrum. Donec tempus ultrices mauris, nec pharetra massa egestas in. Suspendisse potenti. Sed egestas 
+                                    metus ipsum. Nam finibus augue a auctor malesuada. Duis at nisi blandit, ultricies lacus eu, convallis tellus. 
+                            </p>
+                            <p *ngIf="select == 'second'"></p>
+                            <p *ngIf="select == 'third'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
