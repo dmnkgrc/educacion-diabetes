@@ -43,11 +43,6 @@ jobs:
           name: Linting
           command: yarn lint
 
-      # run tests!
-      - run:
-          name: Tests
-          command: yarn run test
-
       - run:
           name: Build Angular
           command: yarn build --prod
