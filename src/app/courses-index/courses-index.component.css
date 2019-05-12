@@ -8,6 +8,32 @@
     font-weight: bold;
     background-image: image()
 }
+
+.tag {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-left: 15px;
+  color: #FFFFFF;
+  width: 336px;
+  height: 200px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.locked-img {
+  margin-top: 30px;
+}
+
+.locked-icon {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 20%;
+  margin-left: 35%;
+}
+
 .active{
     background-color: #252525;
     opacity: 80%;

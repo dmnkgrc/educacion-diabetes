@@ -13,6 +13,8 @@ import { UserService } from './services/user.service';
 import { CoursesIndexComponent } from './courses-index/courses-index.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CourseShowComponent } from './course-show/course-show.component';
+import { StudentHomeComponent } from './student-home/student-home.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CourseShowComponent } from './course-show/course-show.component';
     LoginComponent,
     SignupComponent,
     CoursesIndexComponent,
-    CourseShowComponent
+    CourseShowComponent,
+    StudentHomeComponent,
+    StudentProfileComponent
   ],
   imports: [
     BrowserModule,

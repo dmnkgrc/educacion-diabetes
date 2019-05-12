@@ -20,7 +20,6 @@ margin-left: 15px;
 color: #FFFFFF;
 width: 336px;
 height: 200px;
-border-radius: 20px;
 font-weight: bold;
 }
 
@@ -66,4 +65,45 @@ margin-left: 35%;
   background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
   display: inline-block;
   margin-top: 10px;
+}
+
+.tag {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #FFFFFF;
+  width: 1000px;
+  height: 300px;
+  font-weight: bold;
+  text-align: center
+}
+
+.main-title{
+  font-family: 'Monserrat';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 80px;
+}
+
+.btn {
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 18%;
+  height: 2%;
+  font-weight: bold;
+}
+
+.default:hover {
+  background: #e7e7e7;
+  color: black
 }
