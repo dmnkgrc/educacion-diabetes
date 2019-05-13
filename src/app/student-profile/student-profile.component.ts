@@ -21,7 +21,9 @@ export class StudentProfileComponent implements OnInit {
       {
         university: 'UNAM - 1980 / 1987',
         speciality: 'Endocrinología',
-        description: 'Comencé la carrera en medicina en 1981 con la gran intención de curar el mundo de la diabetes, me especialicé en el estudio de la sangre para prevenir que esta horrible enfermedad se sigua propagando por el mundo, y por ahora quiero aprender lo más que pueda sobre esto.',
+        description: `Comencé la carrera en medicina en 1981 con la gran intención de curar el mundo de la diabetes,
+                      me especialicé en el estudio de la sangre para prevenir que esta horrible enfermedad se sigua
+                      propagando por el mundo, y por ahora quiero aprender lo más que pueda sobre esto.`,
       }
     ]
   };
