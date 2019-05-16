@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     this.sessionService.authenticate(this.loginForm.controls['email'].value,
     this.loginForm.controls['password'].value).subscribe(result => {
       console.log(result);
+      localStorage.setItem('token', result);
       this.router.navigateByUrl('courses');
     });
   }
