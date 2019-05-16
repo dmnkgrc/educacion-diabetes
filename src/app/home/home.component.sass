@@ -1,8 +1,76 @@
+@mixin background-opacity($color, $opacity: 0.3)
+    background: $color /* The Fallback */
+    background: rgba($color, $opacity)
+
+.navbar
+  background: transparent
+
+.navbar-dark .navbar-nav .nav-link
+  color: #fff
+  &:hover
+    opacity: 0.7
+  &.signup-link
+    color: #FF62A5
+    border: 2px solid #FF62A5
+    border-radius: 20px
+    padding: .5rem 20px
+    margin: 0px 20px
+
 .footer
-    background-color: #113F67
-    min-height: 4rem
-    text-align: center
-    color: white
+  background-color: #113F67
+  min-height: 4rem
+  text-align: center
+  color: white
 
 .btn-pink
-    background-image: linear-gradient(to upper, #E45F96,#ED82B6 )
+  background-image: linear-gradient(to upper, #E45F96,#ED82B6 )
+
+.content
+  height: 100%
+  width: 100%
+  position: relative
+  @include background-opacity(#252525, 0.5)
+  .home-text
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    color: #ffffff
+    text-align: center
+    h4
+      font-weight: 400
+      margin-top: 30px
+      font-size: 23px
+    button
+      background: #FF62A5
+      color: #ffffff
+      border: none
+      font-weight: 600
+      font-size: 16px
+      padding: 14px 28px
+      margin-top: 40px
+      border-radius: 20px
+      &:hover
+        opacity: 0.9
+
+.col-md-5
+  position: relative
+  height: 15vh
+  .card
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    border-color: #000
+    border-width: 3px
+    cursor: pointer
+    &:hover
+      opacity: 0.7
+    .card-body
+      padding: 0.5rem 1.25rem
+    h2
+      color: #000
+      text-transform: uppercase
+      margin: 0
+
+
+

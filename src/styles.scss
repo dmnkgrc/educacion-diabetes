@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
 $blue: #113F67;
-
-.navbar {
-  background: $blue;
-}
 
 
 body {
-  padding-top: 1vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar {
+  background: $blue;
 }
 
 .card {
@@ -258,9 +259,9 @@ body {
 }
 
 .img-section {
-  margin-top: 60px;
-  height: calc(90vh - 60px);
-  background: url(./assets/cover.jpg);
+  margin-top: 0px;
+  height: 85vh;
+  background: url(./assets/cover.png);
   background-position: center;
   background-size: cover;
 }
