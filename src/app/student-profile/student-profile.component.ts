@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import jwtDecode from 'jwt-decode';
+import { AppState } from '../store/state/app.state';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser } from '../store/selectors/user.selectors';
+import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-student-profile',
@@ -20,11 +25,15 @@ export class StudentProfileComponent implements OnInit {
     email: 'josorio@gmail.com',
 
   };
-  constructor() { }
+  currentUser$: Observable<User>;
+  constructor(
+    public store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user = jwtDecode(token);
+    this.currentUser$ = this.store.select(selectCurrentUser);
     this.user = user;
     this.user = {
       ...this.user,

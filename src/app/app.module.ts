@@ -15,6 +15,20 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CourseShowComponent } from './course-show/course-show.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
+import { appReducers } from './store/reducers/app.reducers';
+
+
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  // tslint:disable-next-line:only-arrow-functions
+  return function(state, action) {
+    console.log('state', state);
+    console.log('action', action);
+    return reducer(state, action);
+  };
+}
+
+export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
   declarations: [
@@ -33,7 +47,8 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    StoreModule.forRoot(appReducers, {metaReducers})
   ],
   providers: [
     UserService,
