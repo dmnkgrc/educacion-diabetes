@@ -1,0 +1,28 @@
+.content-container {
+  margin-top: 30px;
+}
+.course {
+  text-overflow: ellipsis;
+  border-radius: 15px;
+  margin-top: 15px;
+  background: #fff;
+  height: auto;
+  padding: 0;
+  h1 {
+    color: #fff;
+    width: 100%;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-size: 40px;
+    text-align: center;
+    background:#1288CA;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 10px;
+    text-overflow: ellipsis;
+  }
+  p {
+    font-size: 12px;
+    text-overflow: ellipsis;
+  }
+}

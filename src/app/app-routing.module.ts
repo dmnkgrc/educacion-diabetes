@@ -11,6 +11,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
+import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'admin-profile',
     component: AdminProfileComponent
+  },
+  {
+    path: 'admin-courses',
+    component: AdminCoursesComponent
   },
   {
     path: 'signup',

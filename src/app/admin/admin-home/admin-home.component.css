@@ -24,17 +24,6 @@ margin-top: 20%;
 margin-left: 35%;
 }
 
-.active{
-  background-color: #252525;
-  opacity: 80%;
-}
-.nav-item {
-  text-align: left;
-}
-.nav-link{
-  text-align: left;
-}
-
 .course-card{
   height: 200px;
   width: 858px;

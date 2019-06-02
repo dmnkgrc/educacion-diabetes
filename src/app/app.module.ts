@@ -23,6 +23,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
+import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -53,7 +54,8 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     CoursesIndexComponent,
     CourseShowComponent,
     StudentHomeComponent,
-    StudentProfileComponent
+    StudentProfileComponent,
+    AdminCoursesComponent
   ],
   imports: [
     BrowserModule,

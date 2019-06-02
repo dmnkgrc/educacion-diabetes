@@ -287,5 +287,17 @@ body {
   width: 16.666667%;
   color: white;
   font-weight: bold;
-  background-image: image()
+
+  .active{
+    background-color: #252525;
+    opacity: 80%;
+  }
+  .nav-item {
+    text-align: left;
+  }
+  .nav-link{
+    text-align: left;
+  }
 }
+
+
