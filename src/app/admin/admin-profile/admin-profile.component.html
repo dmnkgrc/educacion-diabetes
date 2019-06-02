@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+        </a>
+    </nav>
+    <br>
+    <br>
+    <section *ngIf="{
+      currentUser: currentUser$ | async
+    } as values;">
+        <div class="row">
+            <div class="col-md-2">
+                    <nav id="sidebar">
+                        <br>
+                        <ul class="navbar-nav nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" [routerLink]="['/admin-home']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                                </li>
+                                <li class="active nav-item">
+                                    <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                                </li>
+                            </ul>
+                </nav>
+            </div>
+            <div class="col-md-10" style="background-color: #F2F2F2;">
+                <div class="row">
+                    <div class="col-md-9">
+                            <div class="card" style="">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{currentUser.first_name}} {{currentUser.last_name}}</h3>
+                                        <hr>
+                                        <p class="card-text"></p>
+                                        <p><b>Nombre</b> {{currentUser.first_name}} {{currentUser.last_name}}</p>
+                                        <p><b>Correo Electrónico</b> {{currentUser.email}}</p>
+                                        <p><b>Teléfono</b> {{currentUser.telephone}}</p>
+                                        <p><b>Inscripción</b> </p>
+                                        <p><b>Ultima Conexión</b> </p>
+                                        <hr>
+                                        <p><i class="fas fa-sync"></i> Actividad Reciente</p>
+                                        <hr>
+                                        <div *ngFor="let activity of last_activities">
+                                            <p>{{activity.time}} {{activity.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-11">
+                            <div class="card" style="">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Editar usuario</h3>
+                                        <hr>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+    </section>
+    

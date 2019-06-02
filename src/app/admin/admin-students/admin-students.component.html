@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+    </a>
+</nav>
+<br>
+<br>
+<section>
+    <div class="row">
+        <div class="col-md-2">
+                <nav id="sidebar">
+                    <br>
+                    <ul class="navbar-nav nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                            </li>
+                            <li class="active nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                            </li>
+                        </ul>
+            </nav>
+        </div>
+        <div class="col-md-9" style="background-color: #F2F2F2;">
+            <br><br>
+            <h1>Usuarios</h1>
+            <div class="card" style="">
+                <div class="card-body">
+                        <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cluster</th>
+                                    <th scope="col">Cédula</th>
+                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Especialidad</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let student of students">
+                                    <th scope="row">{{student.name}}</th>
+                                    <td>{{student.cluster}}</td>
+                                    <td>{{student.professional_license}}</td>
+                                    <td>{{student.city}}</td>
+                                    <td>{{student.speciality}}</td>
+                                    <td><b>Ver</b></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

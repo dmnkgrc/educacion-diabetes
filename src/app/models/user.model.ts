@@ -11,6 +11,7 @@ export class User {
     public cellphone: string;
     public professional_license: string;
     public exp: string;
+    public admin: boolean;
 
 
     constructor( data: any) {

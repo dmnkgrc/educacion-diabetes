@@ -17,6 +17,10 @@ import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
 import { appReducers } from './store/reducers/app.reducers';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
+import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -34,6 +38,10 @@ export const metaReducers: MetaReducer<any>[] = [debug];
   declarations: [
     AppComponent,
     HomeComponent,
+    AdminLoginComponent,
+    AdminStudentsComponent,
+    AdminHomeComponent,
+    AdminProfileComponent,
     LoginComponent,
     SignupComponent,
     CoursesIndexComponent,

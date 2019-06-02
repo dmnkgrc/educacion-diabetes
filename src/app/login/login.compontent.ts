@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
         speciality: tokenInfo.speciality,
         city: tokenInfo.city,
         address: tokenInfo.address,
+        admin: tokenInfo.admin,
         phone: tokenInfo.phone,
         cellphone: tokenInfo.cellphone,
         professional_license: tokenInfo.professional_license,
@@ -58,6 +59,10 @@ export class LoginComponent implements OnInit {
       });
       this.store.dispatch(new SetCurrentUser(currentUser));
       localStorage.setItem('token', result.token);
+      if (currentUser.admin){
+        this.router.navigateByUrl('admin-home');
+        return;
+      }
       this.router.navigateByUrl('courses');
     });
   }

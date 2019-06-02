@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+    </a>
+</nav>
+<br>
+<br>
+<section>
+    <div class="row">
+        <div class="col-md-2">
+                <nav id="sidebar">
+                    <br>
+
+                    <ul class="navbar-nav nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/admin-students']" style="color: white"><i class="far fa-users" style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
+                            </li>
+                            <li class="active nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                            </li>
+                        </ul>
+            </nav>
+        </div>
+        <div class="col-md-10" style="background-color: #F2F2F2;">
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                        <div class="card">
+                                <div class="card-body">
+                                        <i class="fas fa-chalkboard"></i>
+                                </div>
+                            </div>
+
+                </div>
+                <div class="col-md-3 md-offset-1">
+                        <div class="card">
+                                <div class="card-body">
+                                        <i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>
+                                </div>
+                            </div>
+                    
+                </div>
+                <div class="col-md-3 md-offset-1">
+                        <div class="card">
+                                <div class="card-body">
+                                    <i class="far fa-clock"></i>
+                                </div>
+                            </div>
+                </div>
+                <div class="col-md-3 md-offset-1">
+                        <div class="card">
+                                <div class="card-body">
+                                    This is some text within a card body.
+                                </div>
+                            </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-9">
+                        <div class="card">
+                                <div class="card-body">
+                                    This is some text within a card body.
+                                </div>
+                            </div>
+                </div>
+                <div class="col-md-3 md-offset-1">
+                        <div class="card">
+                                <div class="card-body">
+                                    This is some text within a card body.
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

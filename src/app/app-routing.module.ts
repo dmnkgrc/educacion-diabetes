@@ -7,6 +7,10 @@ import { CoursesIndexComponent } from './courses-index/courses-index.component';
 import { CourseShowComponent } from './course-show/course-show.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
+import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 
 const routes: Routes = [
   {
@@ -19,7 +23,22 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-
+  {
+    path: 'admin-login',
+    component: AdminLoginComponent
+  },
+  {
+    path: 'admin-home',
+    component: AdminHomeComponent
+  },
+  {
+    path: 'admin-students',
+    component: AdminStudentsComponent
+  },
+  {
+    path: 'admin-profile',
+    component: AdminProfileComponent
+  },
   {
     path: 'signup',
     component: SignupComponent
