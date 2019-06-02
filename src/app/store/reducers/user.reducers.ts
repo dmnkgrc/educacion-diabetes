@@ -3,11 +3,10 @@ import { UserActions } from '../actions/user.actions';
 import { EUserActions } from '../types/user.types';
 import * as moment from 'moment';
 
-export const userReducers = (
+export function userReducers(
   state = initialUserState,
   action: UserActions
-): UserState => {
-  console.log(action, state);
+): UserState {
   switch (action.type) {
     case EUserActions.GetUsersSuccess:
       return {
@@ -30,4 +29,4 @@ export const userReducers = (
     default:
       return state;
   }
-};
+}
