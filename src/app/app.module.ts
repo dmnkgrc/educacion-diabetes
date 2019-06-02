@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +34,11 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = [debug];
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ keys: ['users'], rehydrate: true })(reducer);
+}
+
+export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -56,7 +62,8 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     FormsModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
-    StoreModule.forRoot(appReducers, {metaReducers})
+    StoreModule.forRoot(appReducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({maxAge: 25}),
   ],
   providers: [
     UserService,

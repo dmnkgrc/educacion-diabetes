@@ -5,25 +5,24 @@
     </nav>
     <br>
     <br>
-    <section *ngIf="{
-      currentUser: currentUser$ | async
-    } as values;">
+    <section *ngIf="currentUser$ | async as currentUser;">
         <div class="row">
-            <div class="col-md-2">
-                    <nav id="sidebar">
+            <div class="col-md-2" style="padding: 0;">
+                    <nav id="sidebar" style="height: calc(100vh - 50px);">
                         <br>
                         <ul class="navbar-nav nav">
                                 <li class="nav-item">
                                     <a class="nav-link active" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" [routerLink]="['/admin-home']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                                    <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                                  <a class="nav-link" routerLink="/admin-students" style="color: white"><i class="fa fa-apple-alt"
+                                      style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
                                 </li>
                                 <li class="active nav-item">
-                                    <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                                    <a class="nav-link" [routerLink]="['/admin-courses']" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
@@ -31,19 +30,45 @@
                             </ul>
                 </nav>
             </div>
-            <div class="col-md-10" style="background-color: #F2F2F2;">
+            <div class="col-md-10" style="background-color: #F2F2F2; height: calc(100vh - 50px); padding: 0;">
                 <div class="row">
                     <div class="col-md-9">
-                            <div class="card" style="">
+                            <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">{{currentUser.first_name}} {{currentUser.last_name}}</h3>
                                         <hr>
-                                        <p class="card-text"></p>
-                                        <p><b>Nombre</b> {{currentUser.first_name}} {{currentUser.last_name}}</p>
-                                        <p><b>Correo Electrónico</b> {{currentUser.email}}</p>
-                                        <p><b>Teléfono</b> {{currentUser.telephone}}</p>
-                                        <p><b>Inscripción</b> </p>
-                                        <p><b>Ultima Conexión</b> </p>
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <b>Nombre</b>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <p> {{currentUser.first_name}} {{currentUser.last_name}}</p>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <b>Correo electrónico</b>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <p> {{currentUser.email}}</p>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <b>Teléfono</b>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <p> {{currentUser.phone}}</p>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <b>Inscripción</b>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <p>20 Ene 2019</p>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <b>Ultima conexión</b>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <p>25 Mayo  2019</p>
+                                          </div>
+                                        </div>
                                         <hr>
                                         <p><i class="fas fa-sync"></i> Actividad Reciente</p>
                                         <hr>
@@ -55,7 +80,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-11">
                             <div class="card" style="">
                                     <div class="card-body">
@@ -64,9 +89,8 @@
                                     </div>
                                 </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-                
+
         </div>
     </section>
-    

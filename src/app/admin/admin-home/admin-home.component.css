@@ -1,13 +1,4 @@
-#sidebar {
-  position: fixed;
-  background-color: #252525;
-  height: 91.3vh;
-  text-align: center;
-  width: 15vw;
-  color: white;
-  font-weight: bold;
-  background-image: image()
-}
+
 
 .tag {
 float: left;

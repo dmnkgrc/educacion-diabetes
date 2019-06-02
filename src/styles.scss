@@ -265,3 +265,27 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+.row {
+  margin: 0 !important;
+}
+
+.sidebar-container,
+.content-container {
+  padding: 0;
+}
+
+.content-container {
+  height: calc(100vh - 50px);
+}
+
+#sidebar {
+  position: fixed;
+  background-color: #252525;
+  height: calc(100vh - 50px);
+  text-align: center;
+  width: 16.666667%;
+  color: white;
+  font-weight: bold;
+  background-image: image()
+}

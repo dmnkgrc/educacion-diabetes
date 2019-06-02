@@ -7,6 +7,7 @@ export const userReducers = (
   state = initialUserState,
   action: UserActions
 ): UserState => {
+  console.log(action, state);
   switch (action.type) {
     case EUserActions.GetUsersSuccess:
       return {

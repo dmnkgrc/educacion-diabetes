@@ -7,7 +7,7 @@
 <br>
 <section>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 sidebar-container">
                 <nav id="sidebar">
                     <br>
                     <ul class="navbar-nav nav">
@@ -18,10 +18,11 @@
                                 <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                                <a class="nav-link" routerLink="/admin-students" style="color: white"><i class="fa fa-apple-alt"
+                                    style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
                             </li>
                             <li class="active nav-item">
-                                <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                                <a class="nav-link" routerLink="/admin-courses" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
@@ -29,10 +30,10 @@
                         </ul>
             </nav>
         </div>
-        <div class="col-md-9" style="background-color: #F2F2F2;">
+        <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;">
             <br><br>
             <h1>Usuarios</h1>
-            <div class="card" style="">
+            <div class="card">
                 <div class="card-body">
                         <table class="table">
                                 <thead>

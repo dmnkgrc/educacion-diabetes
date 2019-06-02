@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../../store/selectors/user.selectors';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-profile',
@@ -39,7 +40,9 @@ export class AdminProfileComponent implements OnInit {
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user = jwtDecode(token);
-    this.currentUser$ = this.store.select(selectCurrentUser);
+    this.currentUser$ = this.store.select(selectCurrentUser).pipe(tap((user) => {
+      console.log(user);
+    }));
   }
 
 }
