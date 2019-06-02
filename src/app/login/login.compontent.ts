@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       });
       this.store.dispatch(new SetCurrentUser(currentUser));
       localStorage.setItem('token', result.token);
-      if (currentUser.admin){
+      if (currentUser.admin) {
         this.router.navigateByUrl('admin-home');
         return;
       }

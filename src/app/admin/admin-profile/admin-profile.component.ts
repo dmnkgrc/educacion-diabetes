@@ -14,7 +14,7 @@ import { tap } from 'rxjs/operators';
 })
 export class AdminProfileComponent implements OnInit {
 
-  public last_activities: any = [
+  public lastActivities: any = [
     {
       time: 'Hoy 1:00',
       description: 'Edición del curso "Introducción a la diabetes"'
@@ -40,9 +40,7 @@ export class AdminProfileComponent implements OnInit {
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user = jwtDecode(token);
-    this.currentUser$ = this.store.select(selectCurrentUser).pipe(tap((user) => {
-      console.log(user);
-    }));
+    this.currentUser$ = this.store.select(selectCurrentUser);
   }
 
 }
