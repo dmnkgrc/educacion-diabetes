@@ -12,6 +12,7 @@ export class UserService {
     rootURL: string = config.rootURL;
     userEndpoint: string = config.apiEndPoints.users;
     signupEndpoint: string = config.apiEndPoints.signup;
+    studentsEndpoint: string = config.apiEndPoints.students;
     constructor(
         public http: HttpClient,
         public sessionService: SessionService
@@ -31,5 +32,18 @@ export class UserService {
             }),
             catchError(error => of(error))
           );
+    }
+
+    public getAllStudents(): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      return this.http.get(this.rootURL + this.studentsEndpoint, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
     }
 }

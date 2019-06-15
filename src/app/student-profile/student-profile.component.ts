@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-student-profile',
@@ -27,10 +29,19 @@ export class StudentProfileComponent implements OnInit {
   };
   currentUser$: Observable<User>;
   constructor(
-    public store: Store<AppState>
+    public store: Store<AppState>,
+    public route: ActivatedRoute,
+    public userService: UserService
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params.id) {
+        // this.userService.getUserById(params.id).subscribe((user: User) => {
+        //   this.user = user;
+        // })
+      }
+    });
     const token = localStorage.getItem('token');
     const user = jwtDecode(token);
     this.currentUser$ = this.store.select(selectCurrentUser);

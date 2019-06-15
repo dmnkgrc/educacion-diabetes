@@ -5,56 +5,65 @@ import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../../store/selectors/user.selectors';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin-students',
   templateUrl: './admin-students.component.html',
   styleUrls: ['./admin-students.component.css']
 })
-export class AdminStudentsComponent {
+export class AdminStudentsComponent implements OnInit {
 
-  public students = [
-      {
-          name: 'Juan Valdez',
-          cluster: 'Axxa',
-          professional_license: '234BHUREDSAJIO342',
-          city: 'CDMX',
-          speciality: 'Neurologo'
-      },
-      {
-        name: 'Juan Valdez',
-        cluster: 'Axxa',
-        professional_license: '234BHUREDSAJIO342',
-        city: 'CDMX',
-        speciality: 'Neurologo'
-    }, {
-        name: 'Juan Valdez',
-        cluster: 'Axxa',
-        professional_license: '234BHUREDSAJIO342',
-        city: 'CDMX',
-        speciality: 'Neurologo'
-    }, {
-        name: 'Juan Valdez',
-        cluster: 'Axxa',
-        professional_license: '234BHUREDSAJIO342',
-        city: 'CDMX',
-        speciality: 'Neurologo'
-    }, {
-        name: 'Juan Valdez',
-        cluster: 'Axxa',
-        professional_license: '234BHUREDSAJIO342',
-        city: 'CDMX',
-        speciality: 'Neurologo'
-    }, {
-        name: 'Juan Valdez',
-        cluster: 'Axxa',
-        professional_license: '234BHUREDSAJIO342',
-        city: 'CDMX',
-        speciality: 'Neurologo'
-    }
-  ];
+  public students: any[];
+  // = [
+  //     {
+  //         name: 'Juan Valdez',
+  //         cluster: 'Axxa',
+  //         professional_license: '234BHUREDSAJIO342',
+  //         city: 'CDMX',
+  //         speciality: 'Neurologo'
+  //     },
+  //     {
+  //       name: 'Juan Valdez',
+  //       cluster: 'Axxa',
+  //       professional_license: '234BHUREDSAJIO342',
+  //       city: 'CDMX',
+  //       speciality: 'Neurologo'
+  //   }, {
+  //       name: 'Juan Valdez',
+  //       cluster: 'Axxa',
+  //       professional_license: '234BHUREDSAJIO342',
+  //       city: 'CDMX',
+  //       speciality: 'Neurologo'
+  //   }, {
+  //       name: 'Juan Valdez',
+  //       cluster: 'Axxa',
+  //       professional_license: '234BHUREDSAJIO342',
+  //       city: 'CDMX',
+  //       speciality: 'Neurologo'
+  //   }, {
+  //       name: 'Juan Valdez',
+  //       cluster: 'Axxa',
+  //       professional_license: '234BHUREDSAJIO342',
+  //       city: 'CDMX',
+  //       speciality: 'Neurologo'
+  //   }, {
+  //       name: 'Juan Valdez',
+  //       cluster: 'Axxa',
+  //       professional_license: '234BHUREDSAJIO342',
+  //       city: 'CDMX',
+  //       speciality: 'Neurologo'
+  //   }
+  // ];
   currentUser$: Observable<User>;
   constructor(
-    public store: Store<AppState>
+    public store: Store<AppState>,
+    public userService: UserService
   ) { }
+
+  ngOnInit() {
+    this.userService.getAllStudents().subscribe(res => {
+      this.students = res;
+    });
+  }
 }

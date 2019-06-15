@@ -69,7 +69,8 @@ get f() { return this.signupForm.controls; }
         phone: this.signupForm.controls['telephone'].value ,
         cellphone: this.signupForm.controls['cellphone'].value ,
         speciality: this.signupForm.controls['specialty'].value ,
-        professional_license: this.signupForm.controls['professionalC'].value
+        professional_license: this.signupForm.controls['professionalC'].value,
+        admin: false
         }
     };
     this.userService.signup(data).subscribe((res) => {
