@@ -37,31 +37,34 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params.id) {
-        // this.userService.getUserById(params.id).subscribe((user: User) => {
-        //   this.user = user;
-        // })
+        this.userService.getUserById(params.id).subscribe((user: User) => {
+          this.user = user;
+        });
+      } else {
+        const token = localStorage.getItem('token');
+        const user = jwtDecode(token);
+        this.currentUser$ = this.store.select(selectCurrentUser);
+        this.currentUser$.subscribe(user => {
+          this.user = user;
+        });
       }
+      this.user = {
+        ...this.user,
+        experience: [
+          {
+            university: 'UNAM - 1980 / 1987',
+            speciality: 'Endocrinología',
+            description: `Comencé la carrera en medicina en 1981 con la gran intención de curar el mundo de la diabetes,
+                        me especialicé en el estudio de la sangre para prevenir que esta horrible enfermedad se sigua
+                        propagando por el mundo, y por ahora quiero aprender lo más que pueda sobre esto.`,
+          }
+        ],
+        birthdayMonth: 'Marzo',
+        birthdayDay: '13',
+        birthdayYear: '1970',
+        username: 'JuanOso',
+      };
     });
-    const token = localStorage.getItem('token');
-    const user = jwtDecode(token);
-    this.currentUser$ = this.store.select(selectCurrentUser);
-    this.user = user;
-    this.user = {
-      ...this.user,
-      experience: [
-        {
-          university: 'UNAM - 1980 / 1987',
-          speciality: 'Endocrinología',
-          description: `Comencé la carrera en medicina en 1981 con la gran intención de curar el mundo de la diabetes,
-                      me especialicé en el estudio de la sangre para prevenir que esta horrible enfermedad se sigua
-                      propagando por el mundo, y por ahora quiero aprender lo más que pueda sobre esto.`,
-        }
-      ],
-      birthdayMonth: 'Marzo',
-      birthdayDay: '13',
-      birthdayYear: '1970',
-      username: 'JuanOso',
-    };
   }
 
 }

@@ -5,9 +5,7 @@
 </nav>
 <br>
 <br>
-<section *ngIf="{
-  currentUser: currentUser$ | async
-} as values;">
+<section *ngIf="user">
     <div class="row">
         <div class="col-md-2">
                 <nav id="sidebar">
@@ -42,7 +40,7 @@
                         </div>
                         <div class="card-body" style="text-align:center">
                           {{values | json }}
-                          <h5 class="card-title">{{values.currentUser?.first_name}} {{values.currentUser?.last_name}}</h5>
+                          <h5 class="card-title">{{user?.first_name}} {{user?.last_name}}</h5>
                           <p class="card-text" style="text-align:center">
                             <i class="fa fa-map-marker-alt"></i>
                             {{user.city}}
@@ -62,7 +60,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                       <label for="username">Usuario</label>
-                                      <input type="text" class="form-control" id="inputEmail4" value="{{values.currentUser?.username}}">
+                                      <input type="text" class="form-control" id="inputEmail4" value="{{user?.username}}">
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="inputPassword4">Contraseña</label>
@@ -91,11 +89,11 @@
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
                                     <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" value="{{values.currentUser?.first_name}}">
+                                    <input type="text" class="form-control" value="{{user?.first_name}}">
                                   </div>
                                   <div class="form-group col-md-6">
                                     <label for="apellido">Apellido</label>
-                                    <input type="text" class="form-control" value="{{values.currentUser?.last_name}}">
+                                    <input type="text" class="form-control" value="{{user?.last_name}}">
                                   </div>
                                 </div>
                                       <div class="form-row">

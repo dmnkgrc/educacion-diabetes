@@ -3,6 +3,7 @@ export const config: any = {
     apiEndPoints: {
       auth: '/auth/',
       signup: '/sign-up',
-      students: '/users/students'
+      students: '/users/students',
+      getUser: '/users/'
     }
   };

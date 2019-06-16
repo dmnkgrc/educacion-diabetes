@@ -53,7 +53,8 @@
                                     <td>{{student.professional_license}}</td>
                                     <td>{{student.city}}</td>
                                     <td>{{student.speciality}}</td>
-                                    <td><b>Ver</b></td>
+                                    <td><a [routerLink]="['/student-profile', student.id]"><b>Ver</b></a>
+                                    </td>
                                   </tr>
                                 </tbody>
                               </table>

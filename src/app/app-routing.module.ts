@@ -61,6 +61,10 @@ const routes: Routes = [
     component: StudentHomeComponent
   },
   {
+    path: 'student-profile/:id',
+    component: StudentProfileComponent
+  },
+  {
     path: 'student-profile',
     component: StudentProfileComponent
   },

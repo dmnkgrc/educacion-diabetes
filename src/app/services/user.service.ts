@@ -13,6 +13,7 @@ export class UserService {
     userEndpoint: string = config.apiEndPoints.users;
     signupEndpoint: string = config.apiEndPoints.signup;
     studentsEndpoint: string = config.apiEndPoints.students;
+    getUserEndpoint: string = config.apiEndPoints.getUser;
     constructor(
         public http: HttpClient,
         public sessionService: SessionService
@@ -40,6 +41,19 @@ export class UserService {
         'Content-Type': 'application/json'
       });
       return this.http.get(this.rootURL + this.studentsEndpoint, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
+
+    public getUserById(userId: any): Observable<any>{
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      return this.http.get(this.rootURL + this.getUserEndpoint + userId, {headers}).pipe(
         tap((res: any) => {
           console.log(res);
         }),
