@@ -48,7 +48,7 @@ export class UserService {
       );
     }
 
-    public getUserById(userId: any): Observable<any>{
+    public getUserById(userId: any): Observable<any> {
       const headers: HttpHeaders = new HttpHeaders({
         Accept: 'application/json',
         'Content-Type': 'application/json'

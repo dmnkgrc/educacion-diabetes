@@ -44,7 +44,8 @@ export class StudentProfileComponent implements OnInit {
         const token = localStorage.getItem('token');
         const user = jwtDecode(token);
         this.currentUser$ = this.store.select(selectCurrentUser);
-        this.currentUser$.subscribe(user => {
+        // tslint:disable-next-line: no-shadowed-variable
+        this.currentUser$.subscribe((user: User) => {
           this.user = user;
         });
       }
