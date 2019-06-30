@@ -10,7 +10,7 @@ export class EscapeHtmlPipe implements PipeTransform {
   }
 
   transform(content) {
-    return this.sanitizer.bypassSecurityTrustHtml(content);
+    return this.sanitizer.bypassSecurityTrustUrl(content);
   }
 
 }
