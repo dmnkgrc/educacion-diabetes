@@ -292,6 +292,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@ng-select/ng-select@^2.20.2":
+  version "2.20.2"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.20.2.tgz#d89f710ae4bb9bd703ff07c012ee37f45833e77f"
+  integrity sha512-wJ7dyaOqBeozRllqqbFsOwz0R5by8pJnXhNX5AefmKPSG10coycx5ZPt8H26igOuKmTGB2Jv4mD/l1WWooDXvw==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngrx/effects@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-7.4.0.tgz#7d1977538cf85e42ab48fd648acdfbc8b52f93d3"

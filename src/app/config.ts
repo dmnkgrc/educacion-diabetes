@@ -4,6 +4,7 @@ export const config: any = {
       auth: '/auth/',
       signup: '/sign-up',
       students: '/users/students',
-      getUser: '/users/'
+      getUser: '/users/',
+      courses: '/courses/'
     }
   };

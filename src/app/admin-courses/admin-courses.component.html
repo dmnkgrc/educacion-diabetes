@@ -34,43 +34,64 @@
         </ul>
       </nav>
     </div>
-    <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;">
-      <div class="row" *ngIf="!showCourse">
-        <div class="col-md-4 course">
-          <h1>Automonitoreo Dialogo Final</h1>
-          <div class="row" style="padding: 0px 5px !important;">
-            <div class="col-md-4">
-              <p><b>Título</b></p>
+    <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="courses$ | async as courses">
+      <div class="row" style="padding: 0 40px;">
+        <button class="col-12 col-md-6 col-lg-5 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
+      </div>
+      <div class="row" *ngIf="!showCourse" style="padding: 0 40px;">
+        <div class="col-12 course" *ngFor="let course of courses">
+          <div class="row" style="padding: 0px !important;">
+            <div class="col-12 col-md-5 course-title">
+              <h1>{{course.name}}</h1>
             </div>
-            <div class="col-md-8">
-              <p>Automonitoreo Dialogo Final</p>
-            </div>
-            <div class="col-md-4">
-              <p><b>Descripción</b></p>
-            </div>
-            <div class="col-md-8">
-              <p>La diabetes comien...</p>
-            </div>
-            <div class="col-md-4">
-              <p><b>Clusters</b></p>
-            </div>
-            <div class="col-md-8">
-              <p></p>
-            </div>
-            <div class="col-12">
-              <p style="text-decoration: underline; margin-top: 15px; cursor: pointer;" (click)="toggleCourse()">Ver Curso</p>
+            <div class="col-12 col-md-7 course-info">
+              <div class="upper">
+                  <h2>{{course.name}}</h2>
+                  <p>{{course.description}}</p>
+              </div>
+              <div class="buttons">
+                <button class="button pink-button">Preview</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div *ngIf="showCourse">
-        <iframe
-          src="https://onedrive.live.com/embed?cid=CBAACE59E55B5E4E&amp;resid=CBAACE59E55B5E4E%21488&amp;authkey=ADNltmZi8jCEXVc&amp;em=2&amp;wdAr=1.7777777777777777"
-          width="100%" height="500px" frameborder="0">Esto es un documento de <a target="_blank"
-            href="https://office.com">Microsoft Office</a> incrustado con tecnología de <a target="_blank"
-            href="https://office.com/webapps">Office Online</a>.</iframe>
-      </div>
 
+      </div>
+      <div class="modal fade create-presentation-modal" id="createPresentationModal" tabindex="-1" role="dialog" aria-labelledby="createPresentationModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createPresentationModalLabel">Crear Presentación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <textarea class="form-control" [(ngModel)]="frame" placeholder="Código de la presentación (requerido)"></textarea>
+                <ng-select
+                  [items]="courses"
+                  [multiple]="true"
+                  bindValue="id"
+                  [closeOnSelect]="false"
+                  [searchable]="false"
+                  bindLabel="name"
+                  placeholder="Seleccionar cursos"
+                  [(ngModel)]="coursesId"
+                  style="margin-bottom: 20px">
+                </ng-select>
+                <input class="form-control" type="text" [(ngModel)]="audioUrl" placeholder="URL del audio"/>
+                <textarea class="form-control" [(ngModel)]="audioSync" placeholder="Sync de audio con presentación (1: 0, 2: 10, 3: 120)">
+                </textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </section>

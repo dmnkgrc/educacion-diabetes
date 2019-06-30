@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,6 +64,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     StoreModule.forRoot(appReducers, {metaReducers}),

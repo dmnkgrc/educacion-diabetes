@@ -1,6 +1,23 @@
 .content-container {
   margin-top: 30px;
 }
+.create-button {
+  background: #fff;
+  color: #B4B4B4;
+  font-size: 25px;
+  padding: 20px 0px;
+  box-shadow: none;
+  border: 1px solid #B4B4B4;
+  border-radius: 10px;
+  margin: 40px 0px;
+  outline: none;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.7;
+  }
+}
 .course {
   text-overflow: ellipsis;
   border-radius: 15px;
@@ -8,8 +25,7 @@
   background: #fff;
   height: auto;
   padding: 0;
-  h1 {
-    color: #fff;
+  .course-title {
     width: 100%;
     overflow: hidden;
     text-transform: uppercase;
@@ -17,12 +33,59 @@
     text-align: center;
     background:#1288CA;
     border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    padding: 10px;
+    border-bottom-left-radius: 15px;
+    padding: 50px 10px;
     text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  p {
-    font-size: 12px;
-    text-overflow: ellipsis;
+  h1 {
+    color: #fff;
+  }
+  .course-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    .upper {
+      justify-content: normal;
+    }
+    h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 14px;
+      text-overflow: ellipsis;
+      margin-bottom: 40px;
+    }
+    .buttons {
+      .pink-button {
+        background: #FF62A5;
+        color: #fff;
+        text-transform: uppercase;
+        box-shadow: none;
+        text-decoration: none;
+        border: none;
+        font-size: 16px;
+        padding: 15px 45px;
+        border-radius: 20px;
+        font-weight: 600;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 0.6;
+        }
+      }
+
+    }
+  }
+}
+
+.create-presentation-modal {
+  input, textarea {
+    margin-bottom: 20px;
   }
 }
