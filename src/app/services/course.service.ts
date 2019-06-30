@@ -47,4 +47,26 @@ export class CourseService {
         catchError(error => of(error))
       );
     }
+
+    public createPresentation(data: any): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      });
+      const presentation = {
+        frame: data.frame,
+        courses_id: data.coursesId,
+        audio_url: data.audioUrl,
+        audio_sync: data.audioSync
+      };
+      return this.http.post(`${this.rootURL}${this.apiEnpoints.presentations}`, {
+        presentation
+      }, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
 }

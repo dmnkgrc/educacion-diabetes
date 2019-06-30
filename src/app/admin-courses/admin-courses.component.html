@@ -35,7 +35,7 @@
       </nav>
     </div>
     <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="courses$ | async as courses">
-      <div class="row" style="padding: 0 40px;">
+      <div class="row" style="padding: 0 40px;" *ngIf="!showCourse">
         <button class="col-12 col-md-6 col-lg-5 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
       </div>
       <div class="row" *ngIf="!showCourse" style="padding: 0 40px;">
@@ -50,13 +50,13 @@
                   <p>{{course.description}}</p>
               </div>
               <div class="buttons">
-                <button class="button pink-button">Preview</button>
+                <button class="button pink-button" (click)="selectCourse(course)">Preview</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="showCourse">
+      <div *ngIf="showCourse" [innerHTML]="selectedCourse.presentations[0].frame | keepHtml" class="embed-responsive embed-responsive-16by9">
 
       </div>
       <div class="modal fade create-presentation-modal" id="createPresentationModal" tabindex="-1" role="dialog" aria-labelledby="createPresentationModalLabel" aria-hidden="true">
@@ -87,7 +87,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="createPresentation()">Guardar</button>
               </div>
             </div>
           </div>
