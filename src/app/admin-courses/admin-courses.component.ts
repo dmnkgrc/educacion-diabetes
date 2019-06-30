@@ -36,11 +36,9 @@ export class AdminCoursesComponent implements OnInit {
         newSlide = `${newSlide}.${data.state.indexv}`;
       }
       const player = document.getElementById('player') as HTMLAudioElement;
-      console.log(newSlide)
       this.currentSlide = newSlide;
       player.load();
     }
-    console.log(data);
     return;
   }
   ngOnInit() {
