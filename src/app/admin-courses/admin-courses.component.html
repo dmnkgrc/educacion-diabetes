@@ -35,22 +35,25 @@
       </nav>
     </div>
     <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="courses$ | async as courses">
-      <div class="row" style="padding: 0 40px;" *ngIf="!showCourse">
-        <button class="col-12 col-md-6 col-lg-5 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
-      </div>
-      <div class="row" *ngIf="!showCourse" style="padding: 0 40px;">
-        <div class="col-12 course" *ngFor="let course of courses">
+      <div class="row" *ngIf="!showCourse" style="padding: 0 10px;">
+        <div class="col-12 col-md-3" style="padding: 0 20px;" *ngIf="!showCourse">
+          <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
+          <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
+        </div>
+        <div class="col-12 col-md-9 course" *ngFor="let course of courses">
           <div class="row" style="padding: 0px !important;">
-            <div class="col-12 col-md-5 course-title">
-              <h1>{{course.name}}</h1>
-            </div>
-            <div class="col-12 col-md-7 course-info">
+            <div class="col-12 course-info">
               <div class="upper">
                   <h2>{{course.name}}</h2>
-                  <p>{{course.description}}</p>
               </div>
-              <div class="buttons">
-                <button class="button pink-button" (click)="selectCourse(course)">Preview</button>
+              <div class="presentations">
+                <ul>
+                  <li *ngFor="let presentation of course.presentations_list" (click)="selectPresentation(presentation)">
+                    <span class="presentation-position">{{presentation.position}}</span>
+                    <span class="presentation-title">{{presentation.title}}</span>
+                    <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -59,9 +62,9 @@
       <div *ngIf="showCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
         <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
-      <div *ngIf="showCourse && selectedCourse.presentations[0].audio_url">
+      <div *ngIf="showCourse && selectedCourse.audio_url">
         <audio autoplay style="display: none;" id="player">
-          <source [src]="selectedCourse.presentations[0].audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
+          <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
         Your browser does not support the audio element.
         </audio>
       </div>
@@ -78,15 +81,15 @@
                 <input type="text" class="form-control" [(ngModel)]="frame" placeholder="Url de la presentación (requerido)" />
                 <ng-select
                   [items]="courses"
-                  [multiple]="true"
                   bindValue="id"
-                  [closeOnSelect]="false"
+                  [closeOnSelect]="true"
                   [searchable]="false"
                   bindLabel="name"
-                  placeholder="Seleccionar cursos"
+                  placeholder="Seleccionar cursos (requerido)"
                   [(ngModel)]="coursesId"
                   style="margin-bottom: 20px">
                 </ng-select>
+                <input type="text" class="form-control" [(ngModel)]="position" placeholder="Posición de la presentación (requerido)" />
                 <input class="form-control" type="text" [(ngModel)]="audioUrl" placeholder="URL del audio"/>
                 <textarea class="form-control" [(ngModel)]="audioSync" placeholder='Sync de audio con presentación, ejemplo: "1":"0,5","1.1":"5,16","2":"16,37"'>
                 </textarea>

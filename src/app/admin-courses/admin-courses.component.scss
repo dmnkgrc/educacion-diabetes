@@ -4,23 +4,24 @@
 .create-button {
   background: #fff;
   color: #B4B4B4;
-  font-size: 25px;
+  font-size: 23px;
   padding: 20px 0px;
   box-shadow: none;
   border: 1px solid #B4B4B4;
   border-radius: 10px;
-  margin: 40px 0px;
+  margin: 20px 0px;
   outline: none;
   &:hover {
-    opacity: 0.9;
+    opacity: 0.7;
   }
   &:active {
-    opacity: 0.7;
+    opacity: 0.5;
   }
 }
 .course {
   text-overflow: ellipsis;
-  border-radius: 15px;
+  // border-radius: 15px;
+  border: 1px solid #707070;
   margin-top: 15px;
   background: #fff;
   height: auto;
@@ -44,21 +45,57 @@
     color: #fff;
   }
   .course-info {
-    padding: 20px;
+    padding: 0;
     display: flex;
     flex-direction: column;
     .upper {
       justify-content: normal;
+      border-bottom: 1px solid #707070;
+      padding: 20px;
     }
     h2 {
+      color: #707070;
+      font-weight: 400;
       font-size: 32px;
-      font-weight: 900;
-      margin-bottom: 20px;
+      margin: 0;
     }
     p {
       font-size: 14px;
       text-overflow: ellipsis;
       margin-bottom: 40px;
+    }
+    .presentations {
+      ul {
+        list-style-type: none;
+        li {
+          color: #707070;
+          display: flex;
+          padding: 15px 0;
+          align-items: center;
+          cursor: pointer;
+          .presentation-position {
+            width: 33px;
+            height: 33px;
+            border-radius: 3px;
+            border: 1px solid #707070;
+            padding: 3px;
+            font-size: 20px;
+            text-align: center;
+            align-self: center;
+          }
+          .presentation-title {
+            font-size: 20px;
+            font-weight: 900;
+            align-self: center;
+            margin-left: 30px;
+            flex: 1;
+          }
+          .presentation-date {
+            margin-right: 50px;
+            font-size: 20px;
+          }
+        }
+      }
     }
     .buttons {
       .pink-button {

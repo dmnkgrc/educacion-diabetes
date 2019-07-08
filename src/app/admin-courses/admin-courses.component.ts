@@ -14,6 +14,7 @@ export class AdminCoursesComponent implements OnInit {
   public frame: string;
   public audioUrl: string;
   public audioSync: string;
+  public position: string;
   public selectedCourse: any;
   public coursesId: number[];
   public times: any;
@@ -53,15 +54,13 @@ export class AdminCoursesComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  public selectCourse(course: any) {
-    this.selectedCourse = course;
-    if (course.presentations.length > 0) {
-      this.frameUrl = this.getUrl(course.presentations[0].frame);
-      let audioSync = course.presentations[0].audio_sync;
-      if (audioSync) {
-        audioSync = `{${audioSync}}`;
-        this.times = JSON.parse(audioSync);
-      }
+  public selectPresentation(presentation: any) {
+    this.selectedCourse = presentation;
+    this.frameUrl = this.getUrl(presentation.frame);
+    let audioSync = presentation.audio_sync;
+    if (audioSync) {
+      audioSync = `{${audioSync}}`;
+      this.times = JSON.parse(audioSync);
     }
     this.toggleCourse();
   }
@@ -72,7 +71,8 @@ export class AdminCoursesComponent implements OnInit {
         frame: this.frame,
         coursesId: this.coursesId,
         audioUrl: this.audioUrl,
-        audioSync: this.audioSync
+        audioSync: this.audioSync,
+        position: this.position
       }).subscribe(presentation => {
         this.courses$ = this.courseService.getAllCourses();
       });
