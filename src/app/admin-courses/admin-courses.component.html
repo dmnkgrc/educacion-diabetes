@@ -35,28 +35,33 @@
       </nav>
     </div>
     <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="courses$ | async as courses">
-      <div class="row" *ngIf="!showCourse" style="padding: 0 10px;">
-        <div class="col-12 col-md-3" style="padding: 0 20px;" *ngIf="!showCourse">
+      <div class="row" *ngIf="!showCourse" style="padding: 0 10px; height: 100%;">
+        <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
           <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
           <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
         </div>
-        <div class="col-12 col-md-9 course" *ngFor="let course of courses">
-          <div class="row" style="padding: 0px !important;">
-            <div class="col-12 course-info">
-              <div class="upper">
-                  <h2>{{course.name}}</h2>
-              </div>
-              <div class="presentations">
-                <ul>
-                  <li *ngFor="let presentation of course.presentations_list" (click)="selectPresentation(presentation)">
-                    <span class="presentation-position">{{presentation.position}}</span>
-                    <span class="presentation-title">{{presentation.title}}</span>
-                    <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <div class="col-12 col-md-9">
+          <div class="courses">
+              <div class="course" *ngFor="let course of courses">
+                  <div class="row" style="padding: 0px !important;">
+                    <div class="col-12 course-info">
+                      <div class="upper">
+                          <h2>{{course.name}}</h2>
+                      </div>
+                      <div class="presentations">
+                        <ul>
+                          <li *ngFor="let presentation of course.presentations_list" (click)="selectPresentation(presentation)">
+                            <span class="presentation-position">{{presentation.position}}</span>
+                            <span class="presentation-title">{{presentation.title}}</span>
+                            <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           </div>
+
         </div>
       </div>
       <div *ngIf="showCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
@@ -78,6 +83,7 @@
                 </button>
               </div>
               <div class="modal-body">
+                <input type="text" class="form-control" [(ngModel)]="title" placeholder="Título de la presentación (requerido)" />
                 <input type="text" class="form-control" [(ngModel)]="frame" placeholder="Url de la presentación (requerido)" />
                 <ng-select
                   [items]="courses"
@@ -96,11 +102,32 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="createPresentation()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createPresentation()">Guardar</button>
               </div>
             </div>
           </div>
+      </div>
+      <div class="modal fade create-course-modal" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createCourseModalLabel">Crear Curso</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre del curso (requerido)" />
+              <textarea class="form-control" [(ngModel)]="description" placeholder="Descripción del curso (requerido)">
+              </textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createCourse()">Guardar</button>
+            </div>
+          </div>
         </div>
+    </div>
     </div>
   </div>
 </section>

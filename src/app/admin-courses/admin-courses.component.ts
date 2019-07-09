@@ -11,10 +11,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class AdminCoursesComponent implements OnInit {
   public showCourse = false;
+  public title: string;
   public frame: string;
   public audioUrl: string;
   public audioSync: string;
   public position: string;
+  public name: string;
+  public description: string;
   public selectedCourse: any;
   public coursesId: number[];
   public times: any;
@@ -66,10 +69,11 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public createPresentation() {
-    if (this.frame && this.coursesId.length > 0) {
+    if (this.frame && this.coursesId) {
       return this.courseService.createPresentation({
+        title: this.title,
         frame: this.frame,
-        coursesId: this.coursesId,
+        coursesId: [this.coursesId],
         audioUrl: this.audioUrl,
         audioSync: this.audioSync,
         position: this.position
@@ -78,6 +82,18 @@ export class AdminCoursesComponent implements OnInit {
       });
     }
     alert('Frame y Cursos son requeridos');
+  }
+
+  public createCourse() {
+    if (this.name && this.description) {
+      return this.courseService.createCourse({
+        name: this.name,
+        description: this.description
+      }).subscribe(() => {
+        this.courses$ = this.courseService.getAllCourses();
+      });
+    }
+    alert('Nombre y descripción son requeridos');
   }
 
 }

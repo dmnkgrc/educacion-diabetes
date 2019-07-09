@@ -18,11 +18,18 @@
     opacity: 0.5;
   }
 }
+.courses {
+  background: #fff;
+  padding: 0;
+  margin-top: 25px;
+  height: auto;
+  border: 1px solid #707070;
+}
 .course {
   text-overflow: ellipsis;
   // border-radius: 15px;
-  border: 1px solid #707070;
   margin: 15px 0px;
+  margin-bottom: 40px;
   background: #fff;
   height: auto;
   padding: 0;
@@ -121,7 +128,8 @@
   }
 }
 
-.create-presentation-modal {
+.create-presentation-modal,
+.create-course-modal {
   input, textarea {
     margin-bottom: 20px;
   }
