@@ -3,7 +3,7 @@ import { CourseService } from '../services/course.service';
 import { Observable } from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { $ } from 'protractor';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -23,12 +23,14 @@ export class AdminCoursesComponent implements OnInit {
   public description: string;
   public selectedCourse: any;
   public coursesId: number;
+  public usersId: number[];
   public times: any;
   public courses$: Observable<any>;
   public currentSlide: any = 1;
   public frameUrl: SafeResourceUrl;
+  public students$: Observable<any>;
 
-  constructor(private courseService: CourseService, private sanitizer: DomSanitizer) {}
+  constructor(private courseService: CourseService, private sanitizer: DomSanitizer, private userService: UserService) {}
 
   @HostListener('window:message', ['$event'])
   onMessage(e) {
@@ -50,6 +52,7 @@ export class AdminCoursesComponent implements OnInit {
   }
   ngOnInit() {
     this.courses$ = this.courseService.getAllCourses();
+    this.students$ = this.userService.getAllStudents();
   }
 
   public toggleCourse() {
@@ -101,7 +104,8 @@ export class AdminCoursesComponent implements OnInit {
     if (this.name && this.description) {
       return this.courseService.createCourse({
         name: this.name,
-        description: this.description
+        description: this.description,
+        users: this.usersId || []
       }).subscribe(() => {
         this.courses$ = this.courseService.getAllCourses();
       });

@@ -56,7 +56,8 @@ export class CourseService {
       });
       const course = {
         name: data.name,
-        description: data.description
+        description: data.description,
+        users: data.users
       };
       return this.http.post(`${this.rootURL}${this.apiEnpoints.courses}`, {
         course

@@ -34,7 +34,7 @@
         </ul>
       </nav>
     </div>
-    <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="courses$ | async as courses">
+    <div class="col-md-10 content-container" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async} as values">
       <div class="row" *ngIf="!showCourse" style="padding: 0 10px; height: 100%;">
         <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
           <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
@@ -42,7 +42,7 @@
         </div>
         <div class="col-12 col-md-9">
           <div class="courses">
-              <div class="course" *ngFor="let course of courses">
+              <div class="course" *ngFor="let course of values.courses">
                   <div class="row" style="padding: 0px !important;">
                     <div class="col-12 course-info">
                       <div class="upper">
@@ -90,7 +90,7 @@
                 <input type="text" class="form-control" [(ngModel)]="title" placeholder="Título de la presentación (requerido)" />
                 <input type="text" class="form-control" [(ngModel)]="frame" placeholder="Url de la presentación (requerido)" />
                 <ng-select
-                  [items]="courses"
+                  [items]="values.courses"
                   bindValue="id"
                   [closeOnSelect]="true"
                   [searchable]="false"
@@ -124,6 +124,17 @@
               <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre del curso (requerido)" />
               <textarea class="form-control" [(ngModel)]="description" placeholder="Descripción del curso (requerido)">
               </textarea>
+              <ng-select
+                  [items]="values.students"
+                  bindValue="id"
+                  [closeOnSelect]="false"
+                  [multiple]="true"
+                  [searchable]="false"
+                  bindLabel="first_name"
+                  placeholder="Seleccionar alumnos"
+                  [(ngModel)]="usersId"
+                  style="margin-bottom: 20px">
+                </ng-select>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
