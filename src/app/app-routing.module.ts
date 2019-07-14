@@ -12,6 +12,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
+import { CourseIntroComponent } from './course-intro/course-intro.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
     component: AdminCoursesComponent
   },
   {
+    path: 'course-intro/:id',
+    component: CourseIntroComponent
+  },
+  {
     path: 'signup',
     component: SignupComponent
   },
@@ -53,7 +58,7 @@ const routes: Routes = [
     component: CoursesIndexComponent
   },
   {
-    path: 'course-show',
+    path: 'course-show/:id/:presentation_id',
     component: CourseShowComponent
   },
   {

@@ -1,0 +1,139 @@
+.content-container {
+  margin-top: 30px;
+}
+
+.btn-pink {
+  background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.create-button {
+  background: #fff;
+  color: #B4B4B4;
+  font-size: 23px;
+  padding: 20px 0px;
+  box-shadow: none;
+  border: 1px solid #B4B4B4;
+  border-radius: 10px;
+  margin: 20px 0px;
+  outline: none;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+}
+.courses {
+  background: #fff;
+  padding: 0;
+  margin-top: 25px;
+  height: auto;
+}
+.course {
+  text-overflow: ellipsis;
+  margin-bottom: 40px;
+  background: #fff;
+  height: auto;
+  padding: 0;
+  .course-title {
+    width: 100%;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-size: 40px;
+    text-align: center;
+    background:#1288CA;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 50px 10px;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    color: #fff;
+  }
+  .course-info {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    .upper {
+      justify-content: normal;
+      border-bottom: 1px solid #707070;
+      padding: 20px;
+    }
+    h2 {
+      color: #707070;
+      font-weight: 400;
+    }
+    p {
+      font-size: 20px;
+      text-overflow: ellipsis;
+      margin-bottom: 40px;
+    }
+    .presentations {
+      ul {
+        list-style-type: none;
+        li {
+          color: #707070;
+          display: flex;
+          padding: 15px 0;
+          align-items: center;
+          cursor: pointer;
+          .presentation-position {
+            width: 33px;
+            height: 33px;
+            border-radius: 3px;
+            border: 1px solid #707070;
+            padding: 3px;
+            font-size: 20px;
+            text-align: center;
+            align-self: center;
+          }
+          .presentation-title {
+            font-size: 20px;
+            font-weight: 900;
+            align-self: center;
+            margin-left: 30px;
+            flex: 1;
+          }
+          .presentation-date {
+            margin-right: 50px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    .buttons {
+      .pink-button {
+        background: #FF62A5;
+        color: #fff;
+        text-transform: uppercase;
+        box-shadow: none;
+        text-decoration: none;
+        border: none;
+        font-size: 16px;
+        padding: 15px 45px;
+        border-radius: 20px;
+        font-weight: 600;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 0.6;
+        }
+      }
+
+    }
+  }
+}
+
+.create-presentation-modal,
+.create-course-modal {
+  input, textarea {
+    margin-bottom: 20px;
+  }
+}

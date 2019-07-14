@@ -42,40 +42,41 @@
                             uno de los cursos. Éxito!</p>
                     <br>
                     <div *ngFor="let course of courses" [ngClass]="course.show ? 'course-card' : '' "> <!---Tarjeta-->
-                        <div *ngIf="course.show" class="row">
+                        <div class="row">
                             <div class="col-md-1">
-                                <img src="{{course.img}}" style="border-radius: 20px" alt="">
+                                <img src="/assets/guiadiabetes.jpg" style="border-radius: 20px" alt="">
                             </div>
                             <div class="col-md-7 offset-md-4">
                                 <div class="row" style="font-weight: bold; color: #113F67; text-align: center">
-                                    <h1>{{course.title}}</h1>
+                                    <h1>{{course.name}}</h1>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
                                             <p class="card-text">
-                                              {{course.content}}
+                                              {{course.description}}
                                             </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="progress" style="margin-top: 10%;">
-                                          <div class="progress-bar" role="progressbar" [style.width]="course.progress + '%'" aria-valuemin="0" aria-valuemax="100">{{course.progress}}%</div>
+                                            <!-- TODO display progress -->
+                                          <div class="progress-bar" role="progressbar" [style.width]="0 + '%'" aria-valuemin="0" aria-valuemax="100">0%</div>
                                         </div>
                                     </div>
                                     <div class="col-md-2 offset-md-1">
-                                            <a href="{{course.doc}}" class="btn btn-lg btn-pink" style="color: white">
+                                            <a [routerLink]="['/course-intro', course.id]" class="btn btn-lg btn-pink" style="color: white">
                                                 Iniciar
                                             </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="!course.show" class="col-md-1 locked-img">
+                        <!-- <div *ngIf="!course.show" class="col-md-1 locked-img">
                             <div class="tag"><i class="fa fa-lock big-icon locked-icon"></i></div>
                             <img src="{{course.img}}" style="border-radius: 20px">
-                        </div>
+                        </div> -->
                     </div> <!--Fin tarjeta-->
                 </div>
             </div>

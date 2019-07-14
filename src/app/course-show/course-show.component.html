@@ -7,52 +7,56 @@
     <br>
     <section>
         <div class="row">
-            <div class="col-md-2">
-                    <nav id="sidebar">
-                        <br>
-                
-                        <ul class="navbar-nav nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" style = "padding-left: 0px;">Introducción a la diabetes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" >Introducción a la diabetes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" >Tipos de diabetes en México</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" [routerLink]="['../courses']"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
-                                </li>
-                                
-                        </ul>
-
-                        <ul class="navbar-nav nav">
-                            <li>
-                                    <a class="nav-link" style="position: absolute; bottom: 0; color: white; font-style: normal">Cerrar sesión <i class="fa fa-sign-out-alt"></i></a>
+                <div class="col-md-2 sidebar-container">
+                        <nav id="sidebar">
+                          <br>
+                          <ul class="navbar-nav nav">
+                            <li class="nav-item">
+                              <a class="nav-link active" style="padding-left: 0px; color: white;"><i
+                                  class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>{{course?.name}}</a>
                             </li>
-                        </ul>
-                </nav>
-            </div>
+                            <li class="nav-item">
+                              <a class="nav-link" style="color: white"><i class="far fa-check-circle"
+                                  style="margin-right: 10px; margin-left: 10px;"></i>Introduccion</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" style="color: white"><i class="far fa-check-circle"
+                                  style="margin-right: 10px; margin-left: 10px;"></i>Aprendizaje</a>
+                            </li>
+                            <li class="active nav-item">
+                              <a class="nav-link" style="color: white"><i class="far fa-circle-o"
+                                  style="margin-right: 10px; margin-left: 10px;"></i>Actividad</a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
             <div class="col-md-10" style="background-color: #F2F2F2;">
                 <br>
                 <div class="row">
                     <div class="col-md-12">
-                            <img src="https://via.placeholder.com/989x408.png" alt="">
+                            <div *ngIf="selectedCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
+                                    <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                  </div>
+                                  <div *ngIf="selectedCourse && selectedCourse.audio_url">
+                                    <audio autoplay style="display: none;" id="player">
+                                      <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                    </audio>
+                                  </div>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                         <ul class="nav nav-tabs">
                                 <li class="nav-item" >
-                                        <a [ngClass]="select == 'first' ? 'active' : ''" (click)="changeSelect('first')">Acerca De</a>
+                                        <a [ngClass]="select == 'first' ? 'active' : ''" (click)="changeSelect('first')">Comentarios</a>
                                 </li>
                             <li class="nav-item" >
-                                    <a [ngClass]="select == 'second' ? 'active' : ''" (click)="changeSelect('second')">Preguntas</a>
+                                    <a [ngClass]="select == 'second' ? 'active' : ''" (click)="changeSelect('second')">Archivos</a>
                             </li>
                                 <li class="nav-item" >
-                                        <a [ngClass]="select == 'third' ? 'active' : ''" (click)="changeSelect('third')">Sugerencias</a>
+                                        <a [ngClass]="select == 'third' ? 'active' : ''" (click)="changeSelect('third')">Bibliografía</a>
                                 </li>
                         </ul>
                 </div>

@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+  <a class="navbar-brand" href="#">
+    <img src="../../assets/diabetesblanco.png" class="logo" alt="">
+  </a>
+</nav>
+<br>
+<br>
+<section>
+  <div class="row">
+    <div class="col-md-2 sidebar-container">
+      <nav id="sidebar">
+        <br>
+        <ul class="navbar-nav nav">
+          <li class="nav-item">
+            <a class="nav-link active" style="padding-left: 0px; color: white;"><i
+                class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>{{course?.name}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: white"><i class="far fa-check-circle"
+                style="margin-right: 10px; margin-left: 10px;"></i>Introduccion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: white"><i class="far fa-circle-o"
+                style="margin-right: 10px; margin-left: 10px;"></i>Aprendizaje</a>
+          </li>
+          <li class="active nav-item">
+            <a class="nav-link" style="color: white"><i class="far fa-circle-o"
+                style="margin-right: 10px; margin-left: 10px;"></i>Actividad</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-md-10" style="background-color: #F2F2F2; padding: 0px 40px;" *ngIf="course">
+      <div class="row">
+        <div class="col-12 col-md-9">
+          <div class="courses">
+              <div>
+                  <div class="row">
+                    <div class="col-12 course-info">
+                      <div class="upper">
+                          <h1>{{course?.name}}</h1>
+                      </div>
+                      <div class="description">
+                        <p>{{course?.description}}</p>
+                      </div>
+                      <br>
+                      <div>
+                        <ul>
+                            <li *ngFor="let presentation of course.presentations_list; let i = index" (click)="selectPresentation(presentation)">
+                                <div class="row">
+                                  <div class="col-md-9">
+                                      <span class="presentation-position">{{presentation.position}} - </span>
+                                      <span class="presentation-title">{{presentation.title}} </span>
+                                      <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <a [routerLink]="['/course-show', course?.id, i]" class="btn btn-lg btn-pink" style="color: white; margin-left: 5%;">
+                                        Ver
+                                      </a>
+                                  </div>
+                                </div>
+                            </li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

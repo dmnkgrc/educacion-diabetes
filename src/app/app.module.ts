@@ -28,6 +28,7 @@ import { AdminProfileComponent } from './admin/admin-profile/admin-profile.compo
 import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 import { EscapeHtmlPipe } from './escape-html.pipe';
 import { FormatDatePipe } from './format-date.pipe';
+import { CourseIntroComponent } from './course-intro/course-intro.component';
 
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -60,6 +61,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     StudentHomeComponent,
     StudentProfileComponent,
     AdminCoursesComponent,
+    CourseIntroComponent,
     EscapeHtmlPipe,
     FormatDatePipe
   ],
