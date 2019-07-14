@@ -29,6 +29,7 @@ import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 import { EscapeHtmlPipe } from './escape-html.pipe';
 import { FormatDatePipe } from './format-date.pipe';
 import { CourseIntroComponent } from './course-intro/course-intro.component';
+import { IconsModule } from './icons/icons.module';
 
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -73,6 +74,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     NgSelectModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
+    IconsModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
   ],

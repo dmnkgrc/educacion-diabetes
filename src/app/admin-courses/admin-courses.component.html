@@ -54,6 +54,10 @@
                             <span class="presentation-position">{{presentation.position}}</span>
                             <span class="presentation-title">{{presentation.title}}</span>
                             <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
+                            <span class="presentation-icons">
+                              <i-feather name="edit-2" class="edit-icon"></i-feather>
+                              <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, presentation.id)"></i-feather>
+                            </span>
                           </li>
                         </ul>
                       </div>

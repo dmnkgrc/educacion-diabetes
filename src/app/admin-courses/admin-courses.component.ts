@@ -96,4 +96,13 @@ export class AdminCoursesComponent implements OnInit {
     alert('Nombre y descripción son requeridos');
   }
 
+  public deletePresentation(event: any, id: number) {
+    event.stopPropagation();
+    if (confirm('¿Estás seguro?')) {
+      return this.courseService.deletePresentation(id).subscribe(() => {
+        this.courses$ = this.courseService.getAllCourses();
+      });
+    }
+  }
+
 }

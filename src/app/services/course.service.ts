@@ -91,4 +91,18 @@ export class CourseService {
         catchError(error => of(error))
       );
     }
+
+    public deletePresentation(id: number): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      });
+      return this.http.delete(`${this.rootURL}${this.apiEnpoints.presentations}${id}`, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
 }
