@@ -61,7 +61,7 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public selectPresentation(presentation: any, event: any) {
-    if (typeof(event.target.className) !== "string") {
+    if (typeof(event.target.className) !== 'string') {
       return;
     }
     this.selectedCourse = presentation;
