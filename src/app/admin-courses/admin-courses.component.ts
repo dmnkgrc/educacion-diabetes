@@ -3,6 +3,7 @@ import { CourseService } from '../services/course.service';
 import { Observable } from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-admin-courses',
@@ -11,6 +12,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class AdminCoursesComponent implements OnInit {
   public showCourse = false;
+  private editPresentationMode = false;
+  private presentationId: number;
   public title: string;
   public frame: string;
   public audioUrl: string;
@@ -19,7 +22,7 @@ export class AdminCoursesComponent implements OnInit {
   public name: string;
   public description: string;
   public selectedCourse: any;
-  public coursesId: number[];
+  public coursesId: number;
   public times: any;
   public courses$: Observable<any>;
   public currentSlide: any = 1;
@@ -57,7 +60,10 @@ export class AdminCoursesComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  public selectPresentation(presentation: any) {
+  public selectPresentation(presentation: any, event: any) {
+    if (typeof(event.target.className) !== "string") {
+      return;
+    }
     this.selectedCourse = presentation;
     this.frameUrl = this.getUrl(presentation.frame);
     let audioSync = presentation.audio_sync;
@@ -70,14 +76,21 @@ export class AdminCoursesComponent implements OnInit {
 
   public createPresentation() {
     if (this.frame && this.coursesId) {
-      return this.courseService.createPresentation({
+      const data = {
         title: this.title,
         frame: this.frame,
         coursesId: [this.coursesId],
         audioUrl: this.audioUrl,
         audioSync: this.audioSync,
         position: this.position
-      }).subscribe(presentation => {
+      };
+      if (this.editPresentationMode) {
+        this.editPresentationMode = false;
+        return this.courseService.editPresentation(data, this.presentationId).subscribe(presentation => {
+          this.courses$ = this.courseService.getAllCourses();
+        });
+      }
+      return this.courseService.createPresentation(data).subscribe(presentation => {
         this.courses$ = this.courseService.getAllCourses();
       });
     }
@@ -94,6 +107,17 @@ export class AdminCoursesComponent implements OnInit {
       });
     }
     alert('Nombre y descripción son requeridos');
+  }
+
+  public editPresentation(event: any, presentation: any, id: number) {
+    this.title = presentation.title;
+    this.frame = presentation.frame;
+    this.audioSync = presentation.audio_sync;
+    this.audioUrl = presentation.audio_url;
+    this.coursesId = id;
+    this.position = presentation.position;
+    this.editPresentationMode = true;
+    this.presentationId = presentation.id;
   }
 
   public deletePresentation(event: any, id: number) {

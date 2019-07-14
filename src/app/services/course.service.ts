@@ -92,6 +92,30 @@ export class CourseService {
       );
     }
 
+    public editPresentation(data: any, id: number): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      });
+      const presentation = {
+        title: data.title,
+        frame: data.frame,
+        courses_id: data.coursesId,
+        audio_url: data.audioUrl,
+        audio_sync: data.audioSync,
+        position: data.position
+      };
+      return this.http.put(`${this.rootURL}${this.apiEnpoints.presentations}${id}`, {
+        presentation
+      }, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
+
     public deletePresentation(id: number): Observable<any> {
       const headers: HttpHeaders = new HttpHeaders({
         Accept: 'application/json',

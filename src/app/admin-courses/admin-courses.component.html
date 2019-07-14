@@ -50,12 +50,12 @@
                       </div>
                       <div class="presentations">
                         <ul>
-                          <li *ngFor="let presentation of course.presentations_list" (click)="selectPresentation(presentation)">
+                          <li *ngFor="let presentation of course.presentations_list" class="presentation" (click)="selectPresentation(presentation, $event)">
                             <span class="presentation-position">{{presentation.position}}</span>
                             <span class="presentation-title">{{presentation.title}}</span>
                             <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
                             <span class="presentation-icons">
-                              <i-feather name="edit-2" class="edit-icon"></i-feather>
+                              <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createPresentationModal" (click)="editPresentation($event, presentation, course.id)"></i-feather>
                               <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, presentation.id)"></i-feather>
                             </span>
                           </li>
