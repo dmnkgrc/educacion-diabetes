@@ -1,0 +1,127 @@
+@mixin background-opacity($color, $opacity: 0.3)
+    background: $color /* The Fallback */
+    background: rgba($color, $opacity)
+
+.img-section
+  height: 100vh !important
+
+.no-padding
+  padding: 0
+
+.navbar
+  background: transparent
+
+.navbar-dark .navbar-nav .nav-link
+  color: #fff
+  text-align: center
+  &:hover
+    opacity: 0.7
+  &.signup-link
+    color: #FF62A5
+    border: 2px solid #FF62A5
+    border-radius: 20px
+    padding: .5rem 20px
+    margin: 0px 20px
+
+
+.navbar-brand
+  @media screen and (max-width: 765px)
+      margin-left: 35vw
+      width: 20vw
+
+.btn-pink
+  background: linear-gradient(#E45F96,#ED82B6) 
+
+.content
+  height: 100%
+  width: 100%
+  position: relative
+  @include background-opacity(#252525, 0.5)
+  .home-text
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    color: #ffffff
+    text-align: center
+    h4
+      font-weight: 400
+      margin-top: 30px
+      font-size: 23px
+    button
+      background: #FF62A5
+      color: #ffffff
+      border: none
+      font-weight: 600
+      font-size: 16px
+      padding: 14px 28px
+      margin-top: 40px
+      border-radius: 20px
+      &:hover
+        opacity: 0.9
+.card
+  min-height: 45vh
+  margin-top: 50% !important
+  @media screen and (max-width: 765px)
+    margin-top: 30% !important
+    min-height: 15vh
+
+.right-content
+  text-align: center
+  background: linear-gradient(180deg,#2773a0 0,#113f67 100%)
+  padding: 0
+  margin: 0
+  @media screen and (max-width: 765px)
+    margin-top: 0 !important
+
+.form-signin
+  width: 100%
+  max-width: 420px
+  padding: 15px
+  margin: 0 auto
+
+.form-label-group
+  position: relative
+  margin-bottom: 1rem
+
+.form-label-group > input,
+.form-label-group > label
+  padding: var(--input-padding-y) var(--input-padding-x)
+
+.form-label-group > label
+  position: absolute
+  top: 0
+  left: 0
+  display: block
+  width: 100%
+  margin-bottom: 0 /* Override default `<label>` margin */
+  line-height: 1.5
+  color: #495057
+  border: 1px solid transparent
+  border-radius: .25rem
+  transition: all .1s ease-in-out
+
+.form-label-group input::-webkit-input-placeholder
+  color: transparent
+
+.form-label-group input:-ms-input-placeholder
+  color: transparent
+
+.form-label-group input::-ms-input-placeholder
+  color: transparent
+
+.form-label-group input::-moz-placeholder
+  color: transparent
+
+.form-label-group input::placeholder
+  color: transparent
+
+.form-label-group input:not(:placeholder-shown)
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3))
+  padding-bottom: calc(var(--input-padding-y) / 3)
+
+.form-label-group input:not(:placeholder-shown) ~ label
+  padding-top: calc(var(--input-padding-y) / 3)
+  padding-bottom: calc(var(--input-padding-y) / 3)
+  font-size: 12px
+  color: #777
