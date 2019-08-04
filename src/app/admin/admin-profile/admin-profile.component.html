@@ -42,30 +42,32 @@
   	
         <div class="row">
             <div class="col-md-12" style="height: calc(100vh - 50px); padding: 0;">
-                <div class="row">
+                <div class="row" *ngIf="{
+                  currentUser: currentUser$ | async
+                } as values">
                     <div class="col-md-9">
                             <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">{{currentUser.first_name}} {{currentUser.last_name}}</h3>
+                                        <h3 class="card-title">{{values.currentUser.first_name}} {{values.currentUser.last_name}}</h3>
                                         <hr>
                                         <div class="row">
                                           <div class="col-md-4">
                                             <b>Nombre</b>
                                           </div>
                                           <div class="col-md-8">
-                                            <p> {{currentUser.first_name}} {{currentUser.last_name}}</p>
+                                            <p> {{values.currentUser.first_name}} {{values.currentUser.last_name}}</p>
                                           </div>
                                           <div class="col-md-4">
                                             <b>Correo electrónico</b>
                                           </div>
                                           <div class="col-md-8">
-                                            <p> {{currentUser.email}}</p>
+                                            <p> {{values.currentUser.email}}</p>
                                           </div>
                                           <div class="col-md-4">
                                             <b>Teléfono</b>
                                           </div>
                                           <div class="col-md-8">
-                                            <p> {{currentUser.phone}}</p>
+                                            <p> {{values.currentUser.phone}}</p>
                                           </div>
                                           <div class="col-md-4">
                                             <b>Inscripción</b>
