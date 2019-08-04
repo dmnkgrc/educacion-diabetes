@@ -1,153 +1,168 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-    <a class="navbar-brand" href="#">
-        <img src="../../assets/diabetesblanco.png" class="logo" alt="">
-    </a>
-</nav>
-<br>
-<br>
-<section *ngIf="user">
-    <div class="row">
-        <div class="col-md-2">
-                <nav id="sidebar">
-                    <br>
-
-                    <ul class="navbar-nav nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" [routerLink]="['/student-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['/student-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
-                            </li>
-                            <li class="active nav-item">
-                                <a class="nav-link" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
-                            </li>
-                        </ul>
-            </nav>
-        </div>
-        <div class="col-md-10" style="background-color: #F2F2F2;">
-            <br>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            <img src="https://via.placeholder.com/200" class="rounded-circle">
-                        </div>
-                        <div class="card-body" style="text-align:center">
-                          {{values | json }}
-                          <h5 class="card-title">{{user?.first_name}} {{user?.last_name}}</h5>
-                          <p class="card-text" style="text-align:center">
-                            <i class="fa fa-map-marker-alt"></i>
-                            {{user.city}}
-                          </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-8 offset-md-2">
-                    <div class="card" style="width: 40rem;">
-                        <div class="card-header">
-                            <h3> Datos de Autenticación</h3>
-                            <p>Es importante contar con estas medidas de seguridad.</p>
-                        </div>
-                        <div class="card-body" style="text-align:center">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <label for="username">Usuario</label>
-                                      <input type="text" class="form-control" id="inputEmail4" value="{{user?.username}}">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                      <label for="inputPassword4">Contraseña</label>
-                                      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="inputPassword4">Repita contraseña</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                                      </div>
-                                  </div>
-                              </form>
-                        </div>
-                    </div>
-                </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+   
+   <div class="wrapper">
+   	<nav id="sidebar" [ngClass]="collapsedSideBar ? 'active' : ''">
+   		<ul class="list-unstyled components">
+               <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/student-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                </li>
+                <li class="active nav-item">
+                    <a class="nav-link" style="color: white" [routerLink]="['/student-profile']" ><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/courses']" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                </li>
+   		</ul>
+   	</nav>
+   	
+   	<div class="content">
+   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="sidebar-header">
+                <img src="../../assets/diabetes.png" class="logo" alt="">
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-8 offset-md-4">
-                    <div class="card" style="width: 40rem;">
-                        <div class="card-header">
-                            <h3> Información personal</h3>
-                            <p>Lo que nos quieras contar</p>
+            <button type="button" id="sidebarCollapse" class="btn btn-info pull-right" (click)="toggleSideBar()">
+                <i class="fa fa-align-justify"></i> <span></span>
+            </button>
+        </nav>
+  	
+  	
+  	
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-header">
+                                <img src="https://via.placeholder.com/200" class="rounded-circle">
+                            </div>
+                            <div class="card-body" style="text-align:center">
+                              {{values | json }}
+                              <h5 class="card-title">{{user?.first_name}} {{user?.last_name}}</h5>
+                              <p class="card-text" style="text-align:center">
+                                <i class="fa fa-map-marker-alt"></i>
+                                {{user.city}}
+                              </p>
+                            </div>
                         </div>
-                        <div class="card-body" style="text-align:center">
-                            <form>
-                                <div class="form-row">
-                                  <div class="form-group col-md-6">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" value="{{user?.first_name}}">
-                                  </div>
-                                  <div class="form-group col-md-6">
-                                    <label for="apellido">Apellido</label>
-                                    <input type="text" class="form-control" value="{{user?.last_name}}">
-                                  </div>
-                                </div>
-                                      <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                          <label for="nombre">Dia de nacimiento</label>
-                                          <input type="text" class="form-control" value="{{user.birthdayDay}}">
+                    </div>
+    
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-header">
+                                <h3> Datos de Autenticación</h3>
+                                <p>Es importante contar con estas medidas de seguridad.</p>
+                            </div>
+                            <div class="card-body" style="text-align:center">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="username">Usuario</label>
+                                          <input type="text" class="form-control" id="inputEmail4" value="{{user?.username}}">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="nombre">Mes</label>
-                                          <input type="text" class="form-control" value="{{user.birthdayMonth}}">
+                                        <div class="form-group col-md-3">
+                                          <label for="inputPassword4">Contraseña</label>
+                                          <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="nombre">Año</label>
-                                          <input type="text" class="form-control" value="{{user.birthdayYear}}">
-                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputPassword5">Repita contraseña</label>
+                                            <input type="password" class="form-control" id="inputPassword5" placeholder="Password">
+                                          </div>
                                       </div>
-                              </form>
+                                  </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-8 offset-md-4">
-                    <div class="card" style="width: 40rem;">
-                        <div class="card-header">
-                            <h3> Acerca de ti</h3>
-                            <p>Cuentanos tu experiencia</p>
-                        </div>
-                        <div class="card-body" style="text-align:center">
-                            <form>
-                                <div class="form-row">
-                                  <div class="form-group col-md-6">
-                                    <label for="universidad">Universidad</label>
-                                    <input type="text" class="form-control" value="{{user.experience[0].university}}">
-                                  </div>
-                                  <div class="form-group col-md-6">
-                                    <label for="especialidad">Especialidad</label>
-                                    <input type="text" class="form-control" value="{{user.experience[0].speciality}}">
-                                  </div>
-                                </div>
-                                      <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                          <label for="estudios">Estudios</label>
-                                          <p>
-                                              {{user.experience[0].description}}
-                                          </p>
-                                        </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-8 offset-md-4">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-header">
+                                <h3> Información personal</h3>
+                                <p>Lo que nos quieras contar</p>
+                            </div>
+                            <div class="card-body" style="text-align:center">
+                                <form>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control" value="{{user?.first_name}}">
                                       </div>
-                              </form>
+                                      <div class="form-group col-md-6">
+                                        <label for="apellido">Apellido</label>
+                                        <input type="text" class="form-control" value="{{user?.last_name}}">
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-4">
+                                        <label for="nombre">Dia de nacimiento</label>
+                                        <input type="text" class="form-control" value="{{user.birthdayDay}}">
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <label for="nombre">Mes</label>
+                                        <input type="text" class="form-control" value="{{user.birthdayMonth}}">
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <label for="nombre">Año</label>
+                                        <input type="text" class="form-control" value="{{user.birthdayYear}}">
+                                      </div>
+                                    </div>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                <div class="row">
+                    <div class="col-md-8 offset-md-4">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-header">
+                                <h3> Acerca de ti</h3>
+                                <p>Cuentanos tu experiencia</p>
+                            </div>
+                            <div class="card-body" style="text-align:center">
+                                <form>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <label for="universidad">Universidad</label>
+                                        <input type="text" class="form-control" value="{{user.experience[0].university}}">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                        <label for="especialidad">Especialidad</label>
+                                        <input type="text" class="form-control" value="{{user.experience[0].speciality}}">
+                                      </div>
+                                    </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                              <label for="estudios">Estudios</label>
+                                              <p>
+                                                  {{user.experience[0].description}}
+                                              </p>
+                                            </div>
+                                          </div>
+                                  </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+   </div>
+  </body>
+</html>

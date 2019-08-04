@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./admin-profile.component.css']
 })
 export class AdminProfileComponent implements OnInit {
-
+  collapsedSideBar = true;
   public lastActivities: any = [
     {
       time: 'Hoy 1:00',
@@ -41,6 +41,10 @@ export class AdminProfileComponent implements OnInit {
     const token = localStorage.getItem('token');
     const user = jwtDecode(token);
     this.currentUser$ = this.store.select(selectCurrentUser);
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 
 }

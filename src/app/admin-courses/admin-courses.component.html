@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
   <a class="navbar-brand" href="#">
     <img src="../../assets/diabetesblanco.png" class="logo" alt="">
   </a>
@@ -145,4 +145,173 @@
     </div>
     </div>
   </div>
-</section>
+</section> -->
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+   
+   <div class="wrapper">
+   	<nav id="sidebar" [ngClass]="collapsedSideBar ? 'active' : ''">
+   		<ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin-students" style="color: white"><i class="fa fa-apple-alt"
+                        style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
+                </li>
+                <li class="active nav-item">
+                    <a class="nav-link" routerLink="/admin-courses" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                </li>
+   		</ul>
+   	</nav>
+   	
+   	<div class="content">
+   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="sidebar-header">
+                <img src="../../assets/diabetes.png" class="logo" alt="">
+            </div>
+            <button type="button" id="sidebarCollapse" class="btn btn-info pull-right" (click)="toggleSideBar()">
+                <i class="fa fa-align-justify"></i> <span></span>
+            </button>
+        </nav>
+  	
+  	
+  	
+        <div class="row">
+            <div class="col-md-12 content-container" style="padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async} as values">
+                <div class="row" *ngIf="!showCourse" style="padding: 0 10px; height: 100%;">
+                  <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
+                    <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
+                    <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <div class="courses">
+                        <div class="course" *ngFor="let course of values.courses">
+                            <div class="row" style="padding: 0px !important;">
+                              <div class="col-12 course-info">
+                                <div class="upper">
+                                    <h2>{{course.name}}</h2>
+                                </div>
+                                <div class="presentations">
+                                  <ul>
+                                    <li *ngFor="let presentation of course.presentations_list" class="presentation" (click)="selectPresentation(presentation, $event)">
+                                      <span class="presentation-position">{{presentation.position}}</span>
+                                      <span class="presentation-title">{{presentation.title}}</span>
+                                      <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
+                                      <span class="presentation-icons">
+                                        <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createPresentationModal" (click)="editPresentation($event, presentation, course.id)"></i-feather>
+                                        <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, presentation.id)"></i-feather>
+                                      </span>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+          
+                  </div>
+                </div>
+
+                <div *ngIf="showCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
+                  <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+
+                <div *ngIf="showCourse && selectedCourse.audio_url">
+                  <audio autoplay style="display: none;" id="player">
+                    <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                  </audio>
+                </div>
+
+                <div class="modal fade create-presentation-modal" id="createPresentationModal" tabindex="-1" role="dialog" aria-labelledby="createPresentationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="createPresentationModalLabel">Crear Presentación</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <input type="text" class="form-control" [(ngModel)]="title" placeholder="Título de la presentación (requerido)" />
+                          <input type="text" class="form-control" [(ngModel)]="frame" placeholder="Url de la presentación (requerido)" />
+                          <ng-select
+                            [items]="values.courses"
+                            bindValue="id"
+                            [closeOnSelect]="true"
+                            [searchable]="false"
+                            bindLabel="name"
+                            placeholder="Seleccionar cursos (requerido)"
+                            [(ngModel)]="coursesId"
+                            style="margin-bottom: 20px">
+                          </ng-select>
+                          <input type="text" class="form-control" [(ngModel)]="position" placeholder="Posición de la presentación (requerido)" />
+                          <input class="form-control" type="text" [(ngModel)]="audioUrl" placeholder="URL del audio"/>
+                          <textarea class="form-control" [(ngModel)]="audioSync" placeholder='Sync de audio con presentación, ejemplo: "1":"0,5","1.1":"5,16","2":"16,37"'>
+                          </textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createPresentation()">Guardar</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="modal fade create-course-modal" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="createCourseModalLabel">Crear Curso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre del curso (requerido)" />
+                        <textarea class="form-control" [(ngModel)]="description" placeholder="Descripción del curso (requerido)">
+                        </textarea>
+                        <ng-select
+                            [items]="values.students"
+                            bindValue="id"
+                            [closeOnSelect]="false"
+                            [multiple]="true"
+                            [searchable]="false"
+                            bindLabel="first_name"
+                            placeholder="Seleccionar alumnos"
+                            [(ngModel)]="usersId"
+                            style="margin-bottom: 20px">
+                          </ng-select>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createCourse()">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        </div>
+        </div>
+      </div>
+   </div>
+  </body>
+</html>
+
+
+
+

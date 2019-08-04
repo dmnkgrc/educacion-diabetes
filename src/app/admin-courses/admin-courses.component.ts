@@ -29,9 +29,9 @@ export class AdminCoursesComponent implements OnInit {
   public currentSlide: any = 1;
   public frameUrl: SafeResourceUrl;
   public students$: Observable<any>;
+  collapsedSideBar = true;
 
   constructor(private courseService: CourseService, private sanitizer: DomSanitizer, private userService: UserService) {}
-
   @HostListener('window:message', ['$event'])
   onMessage(e) {
 
@@ -131,6 +131,10 @@ export class AdminCoursesComponent implements OnInit {
         this.courses$ = this.courseService.getAllCourses();
       });
     }
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 
 }

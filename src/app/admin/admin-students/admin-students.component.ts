@@ -13,48 +13,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./admin-students.component.css']
 })
 export class AdminStudentsComponent implements OnInit {
-
+  collapsedSideBar = true;
   public students: any[];
-  // = [
-  //     {
-  //         name: 'Juan Valdez',
-  //         cluster: 'Axxa',
-  //         professional_license: '234BHUREDSAJIO342',
-  //         city: 'CDMX',
-  //         speciality: 'Neurologo'
-  //     },
-  //     {
-  //       name: 'Juan Valdez',
-  //       cluster: 'Axxa',
-  //       professional_license: '234BHUREDSAJIO342',
-  //       city: 'CDMX',
-  //       speciality: 'Neurologo'
-  //   }, {
-  //       name: 'Juan Valdez',
-  //       cluster: 'Axxa',
-  //       professional_license: '234BHUREDSAJIO342',
-  //       city: 'CDMX',
-  //       speciality: 'Neurologo'
-  //   }, {
-  //       name: 'Juan Valdez',
-  //       cluster: 'Axxa',
-  //       professional_license: '234BHUREDSAJIO342',
-  //       city: 'CDMX',
-  //       speciality: 'Neurologo'
-  //   }, {
-  //       name: 'Juan Valdez',
-  //       cluster: 'Axxa',
-  //       professional_license: '234BHUREDSAJIO342',
-  //       city: 'CDMX',
-  //       speciality: 'Neurologo'
-  //   }, {
-  //       name: 'Juan Valdez',
-  //       cluster: 'Axxa',
-  //       professional_license: '234BHUREDSAJIO342',
-  //       city: 'CDMX',
-  //       speciality: 'Neurologo'
-  //   }
-  // ];
   currentUser$: Observable<User>;
   constructor(
     public store: Store<AppState>,
@@ -65,5 +25,9 @@ export class AdminStudentsComponent implements OnInit {
     this.userService.getAllStudents().subscribe(res => {
       this.students = res;
     });
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 }

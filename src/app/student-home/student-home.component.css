@@ -1,13 +1,4 @@
-#sidebar {
-  position: fixed;
-  background-color: #252525;
-  height: 91.3vh;
-  text-align: center;
-  width: 15vw;
-  color: white;
-  font-weight: bold;
-  background-image: image()
-}
+
 
 .tag {
 float: left;
@@ -31,17 +22,6 @@ margin-top: 30px;
 color: rgba(255, 255, 255, 0.8);
 margin-top: 20%;
 margin-left: 35%;
-}
-
-.active{
-  background-color: #252525;
-  opacity: 80%;
-}
-.nav-item {
-  text-align: left;
-}
-.nav-link{
-  text-align: left;
 }
 
 .course-card{
@@ -90,20 +70,3 @@ margin-left: 35%;
   font-size: 80px;
 }
 
-.btn {
-  border: 2px solid white;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: white;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 20px;
-  width: 18%;
-  height: 2%;
-  font-weight: bold;
-}
-
-.default:hover {
-  background: #e7e7e7;
-  color: black
-}

@@ -28,6 +28,7 @@ export class StudentProfileComponent implements OnInit {
 
   };
   currentUser$: Observable<User>;
+  collapsedSideBar = true;
   constructor(
     public store: Store<AppState>,
     public route: ActivatedRoute,
@@ -68,4 +69,7 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
+  }
 }

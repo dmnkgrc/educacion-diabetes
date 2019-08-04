@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseIntroComponent implements OnInit {
   course: any;
+  collapsedSideBar = true;
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {}
 
@@ -19,6 +20,10 @@ export class CourseIntroComponent implements OnInit {
         this.course = res;
       });
     });
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 
 }

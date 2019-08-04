@@ -8,6 +8,7 @@ import { CourseService } from '../services/course.service';
 })
 export class CoursesIndexComponent implements OnInit {
   courses: any;
+  collapsedSideBar = true;
   constructor(
     public courseService: CourseService
   ) {}
@@ -16,5 +17,9 @@ export class CoursesIndexComponent implements OnInit {
     this.courseService.getAllCourses().subscribe(res => {
       this.courses = res;
     });
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <a class="navbar-brand" href="#">
             <img src="../../assets/diabetesblanco.png" class="logo" alt="">
         </a>
@@ -76,4 +76,115 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      </head>
+      <body>
+       <div class="wrapper">
+               <nav id="sidebar" [ngClass]="collapsedSideBar ? 'active' : ''">
+                       <ul class="list-unstyled components">
+                                <li class="active nav-item">
+                                <a class="nav-link" [routerLink]="['/student-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" style="color: white" [routerLink]="['/student-profile']" ><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="far fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/courses']" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                                <a class="nav-link active" style="padding-left: 0px; color: white;"><i
+                                                    class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>{{course?.name}}</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" style="color: white"><i class="far fa-check-circle"
+                                                    style="margin-right: 10px; margin-left: 10px;"></i>Introduccion</a>
+                                              </li>
+                                              <li class="active nav-item">
+                                                <a class="nav-link" style="color: white"><i class="far fa-circle-o"
+                                                    style="margin-right: 10px; margin-left: 10px;"></i>Aprendizaje</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" style="color: white"><i class="far fa-circle-o"
+                                                    style="margin-right: 10px; margin-left: 10px;"></i>Actividad</a>
+                                              </li>
+                                <li class="nav-item">
+                                <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
+                                </li>
+                       </ul>
+               </nav>
+               
+               <div class="content">
+                       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="sidebar-header">
+                    <img src="../../assets/diabetes.png" class="logo" alt="">
+                </div>
+                <button type="button" id="sidebarCollapse" class="btn btn-info pull-right" (click)="toggleSideBar()">
+                    <i class="fa fa-align-justify"></i> <span></span>
+                </button>
+            </nav>
+              
+              
+              
+            <div class="row">
+                <div class="col-md-12" style="">
+                <br>
+                <div class="row">
+                        <div class="col-md-12">
+                                <div *ngIf="selectedCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
+                                        <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                        </div>
+                                        <div *ngIf="selectedCourse && selectedCourse.audio_url">
+                                        <audio autoplay style="display: none;" id="player">
+                                        <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+                        </div>
+                </div>
+                <br>
+                <div class="row">
+                        <ul class="nav nav-tabs">
+                                <li class="nav-item" >
+                                        <a [ngClass]="select == 'first' ? 'active' : ''" (click)="changeSelect('first')">Comentarios</a>
+                                </li>
+                                <li class="nav-item" >
+                                        <a [ngClass]="select == 'second' ? 'active' : ''" (click)="changeSelect('second')">Archivos</a>
+                                </li>
+                                <li class="nav-item" >
+                                        <a [ngClass]="select == 'third' ? 'active' : ''" (click)="changeSelect('third')">Bibliografía</a>
+                                </li>
+                        </ul>
+                </div>
+                <br><br>
+                <div class="row">
+                        <div class="col-md-10">
+                                <p *ngIf="select == 'first'">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar ultrices nisl eu dictum. Sed sapien nulla, auctor 
+                                        a neque vehicula, interdum efficitur purus. Pellentesque imperdiet, ligula vitae faucibus facilisis, justo neque ultricies neque, 
+                                        vitae ultricies augue mi id nunc. Integer commodo turpis purus, quis varius magna semper at. In vel arcu felis. Nunc facilisis 
+                                        dignissim erat sit amet rutrum. Donec tempus ultrices mauris, nec pharetra massa egestas in. Suspendisse potenti. Sed egestas 
+                                        metus ipsum. Nam finibus augue a auctor malesuada. Duis at nisi blandit, ultricies lacus eu, convallis tellus. 
+                                </p>
+                                <p *ngIf="select == 'second'"></p>
+                                <p *ngIf="select == 'third'"></p>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+       </div>
+      </body>
+    </html>
+    
+    
+    
+    

@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './student-home.component.html',
   styleUrls: ['./student-home.component.css']
 })
-export class StudentHomeComponent implements OnInit {
-
+export class StudentHomeComponent {
+  collapsedSideBar = true;
   course = {
     title: 'Introducción a la diabetes',
     lessons: [
@@ -22,7 +22,8 @@ export class StudentHomeComponent implements OnInit {
   };
   constructor() { }
 
-  ngOnInit() {
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 
 }

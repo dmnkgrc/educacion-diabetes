@@ -16,6 +16,7 @@ export class CourseShowComponent implements OnInit {
   frameUrl: SafeResourceUrl;
   times: any;
   currentSlide: any;
+  collapsedSideBar = true;
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
@@ -68,5 +69,9 @@ export class CourseShowComponent implements OnInit {
   // tslint:disable-next-line:align
   changeSelect(select): void {
     this.select = select;
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
   }
 }
