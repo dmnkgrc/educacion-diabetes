@@ -43,7 +43,7 @@
             <div class="col-md-12">
                 <br>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-xs-12">
                         <div class="card" style="width: 18rem;">
                             <div class="card-header">
                                 <img src="https://via.placeholder.com/200" class="rounded-circle">
@@ -56,6 +56,10 @@
                               </p>
                             </div>
                         </div>
+                        <br>
+                        <div *ngIf="currentUser$ | async as currentUser">
+                            <button type="button" class="btn btn-danger" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="deleteUser()">Eliminar usuario</button>
+                        </div>
                     </div>
     
                     <div class="col-md-8 offset-md-2">
@@ -65,22 +69,12 @@
                                 <p>Es importante contar con estas medidas de seguridad.</p>
                             </div>
                             <div class="card-body" style="text-align:center">
-                                <form>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="username">Usuario</label>
-                                          <input type="text" class="form-control" id="inputEmail4" value="{{user?.username}}">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                          <label for="inputPassword4">Contraseña</label>
-                                          <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="inputPassword5">Repita contraseña</label>
-                                            <input type="password" class="form-control" id="inputPassword5" placeholder="Password">
-                                          </div>
-                                      </div>
-                                  </form>
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="username">Usuario</label>
+                                  <p>{{user?.email}}</p>
+                                </div>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -139,19 +133,19 @@
                                     <div class="form-row">
                                       <div class="form-group col-md-6">
                                         <label for="universidad">Universidad</label>
-                                        <input type="text" class="form-control" value="{{user.experience[0].university}}">
+                                        <!-- <input type="text" class="form-control" value="{{user.experience[0].university}}"> -->
                                       </div>
                                       <div class="form-group col-md-6">
                                         <label for="especialidad">Especialidad</label>
-                                        <input type="text" class="form-control" value="{{user.experience[0].speciality}}">
+                                        <!-- <input type="text" class="form-control" value="{{user.experience[0].speciality}}"> -->
                                       </div>
                                     </div>
                                           <div class="form-row">
                                             <div class="form-group col-md-12">
                                               <label for="estudios">Estudios</label>
-                                              <p>
+                                              <!-- <p>
                                                   {{user.experience[0].description}}
-                                              </p>
+                                              </p> -->
                                             </div>
                                           </div>
                                   </form>

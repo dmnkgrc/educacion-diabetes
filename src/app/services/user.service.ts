@@ -60,4 +60,17 @@ export class UserService {
         catchError(error => of(error))
       );
     }
+
+    public deleteUserById(userId: any): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      return this.http.delete(this.rootURL + this.getUserEndpoint + userId, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
 }

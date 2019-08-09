@@ -32,11 +32,13 @@ export class StudentProfileComponent implements OnInit {
   constructor(
     public store: Store<AppState>,
     public route: ActivatedRoute,
+    public router: Router,
     public userService: UserService
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.currentUser$ = this.store.select(selectCurrentUser);
       if (params.id) {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
@@ -44,7 +46,6 @@ export class StudentProfileComponent implements OnInit {
       } else {
         const token = localStorage.getItem('token');
         const user = jwtDecode(token);
-        this.currentUser$ = this.store.select(selectCurrentUser);
         // tslint:disable-next-line: no-shadowed-variable
         this.currentUser$.subscribe((user: User) => {
           this.user = user;
@@ -71,5 +72,12 @@ export class StudentProfileComponent implements OnInit {
 
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
+  }
+
+  deleteUser() {
+    this.userService.deleteUserById(this.user.id)
+    .subscribe(() => {
+      this.router.navigateByUrl('/admin-students');
+    });
   }
 }
