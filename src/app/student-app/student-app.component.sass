@@ -1,0 +1,122 @@
+$blue: #113F67
+
+.wrapper
+  padding-top: 60px
+  height: 100vh
+
+.btn-pink
+  background-image: linear-gradient(#ED82B6, #E45F96, #E45F96)
+  display: inline-block
+  margin-top: 10px
+
+.tag
+  float: left
+  position: absolute
+  left: 0px
+  top: 0px
+  z-index: 1000
+  background-color: rgba(0, 0, 0, 0.7)
+  margin-left: 15px
+  margin-top: 30px
+  color: #FFFFFF
+  width: 1000px
+  height: 300px
+  font-weight: bold
+  text-align: center
+
+.main-title
+  font-family: 'Monserrat'
+  font-style: italic
+  font-weight: 500
+  font-size: 80px
+
+#sidebar
+  background: #333
+  min-width: 250px
+  max-width: 250px
+  transition: all 0.5s
+  .sidebar-header
+    padding: 20px
+    background: #6d7fcc
+  ul
+    height: 100%
+    display: flex
+    flex-direction: column
+    &.components
+      padding: 20px 0px
+      border-bottom: 1px solid #47748b
+    p
+      padding: 10px
+      font-size: 1.1em
+      display: block
+    li
+      color: white
+      cursor: pointer
+      padding: 10px
+      font-weight: 600
+      i
+        margin: 0 10px
+      &:hover
+        background: $blue
+      &.active
+        background: $blue
+      &.logout
+        margin-top: auto
+      &.toggler
+        text-align: right
+        &:hover
+          background: transparent
+        i
+          padding: 10px
+          &:hover
+            background: $blue
+  &.active
+    min-width: 50px
+    max-width: 50px
+    ul
+      padding: 0
+      li
+        padding: 10px 0
+        text-align: center
+        &.toggler
+          &:hover
+            background: $blue
+          text-align: center
+        span
+          display: none
+        i
+          margin: 0
+  @media (max-width: 576px)
+    display: none
+
+#bottombar
+  position: fixed
+  left: 0
+  bottom: 0
+  height: 50px
+  width: 100vw
+  background: #333
+  z-index: 100000
+  -webkit-backface-visibility: hidden
+  ul
+    width: 100%
+    height: 100%
+    padding: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    list-style-type: none
+    li
+      color: white
+      cursor: pointer
+      height: 100%
+      flex: 1
+      display: flex
+      align-items: center
+      justify-content: center
+      &:hover
+        background: $blue
+      &.active
+        background: $blue
+  @media (min-width: 576px)
+    display: none

@@ -11,6 +11,15 @@ body {
   background: $blue;
 }
 
+.logo-nav {
+  height: 40px;
+}
+
+.logo-nav-black {
+  height: 120px;
+  margin: -30px 0;
+}
+
 .card {
   color: $blue;
   border-radius: 10px;
@@ -67,7 +76,6 @@ a:focus{
   background: #fff;
   border: none;
   border-radius: 0;
-  margin-bottom: 25px;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
@@ -82,46 +90,7 @@ a:focus{
     width: 100%;
     align-items: stretch;
 }
-#sidebar {
-    background: black;
-    min-width: 250px;
-    max-width: 250px;
-    transition: all 0.3s;
-}
-#sidebar.active{
-  margin-left: -250px;
-}
 
-#sidebar .sidebar-header{
-  padding: 20px;
-  background: #6d7fcc;
-}
-#sidebar ul.components{
-  padding: 20px 0px;
-  border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p{
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
-}
-
-#sidebar ul li a{
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
-}
-#sidebar ul li a:hover {
-    color: white;
-    background: $blue;
-}
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-    color: #fff;
-    background: $blue;
-}
 a[data-toggle="collapse"] {
     position: relative;
 }
@@ -199,7 +168,7 @@ a.article:hover {
   .section—first {
     height: 90vh;
   }
-  
+
   .cover{
     max-height: 70%;
   }

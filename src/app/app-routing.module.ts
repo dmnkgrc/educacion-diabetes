@@ -13,66 +13,91 @@ import { AdminStudentsComponent } from './admin/admin-students/admin-students.co
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 import { CourseIntroComponent } from './course-intro/course-intro.component';
+import { NotauthGuard } from './auth/notauth.guard';
+import { AuthGuard } from './auth/auth.guard';
+import { StudentAppComponent } from './student-app/student-app.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [NotauthGuard],
   },
 
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NotauthGuard],
   },
   {
     path: 'admin-login',
-    component: AdminLoginComponent
+    component: AdminLoginComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin-home',
-    component: AdminHomeComponent
+    component: AdminHomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin-students',
-    component: AdminStudentsComponent
+    component: AdminStudentsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin-profile',
-    component: AdminProfileComponent
+    component: AdminProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin-courses',
-    component: AdminCoursesComponent
-  },
-  {
-    path: 'course-intro/:id',
-    component: CourseIntroComponent
+    component: AdminCoursesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [NotauthGuard],
   },
   {
-    path: 'courses',
-    component: CoursesIndexComponent
-  },
-  {
-    path: 'course-show/:id/:presentation_id',
-    component: CourseShowComponent
-  },
-  {
-    path: 'student-home',
-    component: StudentHomeComponent
+    path: 'inicio',
+    component: StudentAppComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'cursos',
+        component: CoursesIndexComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cursos/:id/:presentation_id',
+        component: CourseShowComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'intro/:id',
+        component: CourseIntroComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'perfil',
+        component: StudentProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: '',
+        component: StudentHomeComponent,
+        canActivateChild: [AuthGuard]
+      }
+    ]
   },
   {
     path: 'student-profile/:id',
-    component: StudentProfileComponent
+    component: StudentProfileComponent,
+    canActivate: [AuthGuard],
   },
-  {
-    path: 'student-profile',
-    component: StudentProfileComponent
-  },
+
 ];
 
 @NgModule({

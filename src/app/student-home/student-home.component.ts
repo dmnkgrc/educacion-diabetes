@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-student-home',
   templateUrl: './student-home.component.html',
-  styleUrls: ['./student-home.component.css']
+  styleUrls: ['./student-home.component.scss'],
 })
 export class StudentHomeComponent {
   collapsedSideBar = true;
@@ -12,18 +12,17 @@ export class StudentHomeComponent {
     lessons: [
       {
         description: '1. ¿Qué es la diabetes?',
-        progress: 79
+        progress: 79,
       },
       {
         description: '2. Recomendaciones ada',
-        progress: 0
-      }
-    ]
+        progress: 0,
+      },
+    ],
   };
-  constructor() { }
+  constructor() {}
 
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
-
 }

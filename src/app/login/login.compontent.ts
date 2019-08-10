@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('admin-home');
         return;
       }
-      this.router.navigateByUrl('courses');
+      this.router.navigateByUrl('/');
     });
   }
 
