@@ -31,7 +31,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:
@@ -41,11 +41,11 @@ jobs:
       # Lint the source code
       - run:
           name: Linting
-          command: yarn lint
+          command: npm run lint
 
       - run:
           name: Build Angular
-          command: yarn build --prod
+          command: npm run build --prod
       # Cache the dist folder for the deploy job
       - save_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
