@@ -2,32 +2,40 @@
   <div class="col-12">
     <div class="row">
       <div class="col-12 banner-container">
-        <img src="https://via.placeholder.com/1000x300" alt="" class="banner" />
+        <img src="/assets/banner.jpg" alt="" class="banner" />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card courses-card">
           <div class="card-body">
-            <h3 class="card-title">{{ course.title }}</h3>
-            <div *ngFor="let lesson of course.lessons" class="row">
-              <div class="col-md-6">
-                <p>{{ lesson.description }}</p>
-              </div>
-              <div class="col-md-4">
-                <div class="progress" style="margin-top: 10%;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    [style.width]="lesson.progress + '%'"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    {{ lesson.progress }}%
+            <h3 class="card-title">Tus cursos</h3>
+            <div *ngIf="courses$ | async as courses">
+              <div *ngIf="courses.length > 0; else noCourses">
+                <div *ngFor="let course of courses" class="row">
+                  <div class="col-md-6">
+                    <p>{{ course.name }}</p>
                   </div>
+                  <!-- <div class="col-md-4">
+                          <div class="progress" style="margin-top: 10%;">
+                            <div
+                              class="progress-bar"
+                              role="progressbar"
+                              [style.width]="lesson.progress + '%'"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              {{ lesson.progress }}%
+                            </div>
+                          </div>
+                        </div> -->
                 </div>
               </div>
+
+              <ng-template #noCourses>
+                <h4>Todavía no tienes cursos</h4>
+              </ng-template>
             </div>
           </div>
         </div>
