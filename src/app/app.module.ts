@@ -4,7 +4,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +32,7 @@ import { IconsModule } from './icons/icons.module';
 import { StudentAppComponent } from './student-app/student-app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CreateMessageComponent } from './create-message/create-message.component';
-
+import { AdminAppComponent } from './admin-app/admin-app.component';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -44,7 +43,9 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
   return localStorageSync({ keys: ['users'], rehydrate: true })(reducer);
 }
 
@@ -70,7 +71,8 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     CreateMessageComponent,
     EscapeHtmlPipe,
     FormatDatePipe,
-    StudentAppComponent
+    StudentAppComponent,
+    AdminAppComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,14 +84,10 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     IconsModule,
-    StoreModule.forRoot(appReducers, {metaReducers}),
-    StoreDevtoolsModule.instrument({maxAge: 25}),
+    StoreModule.forRoot(appReducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
-  providers: [
-    UserService,
-    SessionService,
-    HttpClient
-  ],
-  bootstrap: [AppComponent]
+  providers: [UserService, SessionService, HttpClient],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

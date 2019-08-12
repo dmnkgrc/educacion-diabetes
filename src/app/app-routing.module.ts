@@ -18,6 +18,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { StudentAppComponent } from './student-app/student-app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CreateMessageComponent } from './create-message/create-message.component';
+import { NotAdminGuard } from './auth/not-admin.guard';
+import { AdminAppComponent } from './admin-app/admin-app.component';
+import { AdminGuard } from './auth/admin.guard';
 
 const routes: Routes = [
   {
@@ -32,88 +35,94 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [NotauthGuard],
   },
-  {
-    path: 'admin-login',
-    component: AdminLoginComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-home',
-    component: AdminHomeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-students',
-    component: AdminStudentsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'messages',
-    component: MessagesComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'send-message',
-    component: CreateMessageComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-profile',
-    component: AdminProfileComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-courses',
-    component: AdminCoursesComponent,
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'admin-login',
+  //   component: AdminLoginComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'signup',
     component: SignupComponent,
     canActivate: [NotauthGuard],
   },
   {
+    path: 'admin',
+    component: AdminAppComponent,
+    canActivate: [AuthGuard, AdminGuard],
+    children: [
+      {
+        path: 'alumnos',
+        component: AdminStudentsComponent,
+        canActivateChild: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'perfil',
+        component: AdminProfileComponent,
+        canActivateChild: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'cursos',
+        component: AdminCoursesComponent,
+        canActivateChild: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'messages/send',
+        component: CreateMessageComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: '',
+        component: AdminHomeComponent,
+        canActivateChild: [AuthGuard, AdminGuard],
+      },
+    ],
+  },
+  {
     path: 'inicio',
     component: StudentAppComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, NotAdminGuard],
     children: [
       {
         path: 'cursos',
         component: CoursesIndexComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NotAdminGuard],
       },
       {
         path: 'cursos/:id/:presentation_id',
         component: CourseShowComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NotAdminGuard],
       },
       {
         path: 'intro/:id',
         component: CourseIntroComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NotAdminGuard],
       },
       {
         path: 'perfil',
         component: StudentProfileComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NotAdminGuard],
       },
       {
         path: '',
         component: StudentHomeComponent,
-        canActivateChild: [AuthGuard]
-      }
-    ]
+        canActivateChild: [AuthGuard, NotAdminGuard],
+      },
+    ],
   },
   {
     path: 'student-profile/:id',
     component: StudentProfileComponent,
     canActivate: [AuthGuard],
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

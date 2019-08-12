@@ -1,82 +1,36 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head>
-  <body>
-
-   <div class="wrapper">
-   	<nav id="sidebar" [ngClass]="collapsedSideBar ? 'active' : ''">
-   		<ul class="list-unstyled components">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
-                </li>
-                <li class="active nav-item">
-                    <a class="nav-link" routerLink="/admin-students" style="color: white"><i class="fa fa-apple-alt"
-                        style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/admin-courses" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
-                </li>
-   		</ul>
-   	</nav>
-
-   	<div class="content">
-   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="sidebar-header">
-                <img src="../../assets/diabetes.png" class="logo-nav" alt="">
-            </div>
-            <button type="button" id="sidebarCollapse" class="btn btn-info pull-right" (click)="toggleSideBar()">
-                <i class="fa fa-align-justify"></i> <span></span>
-            </button>
-        </nav>
-
-
-
-        <div class="row">
-            <div class="col-md-10 content-container" style="padding: 0px 40px;">
-                <br><br>
-                <h1>Usuarios</h1>
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cluster</th>
-                                <th scope="col">Cédula</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Especialidad</th>
-                                <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let student of students">
-                                <th scope="row">{{student.first_name}}</th>
-                                <td></td>
-                                <td>{{student.professional_license}}</td>
-                                <td>{{student.city}}</td>
-                                <td>{{student.speciality}}</td>
-                                <td><a [routerLink]="['/student-profile', student.id]"><b>Ver</b></a>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row">
+  <div class="col-md-10 content-container" style="padding: 0px 40px;">
+    <br /><br />
+    <h1>Usuarios</h1>
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Cluster</th>
+              <th scope="col">Cédula</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Especialidad</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <th scope="row">{{ student.first_name }}</th>
+              <td></td>
+              <td>{{ student.professional_license }}</td>
+              <td>{{ student.city }}</td>
+              <td>{{ student.speciality }}</td>
+              <td>
+                <a [routerLink]="['/student-profile', student.id]"
+                  ><b>Ver</b></a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-   </div>
-  </body>
-</html>
-
-
-
+  </div>
+</div>

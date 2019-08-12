@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,21 @@ export class NotauthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('token');
     if (token) {
-      this.router.navigate(['/inicio']);
+      const user = this.getDecodedAccessToken(token);
+      if (!user.admin) {
+        this.router.navigate(['/inicio']);
+        return true;
+      }
+      this.router.navigate(['/admin']);
     }
     return !!!token;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+        return jwt_decode(token);
+    } catch (Error) {
+        return null;
+    }
   }
 }
