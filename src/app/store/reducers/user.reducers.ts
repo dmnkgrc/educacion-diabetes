@@ -8,12 +8,6 @@ export function userReducers(
   action: UserActions
 ): UserState {
   switch (action.type) {
-    case EUserActions.GetUsersSuccess:
-      return {
-        ...state,
-        users: action.payload,
-        lastFetch: moment().format()
-      };
     case EUserActions.GetCurrentUserSuccess:
       return {
         ...state,
@@ -25,6 +19,15 @@ export function userReducers(
         ...state,
         currentUser: action.payload,
         lastFetch: moment().format()
+      };
+    case EUserActions.GetUsersSuccess:
+      console.log('USER SUCCESS');
+      let byId = state.byId;
+      console.log('ACTION PAYLOAD', action.payload);
+      action.payload.forEach((e: any) => byId = {...byId, [e.id]: e });
+      return{
+        ...state,
+        byId
       };
     default:
       return state;

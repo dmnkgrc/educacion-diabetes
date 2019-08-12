@@ -16,6 +16,8 @@ import { CourseIntroComponent } from './course-intro/course-intro.component';
 import { NotauthGuard } from './auth/notauth.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { StudentAppComponent } from './student-app/student-app.component';
+import { MessagesComponent } from './messages/messages.component';
+import { CreateMessageComponent } from './create-message/create-message.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
   {
     path: 'admin-students',
     component: AdminStudentsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'send-message',
+    component: CreateMessageComponent,
     canActivate: [AuthGuard],
   },
   {

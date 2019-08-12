@@ -1,13 +1,13 @@
 import { User } from '../../models/user.model';
 
 export interface UserState {
-  users: User[];
+  byId: any;
   currentUser: User;
   lastFetch: string;
 }
 
 export const initialUserState: UserState = {
-  users: [],
+  byId: {},
   currentUser: null,
   lastFetch: null
 };

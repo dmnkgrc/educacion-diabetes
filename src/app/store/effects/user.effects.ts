@@ -8,16 +8,15 @@ import {
   GetCurrentUserSuccess,
   GetUsers,
   GetUsersSuccess,
-  SaveUser
+  UserActions,
 } from '../actions/user.actions';
 import { EUserActions } from '../types/user.types';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, withLatestFrom, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { of, forkJoin } from 'rxjs';
 import {
   selectLastUserFetch,
   selectCurrentUser,
-  selectAllUsers,
   selectUsersState
 } from '../selectors/user.selectors';
 
@@ -27,7 +26,9 @@ export class UserEffects {
     public userService: UserService,
     private actions$: Actions,
     private store: Store<AppState>
-  ) {}
+  ) {
+    console.log('building effects');
+  }
 
   @Effect()
   getCurrentUser$ = this.actions$.pipe(
@@ -42,6 +43,16 @@ export class UserEffects {
       }
     }),
     switchMap((currentUser: User) => of(new GetCurrentUserSuccess(currentUser)))
+  );
+
+  @Effect()
+  getUsers$ = this.actions$
+  .pipe(
+    ofType<GetUsers>(EUserActions.GetUsers),
+    switchMap((action) => this.userService.getAllStudents()),
+    switchMap((users: User[]) => {
+      return of(new GetUsersSuccess(users));
+    })
   );
 
 }

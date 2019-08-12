@@ -31,6 +31,8 @@ import { FormatDatePipe } from './format-date.pipe';
 import { CourseIntroComponent } from './course-intro/course-intro.component';
 import { IconsModule } from './icons/icons.module';
 import { StudentAppComponent } from './student-app/student-app.component';
+import { MessagesComponent } from './messages/messages.component';
+import { CreateMessageComponent } from './create-message/create-message.component';
 
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -64,6 +66,8 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     StudentProfileComponent,
     AdminCoursesComponent,
     CourseIntroComponent,
+    MessagesComponent,
+    CreateMessageComponent,
     EscapeHtmlPipe,
     FormatDatePipe,
     StudentAppComponent
@@ -73,6 +77,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgSelectModule,
     NgSelectModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,

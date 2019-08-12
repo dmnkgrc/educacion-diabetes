@@ -15,19 +15,7 @@ export const selectLastUserFetch = createSelector(
   (state: UserState) => state.lastFetch
 );
 
-export const selectAllUsers = createSelector(
-  selectUsersState,
-  (state: UserState) => state.users
-);
-
 export const selectAllUsersById = createSelector(
   selectUsersState,
-  (state: UserState) => {
-    const byId: { [id: string]: User } = {};
-    if (!state.users) { return byId; }
-    state.users.forEach(user => {
-      byId[user.user_id] = user;
-    });
-    return byId;
-  }
+  (state: UserState) => state.byId
 );
