@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../services/course.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-home',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentHomeComponent {
   collapsedSideBar = true;
+  courses$: Observable<any[]>;
   course = {
     title: 'Introducción a la diabetes',
     lessons: [
@@ -20,7 +23,9 @@ export class StudentHomeComponent {
       },
     ],
   };
-  constructor() {}
+  constructor(private courseService: CourseService) {
+    this.courses$ = courseService.getAllCourses();
+  }
 
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;

@@ -16,8 +16,13 @@
   margin-bottom: 30px;
 }
 
-.courses-hard {
-  width: 100%;
+.courses-card {
+  .card-title {
+    color: #b4b4b4;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.7rem;
+  }
 }
 
 .card-text {
@@ -39,14 +44,12 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.7);
   margin-left: 15px;
   margin-top: 30px;
   color: #ffffff;
   width: 100%;
   max-width: 1000px;
-  height: 300px;
   font-weight: bold;
   text-align: center;
 }
