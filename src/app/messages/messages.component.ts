@@ -22,10 +22,13 @@ export class MessagesComponent implements OnInit {
     public store: Store<AppState>,
     public router: Router
   ) {
-    this.store.select(selectCurrentUser).pipe(
-      filter(e => !!e),
-      tap(user => this.currentUser = user),
-    ).subscribe();
+    this.store
+      .select(selectCurrentUser)
+      .pipe(
+        filter(e => !!e),
+        tap(user => (this.currentUser = user))
+      )
+      .subscribe();
   }
 
   ngOnInit() {
@@ -38,21 +41,27 @@ export class MessagesComponent implements OnInit {
   }
 
   compose() {
-    this.router.navigateByUrl('/send-message');
+    this.router.navigateByUrl('/admin/mensajes/enviar');
   }
 
   fetchMessages() {
     console.log('fetching for user', this.currentUser);
-    if (!this.currentUser) { return; }
-    if (this.selection === 'inbox') {
-      this.messageService.getInbox(this.currentUser.user_id).subscribe(messages => {
-        this.allMessages = messages;
-      });
+    if (!this.currentUser) {
       return;
     }
-    this.messageService.getSentMessages(this.currentUser.user_id).subscribe(messages => {
-      this.allMessages = messages;
-    });
+    if (this.selection === 'inbox') {
+      this.messageService
+        .getInbox(this.currentUser.user_id)
+        .subscribe(messages => {
+          this.allMessages = messages;
+        });
+      return;
+    }
+    this.messageService
+      .getSentMessages(this.currentUser.user_id)
+      .subscribe(messages => {
+        this.allMessages = messages;
+      });
   }
 
   toggleSideBar() {

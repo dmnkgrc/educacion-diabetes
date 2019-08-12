@@ -1,107 +1,56 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head>
-  <body>
-
-   <div class="wrapper">
-   	<nav id="sidebar" [ngClass]="collapsedSideBar ? 'active' : ''">
-   		<ul class="list-unstyled components">
-          <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/admin-home']" style = "padding-left: 0px; color: white;" ><i class="fa fa-home" style="margin-right: 10px; margin-left: 10px;"></i>Inicio</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/admin-profile']" style="color: white"><i class="far fa-user" style="margin-right: 10px; margin-left: 10px;"></i>Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/admin-students" style="color: white"><i class="fa fa-apple-alt"
-                style="margin-right: 10px; margin-left: 10px;"></i>Estudiantes</a>
-          </li>
-          <li class="active nav-item">
-            <a class="nav-link" [routerLink]="['/messages']" style="color: white"><i class="fa fa-envelope" style="margin-right: 10px; margin-left: 10px;"></i>Mensajes</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/admin-courses']" style="color: white"><i class="fa fa-chalkboard" style="margin-right: 10px; margin-left: 10px;"></i>Cursos</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" style="color: white"><i class="fa fa-cog" style="margin-right: 10px; margin-left: 10px;"></i>Configuración</a>
-          </li>
-   		</ul>
-   	</nav>
-
-   	<div class="content">
-   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="sidebar-header">
-                <img src="../../assets/diabetes.png" class="logo-nav" alt="">
-            </div>
-            <button type="button" id="sidebarCollapse" class="btn btn-info pull-right" (click)="toggleSideBar()">
-                <i class="fa fa-align-justify"></i> <span></span>
-            </button>
-        </nav>
-
-
-
-        <div class="row">
-            <div class="col-md-12" style="height: calc(100vh - 50px); padding: 0;">
-                <div class="card">
-                    <h3>Crear mensaje</h3>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <ng-select
-                                [items]="allUsers"
-                                [multiple]="true"
-                                [closeOnSelect]="false"
-                                [clearSearchOnAdd]="true"
-                                bindLabel="first_name"
-                                bindValue="id"
-                                placeholder="Para: "
-                                [(ngModel)]="messageRecipients"
-                                *ngIf="messageRecipients && selection === 'users'">
-                                <ng-template ng-option-tmp let-item="item">
-                                  <p>{{item.first_name}} {{item.last_name}}</p>
-                                </ng-template>
-                                <ng-template ng-label-tmp let-item="item" *ngIf="!loading">
-                                  <span aria-hidden="true" class="ng-value-icon left" (click)="removeRecipient(item.id)" style="float: left; margin-right: 5px;">×</span>
-                                  <p>{{item.first_name}} {{item.last_name}}</p>
-                                </ng-template>
-                            </ng-select>
-                            <ng-select
-                                [items]="allCourses"
-                                [multiple]="true"
-                                [closeOnSelect]="false"
-                                [clearSearchOnAdd]="true"
-                                bindLabel="name"
-                                bindValue="id"
-                                placeholder="Para: "
-                                [(ngModel)]="selectedCourses"
-                                *ngIf="selectedCourses && selection === 'courses'">
-                                <ng-template ng-option-tmp let-item="item">
-                                  <p>{{item.name}}</p>
-                                </ng-template>
-                                <ng-template ng-label-tmp let-item="item" *ngIf="!loading">
-                                  <span aria-hidden="true" class="ng-value-icon left" (click)="removeCourse(item.id)" style="float: left; margin-right: 5px;">×</span>
-                                  <p>{{item.name}}</p>
-                                </ng-template>
-                            </ng-select>
-                            <button (click)="sendMessage()" *ngIf="selection === 'users'">Enviar mensaje a usuarios</button>
-                            <button (click)="sendCourseMessage()" *ngIf="selection === 'courses'">Enviar mensaje a cursos</button>
-                        </div>
-                        <div class="row">
-                            <input type="text" [(ngModel)]="subject">
-                        </div>
-                        <div class="row">
-                            <textarea name="" id="" cols="30" rows="10" [(ngModel)]="content"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
-   </div>
-  </body>
-</html>
-
-
+<div class="row">
+  <div class="col-md-12" style="height: calc(100vh - 50px); padding: 0;">
+      <div class="card">
+          <h3>Crear mensaje</h3>
+          <div class="col-md-12">
+              <div class="row">
+                  <ng-select
+                      [items]="allUsers"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [clearSearchOnAdd]="true"
+                      bindLabel="first_name"
+                      bindValue="id"
+                      placeholder="Para: "
+                      [(ngModel)]="messageRecipients"
+                      *ngIf="messageRecipients && selection === 'users'">
+                      <ng-template ng-option-tmp let-item="item">
+                        <p>{{item.first_name}} {{item.last_name}}</p>
+                      </ng-template>
+                      <ng-template ng-label-tmp let-item="item" *ngIf="!loading">
+                        <span aria-hidden="true" class="ng-value-icon left" (click)="removeRecipient(item.id)" style="float: left; margin-right: 5px;">×</span>
+                        <p>{{item.first_name}} {{item.last_name}}</p>
+                      </ng-template>
+                  </ng-select>
+                  <ng-select
+                      [items]="allCourses"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [clearSearchOnAdd]="true"
+                      bindLabel="name"
+                      bindValue="id"
+                      placeholder="Para: "
+                      [(ngModel)]="selectedCourses"
+                      *ngIf="selectedCourses && selection === 'courses'">
+                      <ng-template ng-option-tmp let-item="item">
+                        <p>{{item.name}}</p>
+                      </ng-template>
+                      <ng-template ng-label-tmp let-item="item" *ngIf="!loading">
+                        <span aria-hidden="true" class="ng-value-icon left" (click)="removeCourse(item.id)" style="float: left; margin-right: 5px;">×</span>
+                        <p>{{item.name}}</p>
+                      </ng-template>
+                  </ng-select>
+                  <button (click)="sendMessage()" *ngIf="selection === 'users'">Enviar mensaje a usuarios</button>
+                  <button (click)="sendCourseMessage()" *ngIf="selection === 'courses'">Enviar mensaje a cursos</button>
+              </div>
+              <div class="row">
+                  <input type="text" [(ngModel)]="subject">
+              </div>
+              <div class="row">
+                  <textarea name="" id="" cols="30" rows="10" [(ngModel)]="content"></textarea>
+              </div>
+          </div>
+      </div>
+      <br>
+  </div>
+</div>

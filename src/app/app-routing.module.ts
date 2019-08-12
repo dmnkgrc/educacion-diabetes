@@ -66,12 +66,12 @@ const routes: Routes = [
         canActivateChild: [AuthGuard, AdminGuard],
       },
       {
-        path: 'messages',
+        path: 'mensajes',
         component: MessagesComponent,
         canActivate: [AuthGuard, AdminGuard],
       },
       {
-        path: 'messages/send',
+        path: 'mensajes/enviar',
         component: CreateMessageComponent,
         canActivate: [AuthGuard, AdminGuard],
       },
