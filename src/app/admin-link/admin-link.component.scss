@@ -1,0 +1,28 @@
+.container{
+  margin-top: 5%;
+
+  align-content: center;
+  text-align: center;
+
+}
+button{
+  height: 3em;
+  width: 10em;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+.button:hover {opacity: 1}
+.button:active {
+  background-color: rgba(62, 142, 65, 0);
+  box-shadow: 0 5px #666;
+
+}
+
+.titulo{
+  font-size: 200%;
+  font-family: 'Montserrat', sans-serif;
+  font-width: bold;
+  color: black;
+}
+
+

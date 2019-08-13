@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CourseService } from '../services/course.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { CourseService } from '../services/course.service';
 export class CoursesIndexComponent implements OnInit {
   courses: any;
   collapsedSideBar = true;
+
+  @Input() activo: boolean;
   constructor(
     public courseService: CourseService
   ) {}

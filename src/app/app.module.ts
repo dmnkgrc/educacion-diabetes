@@ -33,6 +33,7 @@ import { StudentAppComponent } from './student-app/student-app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CreateMessageComponent } from './create-message/create-message.component';
 import { AdminAppComponent } from './admin-app/admin-app.component';
+import { AdminLinkComponent } from './admin-link/admin-link.component';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -73,6 +74,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     FormatDatePipe,
     StudentAppComponent,
     AdminAppComponent,
+    AdminLinkComponent,
   ],
   imports: [
     BrowserModule,
