@@ -8,12 +8,14 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-admin-courses',
   templateUrl: './admin-courses.component.html',
-  styleUrls: ['./admin-courses.component.scss']
+  styleUrls: ['./admin-courses.component.scss'],
 })
 export class AdminCoursesComponent implements OnInit {
   public showCourse = false;
   private editPresentationMode = false;
+  public editCourseMode = false;
   private presentationId: number;
+  private courseId: number;
   public title: string;
   public frame: string;
   public audioUrl: string;
@@ -31,10 +33,13 @@ export class AdminCoursesComponent implements OnInit {
   public students$: Observable<any>;
   collapsedSideBar = true;
 
-  constructor(private courseService: CourseService, private sanitizer: DomSanitizer, private userService: UserService) {}
+  constructor(
+    private courseService: CourseService,
+    private sanitizer: DomSanitizer,
+    private userService: UserService
+  ) {}
   @HostListener('window:message', ['$event'])
   onMessage(e) {
-
     if (e.origin.includes('localhost')) {
       return false;
     }
@@ -64,7 +69,7 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public selectPresentation(presentation: any, event: any) {
-    if (typeof(event.target.className) !== 'string') {
+    if (typeof event.target.className !== 'string') {
       return;
     }
     this.selectedCourse = presentation;
@@ -85,28 +90,41 @@ export class AdminCoursesComponent implements OnInit {
         coursesId: [this.coursesId],
         audioUrl: this.audioUrl,
         audioSync: this.audioSync,
-        position: this.position
+        position: this.position,
       };
       if (this.editPresentationMode) {
         this.editPresentationMode = false;
-        return this.courseService.editPresentation(data, this.presentationId).subscribe(presentation => {
+        return this.courseService
+          .editPresentation(data, this.presentationId)
+          .subscribe(presentation => {
+            this.courses$ = this.courseService.getAllCourses();
+          });
+      }
+      return this.courseService
+        .createPresentation(data)
+        .subscribe(presentation => {
           this.courses$ = this.courseService.getAllCourses();
         });
-      }
-      return this.courseService.createPresentation(data).subscribe(presentation => {
-        this.courses$ = this.courseService.getAllCourses();
-      });
     }
     alert('Frame y Cursos son requeridos');
   }
 
   public createCourse() {
     if (this.name && this.description) {
-      return this.courseService.createCourse({
+      const data = {
         name: this.name,
         description: this.description,
-        users: this.usersId || []
-      }).subscribe(() => {
+        users: this.usersId || [],
+      };
+      if (this.editCourseMode) {
+        this.editCourseMode = false;
+        return this.courseService
+          .editCourse(data, this.courseId)
+          .subscribe(() => {
+            this.courses$ = this.courseService.getAllCourses();
+          });
+      }
+      return this.courseService.createCourse(data).subscribe(() => {
         this.courses$ = this.courseService.getAllCourses();
       });
     }
@@ -124,6 +142,14 @@ export class AdminCoursesComponent implements OnInit {
     this.presentationId = presentation.id;
   }
 
+  public editCourse(event: any, course: any) {
+    this.name = course.name;
+    this.description = course.description;
+    this.editCourseMode = true;
+    this.courseId = course.id;
+    this.usersId = course.users.map(user => user.id);
+  }
+
   public deletePresentation(event: any, id: number) {
     event.stopPropagation();
     if (confirm('¿Estás seguro?')) {
@@ -133,8 +159,16 @@ export class AdminCoursesComponent implements OnInit {
     }
   }
 
+  public deleteCourse(event: any, id: number) {
+    event.stopPropagation();
+    if (confirm('¿Estás seguro?')) {
+      return this.courseService.deleteCourse(id).subscribe(() => {
+        this.courses$ = this.courseService.getAllCourses();
+      });
+    }
+  }
+
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
-
 }

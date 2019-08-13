@@ -6,128 +6,192 @@ import { config } from '../config';
 import { SessionService } from './session.service';
 
 @Injectable({ providedIn: 'root' })
-
-
 export class CourseService {
-    rootURL: string = config.rootURL;
-    apiEnpoints = config.apiEndPoints;
-    userEndpoint: string = config.apiEndPoints.users;
-    signupEndpoint: string = config.apiEndPoints.signup;
-    studentsEndpoint: string = config.apiEndPoints.students;
-    getUserEndpoint: string = config.apiEndPoints.getUser;
-    constructor(
-        public http: HttpClient,
-        public sessionService: SessionService
-      ) {}
+  rootURL: string = config.rootURL;
+  apiEnpoints = config.apiEndPoints;
+  userEndpoint: string = config.apiEndPoints.users;
+  signupEndpoint: string = config.apiEndPoints.signup;
+  studentsEndpoint: string = config.apiEndPoints.students;
+  getUserEndpoint: string = config.apiEndPoints.getUser;
+  constructor(public http: HttpClient, public sessionService: SessionService) {}
 
-    public getAllCourses(): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      return this.http.get(`${this.rootURL}${this.apiEnpoints.courses}`, {headers}).pipe(
+  public getAllCourses(): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .get(`${this.rootURL}${this.apiEnpoints.courses}`, { headers })
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
 
-    public getCourseById(courseId: number): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      return this.http.get(`${this.rootURL}${this.apiEnpoints.courses}${courseId}`, {headers}).pipe(
+  public getCourseById(courseId: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .get(`${this.rootURL}${this.apiEnpoints.courses}${courseId}`, { headers })
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
 
-    public createCourse(data: any): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      const course = {
-        name: data.name,
-        description: data.description,
-        users: data.users
-      };
-      return this.http.post(`${this.rootURL}${this.apiEnpoints.courses}`, {
-        course
-      }, {headers}).pipe(
+  public createCourse(data: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const course = {
+      name: data.name,
+      description: data.description,
+      users: data.users,
+    };
+    return this.http
+      .post(
+        `${this.rootURL}${this.apiEnpoints.courses}`,
+        {
+          course,
+        },
+        { headers }
+      )
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
 
-    public createPresentation(data: any): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      const presentation = {
-        title: data.title,
-        frame: data.frame,
-        courses_id: data.coursesId,
-        audio_url: data.audioUrl,
-        audio_sync: data.audioSync,
-        position: data.position
-      };
-      return this.http.post(`${this.rootURL}${this.apiEnpoints.presentations}`, {
-        presentation
-      }, {headers}).pipe(
+  public editCourse(data: any, id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const course = {
+      name: data.name,
+      description: data.description,
+      users: data.users,
+    };
+    return this.http
+      .put(
+        `${this.rootURL}${this.apiEnpoints.courses}${id}`,
+        {
+          course,
+        },
+        { headers }
+      )
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
 
-    public editPresentation(data: any, id: number): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      const presentation = {
-        title: data.title,
-        frame: data.frame,
-        courses_id: data.coursesId,
-        audio_url: data.audioUrl,
-        audio_sync: data.audioSync,
-        position: data.position
-      };
-      return this.http.put(`${this.rootURL}${this.apiEnpoints.presentations}${id}`, {
-        presentation
-      }, {headers}).pipe(
+  public deleteCourse(id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .delete(`${this.rootURL}${this.apiEnpoints.courses}${id}`, { headers })
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
 
-    public deletePresentation(id: number): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      });
-      return this.http.delete(`${this.rootURL}${this.apiEnpoints.presentations}${id}`, {headers}).pipe(
+  public createPresentation(data: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const presentation = {
+      title: data.title,
+      frame: data.frame,
+      courses_id: data.coursesId,
+      audio_url: data.audioUrl,
+      audio_sync: data.audioSync,
+      position: data.position,
+    };
+    return this.http
+      .post(
+        `${this.rootURL}${this.apiEnpoints.presentations}`,
+        {
+          presentation,
+        },
+        { headers }
+      )
+      .pipe(
         tap((res: any) => {
           console.log(res);
         }),
         catchError(error => of(error))
       );
-    }
+  }
+
+  public editPresentation(data: any, id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const presentation = {
+      title: data.title,
+      frame: data.frame,
+      courses_id: data.coursesId,
+      audio_url: data.audioUrl,
+      audio_sync: data.audioSync,
+      position: data.position,
+    };
+    return this.http
+      .put(
+        `${this.rootURL}${this.apiEnpoints.presentations}${id}`,
+        {
+          presentation,
+        },
+        { headers }
+      )
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
+  public deletePresentation(id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .delete(`${this.rootURL}${this.apiEnpoints.presentations}${id}`, {
+        headers,
+      })
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
 }
