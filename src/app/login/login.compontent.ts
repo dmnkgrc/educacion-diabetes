@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new SetCurrentUser(currentUser));
       localStorage.setItem('token', result.token);
       if (currentUser.admin) {
-        this.router.navigateByUrl('admin-home');
+        this.router.navigateByUrl('/admin');
         return;
       }
       this.router.navigateByUrl('/');
