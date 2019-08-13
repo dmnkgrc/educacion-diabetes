@@ -1,10 +1,33 @@
 <div class="row">
   <div class="col-md-12" style="height: calc(100vh - 50px); padding: 0;">
+    <br>
       <div class="card">
-          <h3>Crear mensaje</h3>
+        <br>
+          <div class="row">
+            <div class="col-md-10">
+                <h3>Crear mensaje</h3>
+            </div>
+            <div class="col-md-2">
+                <button (click)="sendMessage()" class="btn btn-primary" *ngIf="selection === 'users'">Enviar mensaje a usuarios</button>
+                <button (click)="sendCourseMessage()" class="btn btn-primary" *ngIf="selection === 'courses'">Enviar mensaje a cursos</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="">
+                Enviar mensaje a: 
+              </label>
+                <select class="form-control" [(ngModel)]="selection">
+                  <option value="users">Usuarios</option>
+                  <option value="courses">Cursos</option>
+                </select>
+            </div>
+          </div>
+          <br>
           <div class="col-md-12">
               <div class="row">
                   <ng-select
+                      class="select-dimensions"
                       [items]="allUsers"
                       [multiple]="true"
                       [closeOnSelect]="false"
@@ -40,14 +63,14 @@
                         <p>{{item.name}}</p>
                       </ng-template>
                   </ng-select>
-                  <button (click)="sendMessage()" *ngIf="selection === 'users'">Enviar mensaje a usuarios</button>
-                  <button (click)="sendCourseMessage()" *ngIf="selection === 'courses'">Enviar mensaje a cursos</button>
               </div>
+              <br>
               <div class="row">
-                  <input type="text" [(ngModel)]="subject">
+                  <input type="text" class="form-control" placeholder="Asunto" [(ngModel)]="subject">
               </div>
+              <br>
               <div class="row">
-                  <textarea name="" id="" cols="30" rows="10" [(ngModel)]="content"></textarea>
+                  <textarea class="form-control" [(ngModel)]="content" placeholder="Mensaje" rows="10"></textarea>
               </div>
           </div>
       </div>

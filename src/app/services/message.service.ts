@@ -22,8 +22,7 @@ export class MessageService {
       return this.http.get(this.rootURL + this.messagesEndpoint + `${userId}/received`, {headers}).pipe(
         tap((res: any) => {
           console.log(res);
-        }),
-        catchError(error => of(error))
+        })
       );
     }
 
@@ -35,8 +34,7 @@ export class MessageService {
       return this.http.get(this.rootURL + this.messagesEndpoint + `${userId}/sent`, {headers}).pipe(
         tap((res: any) => {
           console.log(res);
-        }),
-        catchError(error => of(error))
+        })
       );
     }
 

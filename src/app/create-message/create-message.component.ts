@@ -75,7 +75,7 @@ export class CreateMessageComponent implements OnInit {
     };
     console.log('data', data);
     this.messageService.createMessage(data).subscribe(() => {
-      this.router.navigateByUrl('/messages');
+      this.router.navigateByUrl('/admin/mensajes');
     });
   }
 
