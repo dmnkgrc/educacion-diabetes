@@ -4,6 +4,7 @@
         <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
           <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
           <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
+          <button class="col-12 create-button" data-toggle="modal" data-target="#createActivityModal">Crear Actividad</button>
         </div>
         <div class="col-12 col-md-9">
           <div class="courses">
@@ -19,14 +20,22 @@
                       </div>
                       <div class="presentations">
                         <ul>
-                          <li *ngFor="let presentation of course.presentations_list" class="presentation" (click)="selectPresentation(presentation, $event)">
-                            <span class="presentation-position">{{presentation.position}}</span>
-                            <span class="presentation-title">{{presentation.title}}</span>
-                            <span class="presentation-date">Creado {{presentation.created_at | formatDate}}</span>
-                            <span class="presentation-icons">
-                              <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createPresentationModal" (click)="editPresentation($event, presentation, course.id)"></i-feather>
-                              <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, presentation.id)"></i-feather>
-                            </span>
+                          <li *ngFor="let element of course.elements" class="presentation">
+                            <div *ngIf="element.frame; else activity" (click)="selectPresentation(element, $event)">
+                                <span class="presentation-position">{{element.position}}</span>
+                                <span class="presentation-title">{{element.title}}</span>
+                                <span class="presentation-date">{{element.created_at | formatDate}}</span>
+                                <span class="presentation-icons">
+                                  <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createPresentationModal" (click)="editPresentation($event, presentation, course.id)"></i-feather>
+                                  <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, element.id)"></i-feather>
+                                </span>
+                            </div>
+                            <ng-template #activity>
+                                <span class="presentation-position">{{element.position}}</span>
+                                <span class="presentation-title">{{element.name}}</span>
+                                <span class="presentation-date">  {{element.created_at | formatDate}}</span>
+                            </ng-template>
+
                           </li>
                         </ul>
                       </div>
@@ -116,5 +125,49 @@
           </div>
         </div>
     </div>
+
+    <div class="modal fade create-activity-modal" id="createActivityModal" tabindex="-1" role="dialog" aria-labelledby="createActivityModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createActivityModalLabel">Crear Actividad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre de la actividad (requerido)" />
+            <ng-select
+                  [items]="values.courses"
+                  bindValue="id"
+                  [closeOnSelect]="true"
+                  [searchable]="false"
+                  bindLabel="name"
+                  placeholder="Seleccionar cursos (requerido)"
+                  [(ngModel)]="coursesId"
+                  style="margin-bottom: 20px">
+            </ng-select>
+            <input type="text" class="form-control" [(ngModel)]="position" placeholder="Posición de la actividad (requerido)" />
+            <div *ngFor="let question of questions; let i = index">
+              <h3>Pregunta {{i + 1}}</h3>
+              <input type="text" class="form-control" [(ngModel)]="question.title" placeholder="Título de la pregunta (requerido)" />
+              <div *ngFor="let choice of question.choices; let j = index">
+                <h4>Opción {{j + 1}}</h4>
+                <input type="text" class="form-control" [(ngModel)]="question.choices[j]" placeholder="Opción (requerido)" />
+              </div>
+              <button (click)="addChoice(i)" class="agregar-el">Agregar opción</button>
+              <button (click)="removeChoice(i)" class="eliminar-el" *ngIf="question.choices.length > 1">Eliminar opción</button>
+              <input type="text" class="form-control" [(ngModel)]="question.correctAnswer" placeholder="Respuesta correcta (requerido), ejemplo: Diabetes Tipo 1" />
+            </div>
+            <button (click)="addQuestion()" class="agregar-el">Agregar pregunta</button>
+            <button (click)="removeQuestion()" class="eliminar-el" *ngIf="questions.length > 1">Eliminar pregunta</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createActivity()">Guardar</button>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
 </div>

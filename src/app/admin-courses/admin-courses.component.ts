@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserService } from '../services/user.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-courses',
@@ -26,6 +27,13 @@ export class AdminCoursesComponent implements OnInit {
   public selectedCourse: any;
   public coursesId: number;
   public usersId: number[];
+  public questions: any[] = [
+    {
+      title: '',
+      choices: [''],
+      correctAnswer: '',
+    },
+  ];
   public times: any;
   public courses$: Observable<any>;
   public currentSlide: any = 1;
@@ -107,6 +115,51 @@ export class AdminCoursesComponent implements OnInit {
         });
     }
     alert('Frame y Cursos son requeridos');
+  }
+
+  public createActivity() {
+    let validQuestions = false;
+    if (this.questions) {
+      validQuestions = this.questions.every(question => {
+        return (
+          question.title &&
+          question.correctAnswer &&
+          question.choices.length > 0
+        );
+      });
+    }
+    if (this.name && validQuestions && this.coursesId) {
+      const data = {
+        name: this.name,
+        questions: this.questions,
+        position: this.position,
+        coursesId: [this.coursesId],
+      };
+      return this.courseService.createActivity(data).subscribe(() => {
+        this.courses$ = this.courseService.getAllCourses();
+      });
+    }
+    alert('Nombre y Preguntas son requeridos');
+  }
+
+  public addQuestion() {
+    this.questions.push({
+      title: '',
+      choices: [''],
+      correctAnswer: '',
+    });
+  }
+
+  public removeQuestion() {
+    this.questions.pop();
+  }
+
+  public addChoice(index: number) {
+    this.questions[index].choices.push('');
+  }
+
+  public removeChoice(index: number) {
+    this.questions[index].choices.pop();
   }
 
   public createCourse() {

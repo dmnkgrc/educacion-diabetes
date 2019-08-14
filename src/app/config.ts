@@ -8,6 +8,7 @@ export const config: any = {
     getUser: '/users/',
     courses: '/courses/',
     presentations: '/presentations/',
+    activities: '/activities/',
     messages: '/messages/',
   },
 };
