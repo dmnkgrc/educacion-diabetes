@@ -50,7 +50,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminAppComponent,
-     canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard, AdminGuard],
     children: [
       {
         path: 'alumnos',
@@ -65,7 +65,7 @@ const routes: Routes = [
       {
         path: 'cursos',
         component: AdminCoursesComponent,
-        canActivateChild: [AuthGuard, AdminGuard],
+      canActivateChild: [AuthGuard, AdminGuard],
       },
       {
         path: 'mensajes',
@@ -75,7 +75,7 @@ const routes: Routes = [
       {
         path: 'link',
         component: AdminLinkComponent,
-         canActivate: [AuthGuard, AdminGuard],
+       canActivate: [AuthGuard, AdminGuard],
       },
       {
         path: 'mensajes/enviar',
@@ -92,12 +92,12 @@ const routes: Routes = [
   {
     path: 'inicio',
     component: StudentAppComponent,
-     canActivate: [AuthGuard, NotAdminGuard],
+    canActivate: [AuthGuard, NotAdminGuard],
     children: [
       {
         path: 'cursos',
         component: CoursesIndexComponent,
-         canActivate: [AuthGuard, NotAdminGuard],
+      canActivate: [AuthGuard, NotAdminGuard],
       },
       {
         path: 'cursos/:id/:presentation_id',

@@ -7,9 +7,6 @@
       <p>En esta parte podrás acceder a todos los cursos disponibles para ti, revisar tu avance y consultar tus resultados en cada
               uno de los cursos. Éxito!</p>
       <br>
-    <div >
-      <a href ="">Curso Bobma de Insulina</a>
-    </div>
       <div *ngFor="let course of courses" [ngClass]="course.show ? 'course-card' : '' ">
           <div class="row border-card">
               <div class="col-md-1">
