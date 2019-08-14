@@ -7,9 +7,6 @@
                 <div class="col-md-3">
                     <button type="button" class="btn btn-primary" (click)="compose()">Escribir mensaje</button>
                     <ul class="message-type">
-                        <li [ngClass]="selection === 'inbox' ? 'active-item' : ''" (click)="switchSelection('inbox')">
-                            Recibidos
-                        </li>
                         <li [ngClass]="selection === 'sent' ? 'active-item' : ''" (click)="switchSelection('sent')">
                             Enviados
                         </li>
