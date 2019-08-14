@@ -13,7 +13,7 @@ import { filter, tap } from 'rxjs/operators';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit {
-  selection = 'inbox';
+  selection = 'sent';
   currentUser: any;
   allMessages: string;
   collapsedSideBar = false;
@@ -47,14 +47,6 @@ export class MessagesComponent implements OnInit {
   fetchMessages() {
     console.log('fetching for user', this.currentUser);
     if (!this.currentUser) {
-      return;
-    }
-    if (this.selection === 'inbox') {
-      this.messageService
-        .getInbox(this.currentUser.user_id)
-        .subscribe(messages => {
-          this.allMessages = messages;
-        });
       return;
     }
     this.messageService
