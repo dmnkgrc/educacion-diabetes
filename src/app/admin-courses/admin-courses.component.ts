@@ -48,7 +48,7 @@ export class AdminCoursesComponent implements OnInit {
   ) {}
   @HostListener('window:message', ['$event'])
   onMessage(e) {
-    if (e.origin.includes('localhost')) {
+    if (e.origin.includes('localhost') || e.origin.includes('dialogodiabetescare.com')) {
       return false;
     }
     const data = JSON.parse(e.data);
@@ -63,6 +63,7 @@ export class AdminCoursesComponent implements OnInit {
     }
     return;
   }
+
   ngOnInit() {
     this.courses$ = this.courseService.getAllCourses();
     this.students$ = this.userService.getAllStudents();
