@@ -5,6 +5,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserService } from '../services/user.service';
 import { map } from 'rxjs/operators';
+import * as Survey from 'survey-angular';
 
 @Component({
   selector: 'app-admin-courses',
@@ -13,9 +14,12 @@ import { map } from 'rxjs/operators';
 })
 export class AdminCoursesComponent implements OnInit {
   public showCourse = false;
+  public showActivity = false;
   private editPresentationMode = false;
+  private editActivityMode = false;
   public editCourseMode = false;
   private presentationId: number;
+  private activityId: number;
   private courseId: number;
   public title: string;
   public frame: string;
@@ -73,6 +77,10 @@ export class AdminCoursesComponent implements OnInit {
     this.showCourse = !this.showCourse;
   }
 
+  public toggleActivity() {
+    this.showActivity = !this.showActivity;
+  }
+
   public getUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
@@ -89,6 +97,44 @@ export class AdminCoursesComponent implements OnInit {
       this.times = JSON.parse(audioSync);
     }
     this.toggleCourse();
+  }
+
+  public selectActivity(activity: any, event: any) {
+    if (typeof event.target.className !== 'string') {
+      return;
+    }
+    this.selectedCourse = activity;
+    this.toggleActivity();
+    Survey.Survey.cssType = 'bootstrap';
+    const surveyQuestions = activity.questions.map((question, index) => {
+      return {
+      ...question,
+      name: index,
+      type: 'radiogroup'
+      };
+    });
+    const json = {
+      title: activity.name,
+      pages: [
+        {
+          questions: surveyQuestions
+        }
+      ],
+      completedHtml: '<h4>Has respondido correctamente <b>{correctedAnswers}</b> preguntas de <b>{questionCount}</b>.</h4>',
+      completeText: 'Calificar'
+    };
+    const survey = new Survey.Model(json);
+
+
+    survey
+      .onComplete
+      .add((result) => {
+        console.log(result);
+      });
+
+    setTimeout(() => {
+      Survey.SurveyNG.render('show-activity', { model: survey });
+    }, 100);
   }
 
   public createPresentation() {
@@ -136,6 +182,14 @@ export class AdminCoursesComponent implements OnInit {
         position: this.position,
         coursesId: [this.coursesId],
       };
+      if (this.editActivityMode) {
+        this.editActivityMode = false;
+        return this.courseService
+          .editActivity(data, this.activityId)
+          .subscribe(presentation => {
+            this.courses$ = this.courseService.getAllCourses();
+          });
+      }
       return this.courseService.createActivity(data).subscribe(() => {
         this.courses$ = this.courseService.getAllCourses();
       });
@@ -194,6 +248,15 @@ export class AdminCoursesComponent implements OnInit {
     this.position = presentation.position;
     this.editPresentationMode = true;
     this.presentationId = presentation.id;
+  }
+
+  public editActivity(event: any, activity: any, id: number) {
+    this.name = activity.name;
+    this.questions = activity.questions;
+    this.coursesId = id;
+    this.position = activity.position;
+    this.editActivityMode = true;
+    this.activityId = activity.id;
   }
 
   public editCourse(event: any, course: any) {

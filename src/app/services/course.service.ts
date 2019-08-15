@@ -241,6 +241,34 @@ export class CourseService {
       );
   }
 
+  public editActivity(data: any, id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const activity = {
+      name: data.name,
+      questions: data.questions,
+      position: data.position,
+      courses_id: data.coursesId,
+    };
+    return this.http
+      .put(
+        `${this.rootURL}${this.apiEnpoints.activities}${id}`,
+        {
+          activity,
+        },
+        { headers }
+      )
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
   public deleteActivity(id: number): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',

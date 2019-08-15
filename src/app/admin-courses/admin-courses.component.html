@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 content-container" style="padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async} as values">
-      <div class="row" *ngIf="!showCourse" style="padding: 0 10px; height: 100%;">
+      <div class="row" *ngIf="!showCourse && !showActivity" style="padding: 0 10px; height: 100%;">
         <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
           <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
           <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
@@ -31,12 +31,15 @@
                                 </span>
                             </div>
                             <ng-template #activity>
+                              <div class="presentation-div" (click)="selectActivity(element, $event)">
                                 <span class="presentation-position">{{element.position}}</span>
-                                <span class="presentation-title">{{element.name}}</span>
-                                <span class="presentation-date">  {{element.created_at | formatDate}}</span>
+                                <span class="presentation-title"><i class="fa fa-clipboard-list"></i> {{element.name}}</span>
+                                <span class="presentation-date">{{element.created_at | formatDate}}</span>
                                 <span class="presentation-icons">
+                                  <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createActivityModal" (click)="editActivity($event, element, course.id)"></i-feather>
                                   <i-feather name="trash-2" class="trash-icon" (click)="deleteActivity($event, element.id)"></i-feather>
                                 </span>
+                              </div>
                             </ng-template>
 
                           </li>
@@ -50,6 +53,9 @@
         </div>
       </div>
 
+      <button *ngIf="showCourse || showActivity" class="back-button" (click)="showCourse ? toggleCourse() : toggleActivity()">
+       Volver
+      </button>
       <div *ngIf="showCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
         <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
@@ -59,6 +65,10 @@
           <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
         Your browser does not support the audio element.
         </audio>
+      </div>
+
+      <div *ngIf="showActivity" id="show-activity">
+
       </div>
 
       <div class="modal fade create-presentation-modal" id="createPresentationModal" tabindex="-1" role="dialog" aria-labelledby="createPresentationModalLabel" aria-hidden="true">
