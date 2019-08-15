@@ -213,6 +213,15 @@ export class AdminCoursesComponent implements OnInit {
     }
   }
 
+  public deleteActivity(event: any, id: number) {
+    event.stopPropagation();
+    if (confirm('¿Estás seguro?')) {
+      return this.courseService.deleteActivity(id).subscribe(() => {
+        this.courses$ = this.courseService.getAllCourses();
+      });
+    }
+  }
+
   public deleteCourse(event: any, id: number) {
     event.stopPropagation();
     if (confirm('¿Estás seguro?')) {

@@ -34,6 +34,9 @@
                                 <span class="presentation-position">{{element.position}}</span>
                                 <span class="presentation-title">{{element.name}}</span>
                                 <span class="presentation-date">  {{element.created_at | formatDate}}</span>
+                                <span class="presentation-icons">
+                                  <i-feather name="trash-2" class="trash-icon" (click)="deleteActivity($event, element.id)"></i-feather>
+                                </span>
                             </ng-template>
 
                           </li>
