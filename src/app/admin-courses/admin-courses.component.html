@@ -21,7 +21,7 @@
                       <div class="presentations">
                         <ul>
                           <li *ngFor="let element of course.elements" class="presentation">
-                            <div *ngIf="element.frame; else activity" (click)="selectPresentation(element, $event)">
+                            <div *ngIf="element.frame; else activity" (click)="selectPresentation(element, $event)" class="presentation-div">
                                 <span class="presentation-position">{{element.position}}</span>
                                 <span class="presentation-title">{{element.title}}</span>
                                 <span class="presentation-date">{{element.created_at | formatDate}}</span>

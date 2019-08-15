@@ -100,6 +100,12 @@
           padding: 15px 0;
           align-items: center;
           cursor: pointer;
+          .presentation-div {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+          }
           .presentation-position {
             padding: 3px 8px;
             height: 33px;
