@@ -13,10 +13,11 @@
             <h3 class="card-title">Tus cursos</h3>
             <div *ngIf="courses$ | async as courses">
               <div *ngIf="courses.length > 0; else noCourses">
-                <div *ngFor="let course of courses" class="row">
-                  <div class="col-md-6">
+                <div *ngFor="let course of courses" class="row course-row">
+                  <div class="col-md-8 course-name">
                     <p>{{ course.name }}</p>
                   </div>
+                  <div class="col-md-4 course-actions"><button class="btn-pink dialogo-btn" [routerLink]="['/inicio/cursos', course.id, 0]">Iniciar</button></div>
                   <!-- <div class="col-md-4">
                           <div class="progress" style="margin-top: 10%;">
                             <div

@@ -11,3 +11,9 @@
     border-bottom: solid;
     border-bottom-color: #113F67;
 }
+
+.element-container {
+  width: 100%;
+  max-height: calc(100vh - 60px);
+  overflow: auto;
+}

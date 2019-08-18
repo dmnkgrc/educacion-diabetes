@@ -52,11 +52,14 @@ export class AdminCoursesComponent implements OnInit {
   ) {}
   @HostListener('window:message', ['$event'])
   onMessage(e) {
-    if (e.origin.includes('localhost') || e.origin.includes('dialogodiabetescare.com')) {
+    if (
+      e.origin.includes('localhost') ||
+      e.origin.includes('dialogodiabetescare.com')
+    ) {
       return false;
     }
     const data = JSON.parse(e.data);
-    if (data.eventName === 'slidechanged') {
+    if (data.eventName === 'slidechanged' || data.eventName === 'ready') {
       let newSlide = data.state.indexh + 1;
       if (data.state.indexv > 0) {
         newSlide = `${newSlide}.${data.state.indexv}`;
@@ -108,29 +111,27 @@ export class AdminCoursesComponent implements OnInit {
     Survey.Survey.cssType = 'bootstrap';
     const surveyQuestions = activity.questions.map((question, index) => {
       return {
-      ...question,
-      name: index,
-      type: 'radiogroup'
+        ...question,
+        name: index.toString(),
+        type: 'radiogroup',
       };
     });
     const json = {
       title: activity.name,
       pages: [
         {
-          questions: surveyQuestions
-        }
+          questions: surveyQuestions,
+        },
       ],
-      completedHtml: '<h4>Has respondido correctamente <b>{correctedAnswers}</b> preguntas de <b>{questionCount}</b>.</h4>',
-      completeText: 'Calificar'
+      completedHtml:
+        '<h4>Has respondido correctamente <b>{correctedAnswers}</b> preguntas de <b>{questionCount}</b>.</h4>',
+      completeText: 'Calificar',
     };
     const survey = new Survey.Model(json);
 
-
-    survey
-      .onComplete
-      .add((result) => {
-        console.log(result);
-      });
+    survey.onComplete.add(result => {
+      console.log(result);
+    });
 
     setTimeout(() => {
       Survey.SurveyNG.render('show-activity', { model: survey });

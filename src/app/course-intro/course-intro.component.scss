@@ -3,18 +3,18 @@
 }
 
 .btn-pink {
-  background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
+  background-image: linear-gradient(#ed82b6, #e45f96, #e45f96);
   display: inline-block;
   margin-top: 10px;
 }
 
 .create-button {
   background: #fff;
-  color: #B4B4B4;
+  color: #b4b4b4;
   font-size: 23px;
   padding: 20px 0px;
   box-shadow: none;
-  border: 1px solid #B4B4B4;
+  border: 1px solid #b4b4b4;
   border-radius: 10px;
   margin: 20px 0px;
   outline: none;
@@ -37,13 +37,14 @@
   background: #fff;
   height: auto;
   padding: 0;
+  height: 100%;
   .course-title {
     width: 100%;
     overflow: hidden;
     text-transform: uppercase;
     font-size: 40px;
     text-align: center;
-    background:#1288CA;
+    background: #1288ca;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     padding: 50px 10px;
@@ -52,27 +53,90 @@
     justify-content: center;
     align-items: center;
   }
-  h1 {
-    color: #fff;
-  }
+
   .course-info {
     padding: 0;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    .upper {
-      justify-content: normal;
-      border-bottom: 1px solid #707070;
-      padding: 20px;
+    background: #333;
+    color: #fff;
+    height: 100%;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+    h4 {
+      color: #fff;
+      font-weight: 700;
+      text-align: left;
+      font-size: 14px;
+      margin: 30px 0;
+      margin-bottom: 15px;
     }
-    h2 {
-      color: #707070;
-      font-weight: 400;
-    }
-    p {
-      font-size: 20px;
-      text-overflow: ellipsis;
-      margin-bottom: 40px;
+    ul {
+      list-style-type: none;
+      padding: 15px 25px 0 3.5rem;
+      position: relative;
+      li {
+        cursor: pointer;
+        min-height: 85px;
+        counter-increment: list;
+        position: relative;
+        font-weight: 700;
+        font-size: 14px;
+        outline: none !important;
+        &:before {
+          content: '';
+          position: absolute;
+          left: -1.7rem;
+          top: 30px;
+          height: 60%;
+          width: 1px;
+          border-left: 1px solid #fff;
+        }
+        &:after {
+          content: counter(list);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          left: -2.5rem;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          background: transparent;
+          color: #fff;
+          font-weight: 400;
+          font-size: 13px;
+          text-align: center;
+          border: 1px solid #fff;
+        }
+        &:last-child {
+          &:before {
+            border: none;
+          }
+        }
+        &:hover {
+          opacity: 0.5;
+        }
+        &.element-active {
+          &:after {
+            background: #fff;
+            color: #333;
+          }
+        }
+        &.element-completed {
+          opacity: 0.6;
+          color: #fff;
+          &:after {
+            content: '\2713';
+            font-weight: 400;
+            background: #fff;
+            color: #333;
+          }
+        }
+      }
     }
     .presentations {
       ul {
@@ -109,7 +173,7 @@
     }
     .buttons {
       .pink-button {
-        background: #FF62A5;
+        background: #ff62a5;
         color: #fff;
         text-transform: uppercase;
         box-shadow: none;
@@ -126,14 +190,14 @@
           opacity: 0.6;
         }
       }
-
     }
   }
 }
 
 .create-presentation-modal,
 .create-course-modal {
-  input, textarea {
+  input,
+  textarea {
     margin-bottom: 20px;
   }
 }

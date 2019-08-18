@@ -15,6 +15,23 @@ export class CourseService {
   getUserEndpoint: string = config.apiEndPoints.getUser;
   constructor(public http: HttpClient, public sessionService: SessionService) {}
 
+  private getCourseWithElements(course: any): any {
+    course.elements = [...course.presentations_list, ...course.activities_list];
+    course.elements.sort((a, b) => {
+      if (a.position < b.position) {
+        return -1;
+      } else if (b.position < a.position) {
+        return 1;
+      } else if (a.frame && !b.frame) {
+        return -1;
+      } else if (b.frame && !a.frame) {
+        return 1;
+      }
+      return 0;
+    });
+    return course;
+  }
+
   public getAllCourses(): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',
@@ -25,25 +42,7 @@ export class CourseService {
       .get(`${this.rootURL}${this.apiEnpoints.courses}`, { headers })
       .pipe(
         map((res: any) => {
-          return res.map(course => {
-            course.elements = [
-              ...course.presentations_list,
-              ...course.activities_list,
-            ];
-            course.elements.sort((a, b) => {
-              if (a.position < b.position) {
-                return -1;
-              } else if (b.position < a.position) {
-                return 1;
-              } else if (a.frame && !b.frame) {
-                return -1;
-              } else if (b.frame && !a.frame) {
-                return 1;
-              }
-              return 0;
-            });
-            return course;
-          });
+          return res.map(course => this.getCourseWithElements(course));
         }),
         catchError(error => of(error))
       );
@@ -58,8 +57,8 @@ export class CourseService {
     return this.http
       .get(`${this.rootURL}${this.apiEnpoints.courses}${courseId}`, { headers })
       .pipe(
-        tap((res: any) => {
-          console.log(res);
+        map((res: any) => {
+          return this.getCourseWithElements(res);
         }),
         catchError(error => of(error))
       );

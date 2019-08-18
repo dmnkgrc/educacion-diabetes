@@ -21,10 +21,9 @@ import { CreateMessageComponent } from './create-message/create-message.componen
 import { NotAdminGuard } from './auth/not-admin.guard';
 import { AdminAppComponent } from './admin-app/admin-app.component';
 import { AdminGuard } from './auth/admin.guard';
-import {AdminLinkComponent} from './admin-link/admin-link.component';
+import { AdminLinkComponent } from './admin-link/admin-link.component';
 
 const routes: Routes = [
-
   {
     path: '',
     component: HomeComponent,
@@ -65,7 +64,7 @@ const routes: Routes = [
       {
         path: 'cursos',
         component: AdminCoursesComponent,
-      canActivateChild: [AuthGuard, AdminGuard],
+        canActivateChild: [AuthGuard, AdminGuard],
       },
       {
         path: 'mensajes',
@@ -75,7 +74,7 @@ const routes: Routes = [
       {
         path: 'link',
         component: AdminLinkComponent,
-       canActivate: [AuthGuard, AdminGuard],
+        canActivate: [AuthGuard, AdminGuard],
       },
       {
         path: 'mensajes/enviar',
@@ -97,17 +96,19 @@ const routes: Routes = [
       {
         path: 'cursos',
         component: CoursesIndexComponent,
-      canActivate: [AuthGuard, NotAdminGuard],
+        canActivateChild: [AuthGuard, NotAdminGuard],
       },
       {
-        path: 'cursos/:id/:presentation_id',
-        component: CourseShowComponent,
-        canActivate: [AuthGuard, NotAdminGuard],
-      },
-      {
-        path: 'intro/:id',
+        path: 'cursos/:id',
         component: CourseIntroComponent,
-        canActivate: [AuthGuard, NotAdminGuard],
+        canActivateChild: [AuthGuard, NotAdminGuard],
+        children: [
+          {
+            path: ':element_index',
+            component: CourseShowComponent,
+            canActivateChild: [AuthGuard, NotAdminGuard],
+          },
+        ],
       },
       {
         path: 'perfil',

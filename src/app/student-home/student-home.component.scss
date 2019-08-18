@@ -23,6 +23,17 @@
     font-weight: 600;
     font-size: 1.7rem;
   }
+  .course-name,
+  .course-actions {
+    display: flex;
+    align-items: center;
+    p {
+      margin-bottom: 0;
+    }
+    button {
+      margin-top: 0;
+    }
+  }
 }
 
 .card-text {
@@ -31,12 +42,6 @@
   line-height: 18px;
   text-align: right;
   margin-right: 15px;
-}
-
-.btn-pink {
-  background-image: linear-gradient(#ed82b6, #e45f96, #e45f96);
-  display: inline-block;
-  margin-top: 10px;
 }
 
 .tag {
