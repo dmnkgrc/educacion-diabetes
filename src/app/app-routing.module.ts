@@ -22,6 +22,7 @@ import { NotAdminGuard } from './auth/not-admin.guard';
 import { AdminAppComponent } from './admin-app/admin-app.component';
 import { AdminGuard } from './auth/admin.guard';
 import { AdminLinkComponent } from './admin-link/admin-link.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
   {
@@ -36,11 +37,10 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [NotauthGuard],
   },
-  // {
-  //   path: 'admin-login',
-  //   component: AdminLoginComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'privacidad',
+    component: PrivacyComponent,
+  },
   {
     path: 'signup',
     component: SignupComponent,

@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="navbar-header">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" [routerLink]="['/']">
       <img src="../../assets/diabetesblanco.png" class="logo-nav" alt="">
     </a>
   </div>
@@ -51,6 +51,6 @@
 <footer class="footer">
     <div class="container">
       <br>
-      <span class="text-center">Aviso de privacidad</span>
+      <a class="text-center" [routerLink]="['/privacidad']">Aviso de privacidad</a>
     </div>
   </footer>
