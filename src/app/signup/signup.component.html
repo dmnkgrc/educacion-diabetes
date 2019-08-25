@@ -10,13 +10,32 @@
         <div class="col-md-5 offset-md-1 col-xs-12 no-padding">
           <div class="card">
             <div class="card-body">
-                <form
+              <form
                 class="form-signin"
                 [formGroup]="signupForm"
                 (ngSubmit)="register()"
               >
                 <div class="text-center mb-4">
                   <h3>Registro</h3>
+                </div>
+                <div
+                  *ngIf="error && error.errors && error.errors.length > 0"
+                  class="alert alert-danger fade show"
+                  role="alert"
+                >
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <ul>
+                    <li *ngFor="let err of error.errors">
+                      {{ err }}
+                    </li>
+                  </ul>
                 </div>
                 <div class="row">
                   <div class="col">
@@ -268,9 +287,6 @@
                       </button>
                     </div>
                   </div>
-                  <div *ngIf="error" class="is-invalid">
-                    Ocurrió un error al crear el usuario
-                  </div>
                 </div>
               </form>
             </div>
@@ -279,18 +295,18 @@
         <div class="col-md-5 col-xs-12 no-padding">
           <div class="card right-content">
             <div class="card-body">
-                <div class="right-text">
-                    <h3 style="color: white">¿YA TIENES CUENTA?</h3>
-                    <div class="form-group">
-                      <button
-                        class="btn btn-lg btn-pink"
-                        style="color: white"
-                        [routerLink]="['../login']"
-                      >
-                        Iniciar sesión
-                      </button>
-                    </div>
-                  </div>
+              <div class="right-text">
+                <h3 style="color: white">¿YA TIENES CUENTA?</h3>
+                <div class="form-group">
+                  <button
+                    class="btn btn-lg btn-pink"
+                    style="color: white"
+                    [routerLink]="['../login']"
+                  >
+                    Iniciar sesión
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
