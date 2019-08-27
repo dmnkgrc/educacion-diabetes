@@ -77,7 +77,7 @@ export class StudentProfileComponent implements OnInit {
   deleteUser() {
     this.userService.deleteUserById(this.user.id)
     .subscribe(() => {
-      this.router.navigateByUrl('/admin-students');
+      this.router.navigateByUrl('/admin/alumnos');
     });
   }
 }
