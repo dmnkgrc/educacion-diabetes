@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-student-profile',
@@ -42,14 +43,22 @@ export class StudentProfileComponent implements OnInit {
       if (params.id) {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
+          this.userService.getUserCourses(this.user.id).subscribe((courses: any) => {
+            this.user.courses = courses;
+          });
         });
       } else {
         const token = localStorage.getItem('token');
         const user = jwtDecode(token);
         // tslint:disable-next-line: no-shadowed-variable
-        this.currentUser$.subscribe((user: User) => {
-          this.user = user;
-        });
+        this.currentUser$.subscribe(
+            (user: User) => {
+              this.user = user;
+              this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
+                this.user.courses = courses;
+              });
+            }
+          );
       }
       this.user = {
         ...this.user,
@@ -74,10 +83,18 @@ export class StudentProfileComponent implements OnInit {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
 
+  updateUser() {
+    this.userService.updateUser(this.user).subscribe(res => console.log(res));
+  }
+
   deleteUser() {
     this.userService.deleteUserById(this.user.id)
     .subscribe(() => {
       this.router.navigateByUrl('/admin/alumnos');
     });
+  }
+
+  sendMessage() {
+    this.router.navigateByUrl('admin/mensajes/enviar');
   }
 }

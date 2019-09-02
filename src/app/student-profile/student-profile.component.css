@@ -52,7 +52,19 @@
 }
 
 .btn-pink {
-    background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
-    display: inline-block;
-    margin-top: 10px;
-  }
+  background-image: linear-gradient(#ED82B6,#E45F96, #E45F96);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.card-title{
+  font-size: 30pt;
+  font-weight: 700;
+  margin-left: 10%;
+}
+
+td{
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 2%;
+}

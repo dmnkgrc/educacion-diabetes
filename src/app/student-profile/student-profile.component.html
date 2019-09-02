@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-12">
       <br>
       <div class="row">
@@ -92,19 +92,17 @@
                           <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="universidad">Universidad</label>
-                              <!-- <input type="text" class="form-control" value="{{user.experience[0].university}}"> -->
                             </div>
                             <div class="form-group col-md-6">
                               <label for="especialidad">Especialidad</label>
-                              <!-- <input type="text" class="form-control" value="{{user.experience[0].speciality}}"> -->
                             </div>
                           </div>
                                 <div class="form-row">
                                   <div class="form-group col-md-12">
                                     <label for="estudios">Estudios</label>
-                                    <!-- <p>
+                                    <p>
                                         {{user.experience[0].description}}
-                                    </p> -->
+                                    </p>
                                   </div>
                                 </div>
                         </form>
@@ -113,4 +111,128 @@
           </div>
       </div>
   </div>
+</div> -->
+
+<div>
+   <br>
+    <div class="row">
+      <div class="col-md-7 md-offset-1">
+        <div class="card">
+            <div>
+                <img src="https://via.placeholder.com/100" class="rounded-circle">
+                <span class="card-title">{{user?.first_name}} {{user?.last_name}}</span>
+            </div>
+            <hr>
+            <div>
+                <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>Nombre</b>
+                        </td>
+                        <td>
+                          {{user?.first_name}} {{user?.last_name}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Correo electrónico</b>
+                        </td>
+                        <td>
+                          {{user?.email}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Teléfono</b>
+                        </td>
+                        <td>
+                          {{user?.telephone}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Inscripción</b>
+                        </td>
+                        <td>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                            <b>Última conexión</b>
+                          </td>
+                          <td>
+
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <hr>
+            <div>
+              <h5>Cursos</h5>
+              <p *ngFor="let course of user.courses">
+                {{course.name}}
+              </p>
+            </div>
+            <hr>
+            <div>
+              <h5>Actividad reciente</h5>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 md-offset-1">
+          <div class="card">
+            <h3>Calificaciones</h3>
+            <hr>
+          </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" *ngIf="currentUser$ | async as currentUser">
+      <div class="col-md-7 md-offset-1" *ngIf="currentUser.admin">
+          <div class="card">
+
+          </div>
+      </div>
+
+      <div class="col-md-11 md-offset-1" *ngIf="!currentUser.admin && currentUser.id === user.id">
+          <div class="card">
+            <h5>Editar perfil</h5>
+            <div>
+              <span>Nombre</span>
+              <input type="text" class="form-control" [(ngModel)]="this.user.first_name">
+            </div>
+            <div>
+              <span>Apellido</span>
+              <input type="text" class="form-control" [(ngModel)]="this.user.last_name">
+            </div>
+            <div>
+              <span>Correo</span>
+              <input type="text" class="form-control" [(ngModel)]="this.user.email">
+            </div>
+            <div>
+              <span>Teléfono</span>
+              <input type="number"class="form-control" [(ngModel)]="this.user.telephone">
+            </div>
+            <br>
+            <br>
+            <button type="button" class="btn btn-info" *ngIf="currentUser.id === user.id" (click)="updateUser()">Guardar usuario</button>
+          </div>
+      </div>
+
+      <div class="col-md-3 md-offset-1" *ngIf="currentUser.admin">
+          <div>
+              <div>
+                  <button type="button" class="btn btn-info" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="sendMessage()">Enviar correo</button>
+              </div>
+              <br><br>
+              <div>
+                  <button type="button" class="btn btn-danger" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="deleteUser()">Eliminar usuario</button>
+              </div>
+          </div>
+      </div>
+    </div>
 </div>

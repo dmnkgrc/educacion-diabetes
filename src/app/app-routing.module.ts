@@ -82,6 +82,11 @@ const routes: Routes = [
         canActivate: [AuthGuard, AdminGuard],
       },
       {
+        path: 'student-profile/:id',
+        component: StudentProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: '',
         component: AdminHomeComponent,
         canActivateChild: [AuthGuard, AdminGuard],

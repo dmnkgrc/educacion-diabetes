@@ -10,7 +10,6 @@ import { SessionService } from './session.service';
 
 export class UserService {
     rootURL: string = config.rootURL;
-    userEndpoint: string = config.apiEndPoints.users;
     signupEndpoint: string = config.apiEndPoints.signup;
     studentsEndpoint: string = config.apiEndPoints.students;
     getUserEndpoint: string = config.apiEndPoints.getUser;
@@ -61,6 +60,19 @@ export class UserService {
       );
     }
 
+    public getUserCourses(userId: any): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      return this.http.get(this.rootURL + `/users/${userId}/courses`, {headers}).pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+    }
+
     public deleteUserById(userId: any): Observable<any> {
       const headers: HttpHeaders = new HttpHeaders({
         Accept: 'application/json',
@@ -72,5 +84,13 @@ export class UserService {
         }),
         catchError(error => of(error))
       );
+    }
+
+    public updateUser(user: any): Observable<any> {
+      const headers: HttpHeaders = new HttpHeaders({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      return this.http.put(this.rootURL + this.getUserEndpoint + `${user.user_id}`, user, { headers });
     }
 }
