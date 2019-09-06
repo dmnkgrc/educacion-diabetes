@@ -52,6 +52,7 @@ export class StudentProfileComponent implements OnInit {
         const user = jwtDecode(token);
         // tslint:disable-next-line: no-shadowed-variable
         this.currentUser$.subscribe(
+            // tslint:disable-next-line: no-shadowed-variable
             (user: User) => {
               this.user = user;
               this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
