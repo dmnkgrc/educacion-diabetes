@@ -17,7 +17,7 @@
                   <div class="col-md-8 course-name">
                     <p>{{ course.name }}</p>
                   </div>
-                  <div class="col-md-4 course-actions"><button class="btn-pink dialogo-btn" [routerLink]="['/inicio/cursos', course.id, 0]">Iniciar</button></div>
+                  <div class="col-md-4 course-actions"><button class="btn-pink dialogo-btn" [routerLink]="['/inicio/cursos', course.id, getNext(course)]">Iniciar</button></div>
                   <!-- <div class="col-md-4">
                           <div class="progress" style="margin-top: 10%;">
                             <div

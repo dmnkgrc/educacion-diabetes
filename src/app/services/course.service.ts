@@ -48,6 +48,18 @@ export class CourseService {
       );
   }
 
+  public getCourseProgress(id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http.get(
+      `${this.rootURL}${this.apiEnpoints.courses}${id}/progress`,
+      { headers }
+    );
+  }
+
   public getCourseById(courseId: number): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',
