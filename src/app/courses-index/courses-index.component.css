@@ -1,0 +1,10 @@
+.progress-bar {
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #101010;
+  font-weight: 700;
+}
+
+.progress {
+  height: 1.5rem;
+}

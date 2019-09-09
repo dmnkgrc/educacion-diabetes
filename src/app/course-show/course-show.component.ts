@@ -1,10 +1,17 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { mergeMap, switchMap, map, tap } from 'rxjs/operators';
+import { mergeMap, switchMap, map, tap, takeLast } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as Survey from 'survey-angular';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-course-show',
@@ -24,7 +31,8 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private userService: UserService
   ) {}
 
   @HostListener('window:message', ['$event'])
@@ -44,6 +52,35 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       const player = document.getElementById('player') as HTMLAudioElement;
       this.currentSlide = newSlide;
       player.load();
+      document.querySelector('iframe').contentWindow.postMessage(
+        JSON.stringify({
+          method: 'isLastSlide',
+        }),
+        '*'
+      );
+    } else if (
+      data.eventName === 'callback' &&
+      data.method === 'isLastSlide' &&
+      data.result
+    ) {
+      this.route.params
+        .pipe(
+          switchMap(({ element_index }) =>
+            this.route.parent.params.pipe(
+              mergeMap(({ id }) =>
+                this.courseService
+                  .getCourseById(id)
+                  .pipe(map(course => course.elements[element_index]))
+              )
+            )
+          ),
+          (takeLast(1),
+          switchMap(element => {
+            console.log(element);
+            return this.userService.completeLesson('presentation', element.id);
+          }))
+        )
+        .subscribe(res => {});
     }
     return;
   }
@@ -105,6 +142,23 @@ export class CourseShowComponent implements OnInit, OnDestroy {
 
     survey.onComplete.add(result => {
       console.log(result);
+      this.route.params
+        .pipe(
+          switchMap(({ element_index }) =>
+            this.route.parent.params.pipe(
+              mergeMap(({ id }) =>
+                this.courseService
+                  .getCourseById(id)
+                  .pipe(map(course => course.elements[element_index]))
+              )
+            )
+          ),
+          (takeLast(1),
+          switchMap(element => {
+            return this.userService.completeLesson('activity', element.id);
+          }))
+        )
+        .subscribe(res => {});
     });
 
     setTimeout(() => {
