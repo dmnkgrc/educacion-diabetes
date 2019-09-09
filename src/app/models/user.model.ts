@@ -12,6 +12,7 @@ export class User {
     public professional_license: string;
     public exp: string;
     public admin: boolean;
+    public actions: any;
 
 
     constructor( data: any) {

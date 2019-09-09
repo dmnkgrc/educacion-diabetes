@@ -1,118 +1,3 @@
-<!-- <div class="row">
-  <div class="col-md-12">
-      <br>
-      <div class="row">
-          <div class="col-md-2 col-xs-12">
-              <div class="card" style="width: 18rem;">
-                  <div class="card-header">
-                      <img src="https://via.placeholder.com/200" class="rounded-circle">
-                  </div>
-                  <div class="card-body" style="text-align:center">
-                    <h5 class="card-title">{{user?.first_name}} {{user?.last_name}}</h5>
-                    <p class="card-text" style="text-align:center">
-                      <i class="fa fa-map-marker-alt"></i>
-                      {{user.city}}
-                    </p>
-                  </div>
-              </div>
-              <br>
-              <div *ngIf="currentUser$ | async as currentUser">
-                  <button type="button" class="btn btn-danger" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="deleteUser()">Eliminar usuario</button>
-              </div>
-          </div>
-
-          <div class="col-md-8 offset-md-2">
-              <div class="card" style="width: 40rem;">
-                  <div class="card-header">
-                      <h3> Datos de Autenticación</h3>
-                      <p>Es importante contar con estas medidas de seguridad.</p>
-                  </div>
-                  <div class="card-body" style="text-align:center">
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="username">Usuario</label>
-                        <p>{{user?.email}}</p>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <br>
-      <div class="row">
-          <div class="col-md-8 offset-md-4">
-              <div class="card" style="width: 40rem;">
-                  <div class="card-header">
-                      <h3> Información personal</h3>
-                      <p>Lo que nos quieras contar</p>
-                  </div>
-                  <div class="card-body" style="text-align:center">
-                      <form>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="nombre">Nombre</label>
-                              <input type="text" class="form-control" value="{{user?.first_name}}">
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="apellido">Apellido</label>
-                              <input type="text" class="form-control" value="{{user?.last_name}}">
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-4">
-                              <label for="nombre">Dia de nacimiento</label>
-                              <input type="text" class="form-control" value="{{user.birthdayDay}}">
-                            </div>
-                            <div class="form-group col-md-4">
-                              <label for="nombre">Mes</label>
-                              <input type="text" class="form-control" value="{{user.birthdayMonth}}">
-                            </div>
-                            <div class="form-group col-md-4">
-                              <label for="nombre">Año</label>
-                              <input type="text" class="form-control" value="{{user.birthdayYear}}">
-                            </div>
-                          </div>
-                        </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <br>
-      <div class="row">
-          <div class="col-md-8 offset-md-4">
-              <div class="card" style="width: 40rem;">
-                  <div class="card-header">
-                      <h3> Acerca de ti</h3>
-                      <p>Cuentanos tu experiencia</p>
-                  </div>
-                  <div class="card-body" style="text-align:center">
-                      <form>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="universidad">Universidad</label>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="especialidad">Especialidad</label>
-                            </div>
-                          </div>
-                                <div class="form-row">
-                                  <div class="form-group col-md-12">
-                                    <label for="estudios">Estudios</label>
-                                    <p>
-                                        {{user.experience[0].description}}
-                                    </p>
-                                  </div>
-                                </div>
-                        </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div> -->
-
 <div>
    <br>
     <div class="row">
@@ -173,12 +58,18 @@
             <div>
               <h5>Cursos</h5>
               <p *ngFor="let course of user.courses">
-                {{course.name}}
+                {{ course.name }}
               </p>
             </div>
             <hr>
             <div>
               <h5>Actividad reciente</h5>
+              <ul>
+                <li *ngFor="let action of user.actions">
+                  {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
+                  {{ action?.content }}
+                </li>
+              </ul>
             </div>
         </div>
       </div>
@@ -203,19 +94,19 @@
             <h5>Editar perfil</h5>
             <div>
               <span>Nombre</span>
-              <input type="text" class="form-control" [(ngModel)]="this.user.first_name">
+              <input type="text" class="form-control" [(ngModel)]="user.first_name">
             </div>
             <div>
               <span>Apellido</span>
-              <input type="text" class="form-control" [(ngModel)]="this.user.last_name">
+              <input type="text" class="form-control" [(ngModel)]="user.last_name">
             </div>
             <div>
               <span>Correo</span>
-              <input type="text" class="form-control" [(ngModel)]="this.user.email">
+              <input type="text" class="form-control" [(ngModel)]="user.email">
             </div>
             <div>
               <span>Teléfono</span>
-              <input type="number"class="form-control" [(ngModel)]="this.user.telephone">
+              <input type="number"class="form-control" [(ngModel)]="user.telephone">
             </div>
             <br>
             <br>

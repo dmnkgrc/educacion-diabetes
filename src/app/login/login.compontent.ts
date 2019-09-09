@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
         phone: tokenInfo.phone,
         cellphone: tokenInfo.cellphone,
         professional_license: tokenInfo.professional_license,
-        exp: tokenInfo.exp
+        exp: tokenInfo.exp,
+        actions: tokenInfo.actions
       });
       this.store.dispatch(new SetCurrentUser(currentUser));
       localStorage.setItem('token', result.token);

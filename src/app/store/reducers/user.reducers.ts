@@ -17,13 +17,14 @@ export function userReducers(
     case EUserActions.SetCurrentUser:
       return {
         ...state,
-        currentUser: action.payload,
+        currentUser: {
+          ...action.payload,
+          actions: JSON.parse(action.payload.actions)
+        },
         lastFetch: moment().format()
       };
     case EUserActions.GetUsersSuccess:
-      console.log('USER SUCCESS');
       let byId = state.byId;
-      console.log('ACTION PAYLOAD', action.payload);
       action.payload.forEach((e: any) => byId = {...byId, [e.id]: e });
       return{
         ...state,
