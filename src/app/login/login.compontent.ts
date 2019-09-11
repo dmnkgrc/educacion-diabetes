@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { SetCurrentUser } from '../store/actions/user.actions';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
+import { tokenReference } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
     this.sessionService.authenticate(this.loginForm.controls['email'].value,
     this.loginForm.controls['password'].value).subscribe(result => {
       const tokenInfo = this.getDecodedAccessToken(result.token);
+      console.log('info', tokenInfo);
       const currentUser: User = new User({
         user_id: tokenInfo.user_id,
         first_name: tokenInfo.first_name,

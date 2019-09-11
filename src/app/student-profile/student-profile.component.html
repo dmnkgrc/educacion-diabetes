@@ -54,8 +54,8 @@
                     </tbody>
                   </table>
             </div>
-            <hr>
-            <div>
+            <hr *ngIf="user.courses">
+            <div *ngIf="user.courses">
               <h5>Cursos</h5>
               <p *ngFor="let course of user.courses">
                 {{ course.name }}

@@ -44,7 +44,9 @@ export class StudentProfileComponent implements OnInit {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
           this.userService.getUserCourses(this.user.id).subscribe((courses: any) => {
-            this.user.courses = courses;
+            if (!courses.error) {
+              this.user.courses = courses;
+            }
           });
         });
       } else {
@@ -56,7 +58,9 @@ export class StudentProfileComponent implements OnInit {
             (user: User) => {
               this.user = user;
               this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
-                this.user.courses = courses;
+                if (!courses.error) {
+                  this.user.courses = courses;
+                }
               });
             }
           );
