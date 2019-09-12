@@ -77,6 +77,22 @@ export class UserService {
       );
   }
 
+  public getUserActions(userId: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .get(this.rootURL + `/users/${userId}/actions`, { headers })
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
   public deleteUserById(userId: any): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',

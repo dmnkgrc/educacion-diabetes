@@ -19,7 +19,7 @@ export function userReducers(
         ...state,
         currentUser: {
           ...action.payload,
-          actions: action.payload.actions
+          actions: JSON.parse(action.payload.actions)
         },
         lastFetch: moment().format()
       };
