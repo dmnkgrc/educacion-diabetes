@@ -3,6 +3,8 @@ $blue: #113F67
 .wrapper
   padding-top: 60px
   height: 100vh
+  max-height: 100vh
+  overflow: hidden
 
 .btn-pink
   background-image: linear-gradient(#ED82B6, #E45F96, #E45F96)
@@ -35,6 +37,7 @@ $blue: #113F67
   min-width: 250px
   max-width: 250px
   transition: all 0.5s
+  max-height: calc(100vh - 60px)
   .sidebar-header
     padding: 20px
     background: #6d7fcc

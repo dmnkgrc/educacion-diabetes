@@ -30,8 +30,6 @@ export class NotAdminGuard implements CanActivate, CanActivateChild {
       this.router.navigate(['/admin']);
     }
 
-    console.log(!!token, !user.admin);
-
     return !!token && !user.admin;
   }
 
