@@ -5,8 +5,9 @@
     *ngIf="{ course: course$ | async, currentIndex: currentIndex$ | async } as values"
   >
   <div class="course" *ngIf="values.course">
+        <h1 class="d-md-none course-name">{{values.course?.name}}</h1>
         <div class="row" style="height: 100%;">
-          <div class="col-3 course-info">
+          <div class="col-4 col-lg-3 course-info d-none d-md-flex">
             <h4>{{ values.course?.name }}</h4>
             <div>
               <ul>
@@ -34,7 +35,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-9 course-element">
+          <div class="col-12 col-md-8 col-lg-9 course-element">
             <router-outlet></router-outlet>
           </div>
       </div>

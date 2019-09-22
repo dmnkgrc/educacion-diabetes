@@ -147,7 +147,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   }
 
   public getUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}&style=hidden`);
   }
 
   public selectPresentation(presentation: any) {
