@@ -4,8 +4,10 @@ import {
   HostListener,
   OnDestroy,
   ViewChild,
+  OnChanges,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { mergeMap, switchMap, map, tap, takeLast } from 'rxjs/operators';
@@ -25,12 +27,14 @@ import { CommentService } from '../services/comment.service';
 export class CourseShowComponent implements OnInit, OnDestroy {
   select = 'first';
   course: any;
-  presentationIndex: any;
+  presentationIndex: number;
   selectedCourse: any;
   frameUrl: SafeResourceUrl = null;
   times: any = null;
   currentSlide: any;
   collapsedSideBar = true;
+  isLastLesson = false;
+  finished = false;
   element$: Observable<any>;
   presentationId: any;
   userId: number;
@@ -38,12 +42,16 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   comments: any;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private courseService: CourseService,
     private sanitizer: DomSanitizer,
     private userService: UserService,
     private store: Store<AppState>,
-    private commentService: CommentService
-  ) {}
+    private commentService: CommentService,
+    private changeDetector: ChangeDetectorRef
+  ) {
+    this.finished = false;
+  }
 
   @HostListener('window:message', ['$event'])
   onMessage(e) {
@@ -55,6 +63,9 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     }
     const data = JSON.parse(e.data);
     if (data.eventName === 'slidechanged' || data.eventName === 'ready') {
+      if (data.eventName === 'ready') {
+        this.finished = false;
+      }
       let newSlide = data.state.indexh + 1;
       if (data.state.indexv > 0) {
         newSlide = `${newSlide}.${data.state.indexv}`;
@@ -73,7 +84,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       data.method === 'isLastSlide' &&
       data.result
     ) {
-      this.route.params
+      const lastSlide$ = this.route.params
         .pipe(
           switchMap(({ element_index }) =>
             this.route.parent.params.pipe(
@@ -86,27 +97,43 @@ export class CourseShowComponent implements OnInit, OnDestroy {
           ),
           (takeLast(1),
           switchMap(element => {
-            console.log(element);
+            console.log('this one was called then');
+            this.finished = true;
             return this.userService.completeLesson('presentation', element.id);
           }))
         )
-        .subscribe(res => {});
+        .subscribe(res => {
+          lastSlide$.unsubscribe();
+        });
     }
     return;
   }
 
   ngOnInit() {
+    this.finished = false;
+
     this.element$ = this.route.params.pipe(
       switchMap(({ element_index }) =>
         this.route.parent.params.pipe(
           mergeMap(({ id }) =>
-            this.courseService
-              .getCourseById(id)
-              .pipe(map(course => course.elements[element_index]))
+            this.courseService.getCourseById(id).pipe(
+              tap(course => {
+                this.course = course;
+                this.presentationIndex = Number(element_index);
+                this.finished = false;
+                this.isLastLesson = false;
+                if (course.elements.length - 1 === Number(element_index)) {
+                  this.isLastLesson = true;
+                }
+              }),
+              map(course => course.elements[element_index])
+            )
           )
         )
       ),
       tap(element => {
+        this.finished = false;
+        this.changeDetector.markForCheck();
         if (element.frame) {
           return this.selectPresentation(element);
         }
@@ -115,8 +142,22 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     );
   }
 
+  public goToNextLesson() {
+    this.finished = false;
+    this.changeDetector.markForCheck();
+    if (this.isLastLesson) {
+      this.router.navigate(['/inicio/cursos']);
+      return;
+    }
+    this.router.navigate([
+      '/inicio/cursos',
+      this.course.id,
+      this.presentationIndex + 1,
+    ]);
+  }
+
   public getUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}&style=hidden`);
   }
 
   public selectPresentation(presentation: any) {
@@ -126,6 +167,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       this.userId = user.user_id;
     });
     this.frameUrl = this.getUrl(presentation.frame);
+    this.finished = false;
     let audioSync = presentation.audio_sync;
     if (audioSync) {
       audioSync = `{${audioSync}}`;
@@ -147,6 +189,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   }
 
   public selectActivity(activity: any) {
+    this.finished = false;
     Survey.Survey.cssType = 'bootstrap';
     const surveyQuestions = activity.questions.map((question, index) => {
       return {
@@ -168,8 +211,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     };
     const survey = new Survey.Model(json);
     survey.onComplete.add(result => {
-      console.log(result);
-      this.route.params
+      const surveyCompletion$ = this.route.params
         .pipe(
           switchMap(({ element_index }) =>
             this.route.parent.params.pipe(
@@ -185,10 +227,13 @@ export class CourseShowComponent implements OnInit, OnDestroy {
             const correct = result.getCorrectedAnswerCount();
             const questionCount = result.getAllQuestions().length;
             const grade = correct / questionCount * 10;
+            this.finished = true;
             return this.userService.completeLesson('activity', element.id, grade);
           }))
         )
-        .subscribe(res => {});
+        .subscribe(res => {
+          surveyCompletion$.unsubscribe();
+        });
     });
 
     setTimeout(() => {
@@ -196,7 +241,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  // tslint:disable-next-line:align
   changeSelect(select): void {
     this.select = select;
   }
@@ -208,5 +252,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.frameUrl = null;
     this.element$ = null;
+    this.finished = false;
   }
 }

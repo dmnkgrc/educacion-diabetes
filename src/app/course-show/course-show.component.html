@@ -1,4 +1,13 @@
 <div class="row">
+  <div *ngIf="finished" class="col-12">
+    <button
+      class="btn btn-primary"
+      style="float: right; margin-top: 20px; margin-bottom: 20px;"
+      (click)="goToNextLesson()"
+    >
+      {{ isLastLesson ? 'Finalizar lección' : 'Ir al siguiente tema' }}
+    </button>
+  </div>
   <div *ngIf="element$ | async as element" class="col-12">
     <div *ngIf="element.frame; else showActivity" class="element-container">
       <div

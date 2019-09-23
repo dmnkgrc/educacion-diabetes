@@ -28,6 +28,7 @@ export class StudentHomeComponent {
   constructor(private courseService: CourseService) {
     this.courses$ = courseService.getAllCourses().pipe(
       tap(res => {
+        console.log(res);
         res.forEach(course => {
           this.courseService.getCourseProgress(course.id).subscribe(result => {
             this.progress[course.id] = result.progress;
@@ -41,7 +42,11 @@ export class StudentHomeComponent {
     if (!this.progress[course.id]) {
       return 0;
     }
-    return (course.elements.length * this.progress[course.id]) / 100;
+    const newIndex = (course.elements.length * this.progress[course.id]) / 100;
+    if (newIndex >= course.elements.length) {
+      return 0;
+    }
+    return newIndex;
   }
 
   toggleSideBar() {
