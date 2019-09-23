@@ -10,5 +10,6 @@ export const config: any = {
     presentations: '/presentations/',
     activities: '/activities/',
     messages: '/messages/',
+    comments: '/comments/'
   },
 };

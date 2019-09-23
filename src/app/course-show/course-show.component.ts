@@ -12,6 +12,10 @@ import { mergeMap, switchMap, map, tap, takeLast } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as Survey from 'survey-angular';
 import { UserService } from '../services/user.service';
+import { AppState } from '../store/state/app.state';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser } from '../store/selectors/user.selectors';
+import { CommentService } from '../services/comment.service';
 
 @Component({
   selector: 'app-course-show',
@@ -28,11 +32,17 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   currentSlide: any;
   collapsedSideBar = true;
   element$: Observable<any>;
+  presentationId: any;
+  userId: number;
+  content: any;
+  comments: any;
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private sanitizer: DomSanitizer,
-    private userService: UserService
+    private userService: UserService,
+    private store: Store<AppState>,
+    private commentService: CommentService
   ) {}
 
   @HostListener('window:message', ['$event'])
@@ -110,12 +120,30 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   }
 
   public selectPresentation(presentation: any) {
+    this.presentationId = presentation.id;
+    this.getComments();
+    this.store.select(selectCurrentUser).subscribe(user => {
+      this.userId = user.user_id;
+    });
     this.frameUrl = this.getUrl(presentation.frame);
     let audioSync = presentation.audio_sync;
     if (audioSync) {
       audioSync = `{${audioSync}}`;
       this.times = JSON.parse(audioSync);
     }
+  }
+
+  public createComment() {
+    const data = {
+      content: this.content,
+      user: this.userId,
+      presentation: this.presentationId
+    };
+    this.commentService.createComment(data).subscribe();
+  }
+
+  public getComments() {
+    this.courseService.getPresentationComments(this.presentationId).subscribe(res => { this.comments = res; });
   }
 
   public selectActivity(activity: any) {
@@ -139,7 +167,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       completeText: 'Calificar',
     };
     const survey = new Survey.Model(json);
-
     survey.onComplete.add(result => {
       console.log(result);
       this.route.params
@@ -155,7 +182,10 @@ export class CourseShowComponent implements OnInit, OnDestroy {
           ),
           (takeLast(1),
           switchMap(element => {
-            return this.userService.completeLesson('activity', element.id);
+            const correct = result.getCorrectedAnswerCount();
+            const questionCount = result.getAllQuestions().length;
+            const grade = correct / questionCount * 10;
+            return this.userService.completeLesson('activity', element.id, grade);
           }))
         )
         .subscribe(res => {});

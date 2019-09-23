@@ -122,15 +122,21 @@ export class UserService {
     );
   }
 
-  public completeLesson(type: 'presentation' | 'activity', id: number) {
+  public completeLesson(type: 'presentation' | 'activity', id: number, grade= null) {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('token'),
     });
+    let data = null;
+    if (type === 'activity') {
+      data = {
+        grade
+      };
+    }
     return this.http.post(
       this.rootURL + this.getUserEndpoint + `view/${type}/${id}`,
-      null,
+      data,
       { headers }
     );
   }
