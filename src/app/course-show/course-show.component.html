@@ -52,12 +52,12 @@
         </div>
         <div>
             <div>
-              <div class="card" *ngFor="let comment of comments">
+              <div class="card" *ngFor="let comment of comments" style="margin-bottom: 5%">
                 <div class="card-body">
-                  <h5 class="card-title">User</h5>
+                  <h5 class="card-title">{{comment?.user.first_name}} {{comment?.user.last_name}}</h5>
                   <span class="card-text pull-left">{{comment.content}}</span>
                 </div>
-                <br>
+                <div style="position:absolute; right: 10px; bottom: 0;">{{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</div>
               </div>
             </div>
         </div>

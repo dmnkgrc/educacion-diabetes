@@ -54,10 +54,10 @@
                     </tbody>
                   </table>
             </div>
-            <hr *ngIf="user.courses">
-            <div *ngIf="user.courses">
+            <hr *ngIf="courses">
+            <div *ngIf="courses">
               <h5>Cursos</h5>
-              <p *ngFor="let course of user.courses">
+              <p *ngFor="let course of courses">
                 {{ course.name }}
               </p>
             </div>
@@ -65,7 +65,7 @@
             <div>
               <h5>Actividad reciente</h5>
               <ul>
-                <li *ngFor="let action of user.actions">
+                <li *ngFor="let action of actions | slice:0:5">
                   {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
                   {{ action?.content }}
                 </li>
@@ -76,7 +76,10 @@
       <div class="col-md-4 md-offset-1">
           <div class="card">
             <h3>Calificaciones</h3>
-            <hr>
+            <div *ngFor="let grade of grades">
+              <b><span style="margin-left: 5%">{{grade.name}}</span>: </b>  <span>{{grade.grade | number:'1.1-2'}}</span>
+              <hr style="margin-bottom: 0;">
+            </div>
           </div>
       </div>
     </div>

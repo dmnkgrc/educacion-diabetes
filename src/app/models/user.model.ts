@@ -13,6 +13,7 @@ export class User {
     public exp: string;
     public admin: boolean;
     public actions: any;
+    public courses_grades: any;
 
 
     constructor( data: any) {

@@ -16,20 +16,12 @@ import { map, tap } from 'rxjs/operators';
 })
 export class StudentProfileComponent implements OnInit {
 
-  public user: any = {
-    name: 'Juan',
-    lastName: 'Osorio',
-    birthdayMonth: 'Marzo',
-    birthdayDay: '13',
-    birthdayYear: '1970',
-    username: 'JuanOso',
-    country: 'Mexico',
-    city: 'Guadalajara',
-    email: 'josorio@gmail.com',
-
-  };
+  public user: any;
   currentUser$: Observable<User>;
   collapsedSideBar = true;
+  courses: any;
+  actions: any;
+  grades: any;
   constructor(
     public store: Store<AppState>,
     public route: ActivatedRoute,
@@ -43,10 +35,16 @@ export class StudentProfileComponent implements OnInit {
       if (params.id) {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
-          this.userService.getUserCourses(this.user.id).subscribe((courses: any) => {
+          this.userService.getUserGrades(this.user.user_id).subscribe((res: any) => {
+            this.grades = res.courses_grades;
+          });
+          this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
             if (!courses.error) {
-              this.user.courses = courses;
+              this.courses = courses;
             }
+          });
+          this.userService.getUserActions(this.user.user_id).subscribe((actions) => {
+            this.actions = actions;
           });
         });
       } else {
@@ -57,30 +55,20 @@ export class StudentProfileComponent implements OnInit {
             // tslint:disable-next-line: no-shadowed-variable
             (user: User) => {
               this.user = user;
+              this.userService.getUserGrades(this.user.user_id).subscribe((res: any) => {
+                this.grades = res.courses_grades;
+              });
               this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
                 if (!courses.error) {
-                  this.user.courses = courses;
+                  this.courses = courses;
                 }
+              });
+              this.userService.getUserActions(this.user.user_id).subscribe((actions) => {
+                this.actions = actions;
               });
             }
           );
       }
-      this.user = {
-        ...this.user,
-        experience: [
-          {
-            university: 'UNAM - 1980 / 1987',
-            speciality: 'Endocrinología',
-            description: `Comencé la carrera en medicina en 1981 con la gran intención de curar el mundo de la diabetes,
-                        me especialicé en el estudio de la sangre para prevenir que esta horrible enfermedad se sigua
-                        propagando por el mundo, y por ahora quiero aprender lo más que pueda sobre esto.`,
-          }
-        ],
-        birthdayMonth: 'Marzo',
-        birthdayDay: '13',
-        birthdayYear: '1970',
-        username: 'JuanOso',
-      };
     });
   }
 
