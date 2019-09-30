@@ -6,6 +6,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserService } from '../services/user.service';
 import { map } from 'rxjs/operators';
 import * as Survey from 'survey-angular';
+import { CommentService } from '../services/comment.service';
+import { AppState } from '../store/state/app.state';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser } from '../store/selectors/user.selectors';
+import { BibliographyService } from '../services/bibliography.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -44,11 +49,21 @@ export class AdminCoursesComponent implements OnInit {
   public frameUrl: SafeResourceUrl;
   public students$: Observable<any>;
   collapsedSideBar = true;
+  content: any;
+  userId: any;
+  chosenOption = 'comments';
+  comments: any;
+  bibBody: any;
+  bibUrl: any;
+  references: any;
 
   constructor(
     private courseService: CourseService,
     private sanitizer: DomSanitizer,
-    private userService: UserService
+    private userService: UserService,
+    private commentService: CommentService,
+    private store: Store<AppState>,
+    private bibliographyService: BibliographyService
   ) {}
   @HostListener('window:message', ['$event'])
   onMessage(e) {
@@ -74,6 +89,7 @@ export class AdminCoursesComponent implements OnInit {
   ngOnInit() {
     this.courses$ = this.courseService.getAllCourses();
     this.students$ = this.userService.getAllStudents();
+    this.store.select(selectCurrentUser).subscribe((user) => this.userId = user.user_id);
   }
 
   public toggleCourse() {
@@ -93,6 +109,8 @@ export class AdminCoursesComponent implements OnInit {
       return;
     }
     this.selectedCourse = presentation;
+    this.getComments();
+    this.getReferences();
     this.frameUrl = this.getUrl(presentation.frame);
     let audioSync = presentation.audio_sync;
     if (audioSync) {
@@ -101,6 +119,43 @@ export class AdminCoursesComponent implements OnInit {
     }
     this.toggleCourse();
   }
+
+  public changeOption(option: string){
+    this.chosenOption = option;
+  }
+
+  public createComment() {
+    const data = {
+      content: this.content,
+      user: this.userId,
+      presentation: this.selectedCourse.id
+    };
+    this.commentService.createComment(data).subscribe((res) => {
+      this.comments.push(res);
+      this.content = '';
+    });
+  }
+
+  public getComments() {
+    this.courseService.getPresentationComments(this.selectedCourse.id).subscribe(res => { this.comments = res; });
+  }
+
+  public createReference() {
+    const data = {
+      body: this.bibBody,
+      url: this.bibUrl,
+      presentation: this.selectedCourse.id
+    };
+    this.bibliographyService.createBibliography(data).subscribe((res) => {
+      this.references.push(res);
+      this.content = '';
+    });
+  }
+
+  public getReferences() {
+    this.courseService.getPresentationBibliography(this.selectedCourse.id).subscribe(res => { this.references = res; });
+  }
+
 
   public selectActivity(activity: any, event: any) {
     if (typeof event.target.className !== 'string') {

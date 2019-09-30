@@ -18,6 +18,8 @@ import { AppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
 import { CommentService } from '../services/comment.service';
+import { BibliographyService } from '../services/bibliography.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-course-show',
@@ -40,6 +42,10 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   userId: number;
   content: any;
   comments: any;
+  chosenOption = 'comments';
+  bibBody: any;
+  bibUrl: any;
+  references: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,7 +54,8 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private store: Store<AppState>,
     private commentService: CommentService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private bibliographyService: BibliographyService
   ) {
     this.finished = false;
   }
@@ -156,6 +163,10 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     ]);
   }
 
+  public changeOption(option: string){
+    this.chosenOption = option;
+  }
+
   public getUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}&style=hidden`);
   }
@@ -163,6 +174,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   public selectPresentation(presentation: any) {
     this.presentationId = presentation.id;
     this.getComments();
+    this.getReferences();
     this.store.select(selectCurrentUser).subscribe(user => {
       this.userId = user.user_id;
     });
@@ -181,11 +193,31 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       user: this.userId,
       presentation: this.presentationId
     };
-    this.commentService.createComment(data).subscribe();
+    this.commentService.createComment(data).subscribe((res) => {
+      this.comments.push(res);
+      this.content = '';
+    });
   }
 
   public getComments() {
     this.courseService.getPresentationComments(this.presentationId).subscribe(res => { this.comments = res; });
+  }
+
+  public createReference() {
+
+    const data = {
+      body: this.bibBody,
+      url: this.bibUrl,
+      presentation: this.presentationId
+    };
+    this.bibliographyService.createBibliography(data).subscribe((res) => {
+      this.references.push(res);
+      this.content = '';
+    });
+  }
+
+  public getReferences() {
+    this.courseService.getPresentationBibliography(this.presentationId).subscribe(res => { this.references = res; });
   }
 
   public selectActivity(activity: any) {

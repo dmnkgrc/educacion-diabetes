@@ -48,6 +48,22 @@ export class CourseService {
       );
   }
 
+  public getPresentationBibliography(id): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .get(`${this.rootURL}/presentations/${id}/bibliographies`, { headers })
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
   public getAllCourses(): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',

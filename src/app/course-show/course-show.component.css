@@ -17,3 +17,7 @@
   max-height: calc(100vh - 60px);
   overflow: auto;
 }
+
+.bolder {
+  font-weight: bold;
+}

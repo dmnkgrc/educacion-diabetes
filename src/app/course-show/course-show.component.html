@@ -34,31 +34,53 @@
       </audio>
       <br>
       <div>
-        <h3>Comentarios</h3>
         <div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label>Nuevo comentario</label>
-              </div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <button class="btn btn-primary" (click)="createComment()">Crear comentario</button>
-              </div>
+          <div class="row">
+            <div class="col-md-4">
+                <span (click)="changeOption('comments')" [ngClass]="{'bolder': chosenOption === 'comments'}">Comentarios</span>
             </div>
-            <br>
-            <textarea class="form-control" rows="5" [disabled]="content === null ? true : false" [(ngModel)]="content">{{content}}</textarea>
+            <div class="col-md-4">
+                <span (click)="changeOption('bibliography')" [ngClass]="{'bolder': chosenOption === 'bibliography'}">Bibliografía</span>
+            </div>
           </div>
         </div>
-        <div>
-            <div>
-              <div class="card" *ngFor="let comment of comments" style="margin-bottom: 5%">
-                <div class="card-body">
-                  <h5 class="card-title">{{comment?.user.first_name}} {{comment?.user.last_name}}</h5>
-                  <span class="card-text pull-left">{{comment.content}}</span>
+        <hr>
+        <div *ngIf="chosenOption ==='comments'">
+          <div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Nuevo comentario</label>
                 </div>
-                <div style="position:absolute; right: 10px; bottom: 0;">{{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary" (click)="createComment()">Crear comentario</button>
+                </div>
               </div>
+              <br>
+              <textarea class="form-control" rows="5" [disabled]="content === null ? true : false" [(ngModel)]="content">{{content}}</textarea>
+            </div>
+          </div>
+          <div>
+              <div>
+                <div class="card" *ngFor="let comment of comments" style="margin-bottom: 5%">
+                  <div class="card-body">
+                    <h5 class="card-title">{{comment?.user.first_name}} {{comment?.user.last_name}}</h5>
+                    <span class="card-text pull-left">{{comment.content}}</span>
+                  </div>
+                  <div style="position:absolute; right: 10px; top: 20px;">{{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="chosenOption ==='bibliography'">
+            <div>
+              <h3>Bibliografía</h3>
+              <ul>
+                <li *ngFor="let ref of references">
+                  <span>{{ref.body}} {{ref.url}}</span>
+                </li>
+              </ul>
             </div>
         </div>
       </div>

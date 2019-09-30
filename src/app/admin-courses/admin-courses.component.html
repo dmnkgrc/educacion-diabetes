@@ -138,6 +138,80 @@
           </div>
         </div>
     </div>
+    <br>
+    <div *ngIf="showCourse">
+        <div>
+            <div class="row">
+              <div class="col-md-4">
+                  <span (click)="changeOption('comments')" [ngClass]="{'bolder': chosenOption === 'comments'}">Comentarios</span>
+              </div>
+              <div class="col-md-4">
+                  <span (click)="changeOption('bibliography')" [ngClass]="{'bolder': chosenOption === 'bibliography'}">Bibliografía</span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div *ngIf="chosenOption ==='comments'">
+            <div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>Nuevo comentario</label>
+                  </div>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <button class="btn btn-primary" (click)="createComment()">Crear comentario</button>
+                  </div>
+                </div>
+                <br>
+                <textarea class="form-control" rows="5" [disabled]="content === null ? true : false" [(ngModel)]="content">{{content}}</textarea>
+              </div>
+            </div>
+            <div>
+                <div>
+                  <div class="card" *ngFor="let comment of comments" style="margin-bottom: 5%">
+                    <div class="card-body">
+                      <h5 class="card-title">{{comment?.user?.first_name}} {{comment?.user?.last_name}}</h5>
+                      <span class="card-text pull-left">{{comment.content}}</span>
+                    </div>
+                    <div style="position:absolute; right: 10px; top: 20px;">{{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div *ngIf="chosenOption ==='bibliography'">
+              <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Nueva bibliografía</label>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <button class="btn btn-primary" (click)="createReference()">Crear bibliografía</button>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col">
+                        <label for="">Datos de referencia</label>
+                        <input class="form-control" type="text" [(ngModel)]="bibBody">
+                    </div>
+                    <div class="col">
+                        <label for="">Url</label>
+                        <input class="form-control" type="text" [(ngModel)]="bibUrl">
+                    </div>
+                  </div>
+                </div>
+              <div>
+                <h3>Bibliografía</h3>
+                <ul>
+                  <li *ngFor="let ref of references">
+                    <span>{{ref.body}} {{ref.url}}</span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+    </div>
 
     <div class="modal fade create-activity-modal" id="createActivityModal" tabindex="-1" role="dialog" aria-labelledby="createActivityModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
