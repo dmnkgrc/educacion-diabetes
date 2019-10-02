@@ -120,7 +120,7 @@ export class AdminCoursesComponent implements OnInit {
     this.toggleCourse();
   }
 
-  public changeOption(option: string){
+  public changeOption(option: string) {
     this.chosenOption = option;
   }
 

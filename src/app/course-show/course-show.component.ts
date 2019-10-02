@@ -163,7 +163,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  public changeOption(option: string){
+  public changeOption(option: string) {
     this.chosenOption = option;
   }
 
