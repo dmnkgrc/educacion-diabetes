@@ -34,26 +34,31 @@
                 <b>Teléfono</b>
               </div>
               <div class="col-md-8">
-                <p>{{ values.currentUser.phone }}</p>
+                <p>{{ values.currentUser.cellphone }}</p>
               </div>
               <div class="col-md-4">
                 <b>Inscripción</b>
               </div>
               <div class="col-md-8">
-                <p>20 Ene 2019</p>
+                <p>{{values.currentUser.created_at}}</p>
               </div>
               <div class="col-md-4">
                 <b>Ultima conexión</b>
               </div>
               <div class="col-md-8">
-                <p>25 Mayo 2019</p>
+                <p>{{values.currentUser.last_log_in_at}}</p>
               </div>
             </div>
             <hr />
             <p><i class="fas fa-sync"></i> Actividad Reciente</p>
             <hr />
-            <div *ngFor="let activity of lastActivities">
-              <p>{{ activity.time }} {{ activity.description }}</p>
+            <div>
+              <ul>
+                <li *ngFor="let action of actions | slice:0:5">
+                  {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
+                  {{ action?.content }}
+                </li>
+              </ul>
             </div>
           </div>
         </div>

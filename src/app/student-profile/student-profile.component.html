@@ -40,7 +40,7 @@
                           <b>Inscripción</b>
                         </td>
                         <td>
-
+                            {{user?.created_at | date: 'dd/MM/yyyy HH:mm'}}
                         </td>
                       </tr>
                       <tr>
@@ -48,7 +48,7 @@
                             <b>Última conexión</b>
                           </td>
                           <td>
-
+                              {{user?.last_log_in_at | date: 'dd/MM/yyyy HH:mm'}}
                           </td>
                       </tr>
                     </tbody>
@@ -113,18 +113,18 @@
             </div>
             <br>
             <br>
-            <button type="button" class="btn btn-info" *ngIf="currentUser.id === user.id" (click)="updateUser()">Guardar usuario</button>
+            <button type="button" class="btn btn-info" *ngIf="currentUser?.id === user?.id" (click)="updateUser()">Guardar usuario</button>
           </div>
       </div>
 
-      <div class="col-md-3 md-offset-1" *ngIf="currentUser.admin">
+      <div class="col-md-3 md-offset-1" *ngIf="currentUser?.admin">
           <div>
               <div>
-                  <button type="button" class="btn btn-info" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="sendMessage()">Enviar correo</button>
+                  <button type="button" class="btn btn-info" *ngIf="currentUser?.admin && currentUser?.id !== user?.id" (click)="sendMessage()">Enviar correo</button>
               </div>
               <br><br>
               <div>
-                  <button type="button" class="btn btn-danger" *ngIf="currentUser.admin && currentUser.id !== user.id" (click)="deleteUser()">Eliminar usuario</button>
+                  <button type="button" class="btn btn-danger" *ngIf="currentUser?.admin && currentUser?.id !== user?.id" (click)="deleteUser()">Eliminar usuario</button>
               </div>
           </div>
       </div>

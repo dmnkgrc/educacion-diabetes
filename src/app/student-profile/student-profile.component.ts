@@ -35,16 +35,12 @@ export class StudentProfileComponent implements OnInit {
       if (params.id) {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
-          this.userService.getUserGrades(this.user.user_id).subscribe((res: any) => {
-            this.grades = res.courses_grades;
-          });
+          this.grades = this.user.courses_grades;
+          this.actions = this.user.actions;
           this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
             if (!courses.error) {
               this.courses = courses;
             }
-          });
-          this.userService.getUserActions(this.user.user_id).subscribe((actions) => {
-            this.actions = actions;
           });
         });
       } else {

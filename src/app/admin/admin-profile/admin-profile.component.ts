@@ -6,6 +6,7 @@ import { selectCurrentUser } from '../../store/selectors/user.selectors';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import { tap } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -33,14 +34,22 @@ export class AdminProfileComponent implements OnInit {
     },
   ];
   currentUser$: Observable<User>;
+  actions: any;
   constructor(
-    public store: Store<AppState>
+    public store: Store<AppState>,
+    public userService: UserService
   ) { }
 
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    const user = jwtDecode(token);
     this.currentUser$ = this.store.select(selectCurrentUser);
+    this.currentUser$.subscribe(user => {
+      if (!user.user_id) {
+        return;
+      }
+      this.userService.getUserActions(user.user_id).subscribe(res => {
+        this.actions = res;
+      });
+    });
   }
 
   toggleSideBar() {

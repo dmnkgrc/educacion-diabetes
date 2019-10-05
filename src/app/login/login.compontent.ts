@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
         first_name: tokenInfo.first_name,
         last_name: tokenInfo.last_name,
         speciality: tokenInfo.speciality,
+        created_at: tokenInfo.created_at,
+        last_log_in_at: tokenInfo.last_log_in_at,
         city: tokenInfo.city,
         email: tokenInfo.email,
         address: tokenInfo.address,
