@@ -10,8 +10,15 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">
-              {{ values.currentUser.first_name }}
-              {{ values.currentUser.last_name }}
+              <div class="row">
+                <div class="col-md-2 initials">
+                  {{getInitials(values.currentUser)}}
+                </div>
+                <div class="col-md-9 md-offset-1">
+                  {{ values.currentUser.first_name }}
+                  {{ values.currentUser.last_name }}
+                </div>
+              </div>
             </h3>
             <hr />
             <div class="row">

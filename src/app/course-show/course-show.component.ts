@@ -20,6 +20,7 @@ import { selectCurrentUser } from '../store/selectors/user.selectors';
 import { CommentService } from '../services/comment.service';
 import { BibliographyService } from '../services/bibliography.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-course-show',
@@ -279,6 +280,12 @@ export class CourseShowComponent implements OnInit, OnDestroy {
 
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
+  }
+
+  getInitials(currentUser: User) {
+    let initials = '';
+    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    return initials;
   }
 
   ngOnDestroy() {

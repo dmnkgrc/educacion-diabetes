@@ -11,6 +11,7 @@ import { AppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
 import { BibliographyService } from '../services/bibliography.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-admin-courses',
@@ -134,6 +135,12 @@ export class AdminCoursesComponent implements OnInit {
       this.comments.push(res);
       this.content = '';
     });
+  }
+
+  getInitials(currentUser: User) {
+    let initials = '';
+    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    return initials;
   }
 
   public getComments() {

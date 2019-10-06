@@ -52,6 +52,13 @@ export class AdminProfileComponent implements OnInit {
     });
   }
 
+  getInitials(currentUser: User) {
+    if (!currentUser) { return ''; }
+    let initials = '';
+    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    return initials;
+  }
+
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
   }

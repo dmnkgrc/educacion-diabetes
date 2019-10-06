@@ -442,3 +442,25 @@ a.article:hover {
     opacity: 0.7;
   }
 }
+
+.initials {
+  padding: 0;
+  background-color: #3333;
+  text-align: center;
+  border-radius: 20px;
+  height: 32px;
+}
+
+.student-initials {
+  padding: 0;
+  background-color: #3333;
+  text-align: center;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-top: 12px;
+  height: 40px;
+  width: 20px !important;
+  h3 {
+    margin-top: 4px;
+  }
+}

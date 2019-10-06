@@ -68,6 +68,12 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+  getInitials(currentUser: User) {
+    let initials = '';
+    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    return initials;
+  }
+
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
