@@ -3,28 +3,12 @@
     <br />
     <br />
     <br />
+
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-9">
         <div class="card">
           <div class="card-body">
-            <i class="fas fa-chalkboard"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 md-offset-1">
-        <div class="card">
-          <div class="card-body">
-            <i
-              class="far fa-user"
-              style="margin-right: 10px; margin-left: 10px;"
-            ></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 md-offset-1">
-        <div class="card">
-          <div class="card-body">
-            <i class="far fa-clock"></i>
+            This is some text within a card body.
           </div>
         </div>
       </div>
@@ -40,17 +24,82 @@
     <br />
     <br />
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-4 md-offset-1" style="overflow-y: scroll; height:400px;">
         <div class="card">
-          <div class="card-body">
-            This is some text within a card body.
+            <div *ngIf="courses$ | async as courses" class="card-body">
+                <h5>Cursos</h5>
+                <div *ngFor="let course of courses">
+                  <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <b><span>{{course.name}}</span></b>
+                      </div>
+                      <div class="row">
+                        <span> <i class="fas fa-eye"></i>{{course.viewed_lessons_count}} Comentarios: {{course.comments_count}}</span>
+                      </div>
+                      <div class="row">
+
+                      </div>
+                      <div class="row">
+                        <span>Creado el: {{course.created_at | date: 'dd/MM/yyyy'}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="col-md-5 md-offset-1" style="overflow-y: scroll; height:400px;">
+        <div class="card">
+          <div *ngIf="comments$ | async as comments" class="card-body">
+            <h5>Comentarios</h5>
+            <div *ngFor="let comment of comments" style="border-bottom: 1px solid gray;">
+              <div class="row">
+                <div class="col-md-2 student-initials">
+                    <h3>{{getInitials(comment?.user)}}</h3>
+                </div>
+                <div class="col-md-5">
+                  <b><span>{{comment?.user.first_name}} {{comment?.user.last_name}}</span></b>
+                </div>
+                <div class="col-md-4">
+                  <span>{{comment?.created_at | date: 'dd/MM/yyyy'}}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  {{comment?.content}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-3 md-offset-1">
-        <div class="card">
-          <div class="card-body">
-            This is some text within a card body.
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-body">
+                    <h5>Correo</h5>
+                    <br>
+                    <button><i class="fas fa-edit"></i>Escribir</button>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-body">
+                      <i class="fas fa-user"></i> <h5>Perfil</h5>
+                  </div>
+                </div>
           </div>
         </div>
       </div>

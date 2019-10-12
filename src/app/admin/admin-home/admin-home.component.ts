@@ -1,28 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from 'src/app/services/course.service';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.css']
 })
-export class AdminHomeComponent {
+export class AdminHomeComponent implements OnInit {
   collapsedSideBar = true;
-  course = {
-    title: 'Introducción a la diabetes',
-    lessons: [
-      {
-        description: '1. ¿Qué es la diabetes?',
-        progress: 79
-      },
-      {
-        description: '2. Recomendaciones ada',
-        progress: 0
-      }
-    ]
-  };
-  constructor() { }
+  courses$: any;
+  comments$: any;
+  constructor(
+    private courseService: CourseService,
+    private commentsService: CommentService
+  ) { }
+
+  ngOnInit() {
+    this.courses$ = this.courseService.getLastCourses();
+    this.comments$ = this.commentsService.getLastComments();
+  }
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
 
+  getInitials(currentUser: any) {
+    let initials = '';
+    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    return initials;
+  }
 }
