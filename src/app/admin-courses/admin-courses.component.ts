@@ -12,6 +12,8 @@ import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
 import { BibliographyService } from '../services/bibliography.service';
 import { User } from '../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-admin-courses',
@@ -64,7 +66,8 @@ export class AdminCoursesComponent implements OnInit {
     private userService: UserService,
     private commentService: CommentService,
     private store: Store<AppState>,
-    private bibliographyService: BibliographyService
+    private bibliographyService: BibliographyService,
+    public route: ActivatedRoute
   ) {}
   @HostListener('window:message', ['$event'])
   onMessage(e) {
@@ -89,6 +92,14 @@ export class AdminCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.courses$ = this.courseService.getAllCourses();
+    this.courses$.subscribe(courses => {
+      this.route.params.subscribe(params => {
+        if (params.id) {
+          const course = courses.find(c => Number(c.id) === Number(params.id));
+          this.editCourse(null, course, true);
+        }
+      });
+    });
     this.students$ = this.userService.getAllStudents();
     this.store.select(selectCurrentUser).subscribe((user) => this.userId = user.user_id);
   }
@@ -322,12 +333,18 @@ export class AdminCoursesComponent implements OnInit {
     this.activityId = activity.id;
   }
 
-  public editCourse(event: any, course: any) {
+  public editCourse(event: any, course: any, popModal= false) {
     this.name = course.name;
     this.description = course.description;
     this.editCourseMode = true;
     this.courseId = course.id;
     this.usersId = course.users.map(user => user.id);
+    if (popModal) {
+      setTimeout(() => {
+        const search = 'edit-courses-' + this.courseId;
+        document.getElementById(search).click();
+      }, 1000);
+    }
   }
 
   public deletePresentation(event: any, id: number) {

@@ -28,12 +28,9 @@
         <div class="card">
             <div *ngIf="courses$ | async as courses" class="card-body">
                 <h5>Cursos</h5>
-                <div *ngFor="let course of courses">
+                <div *ngFor="let course of courses" style="border-bottom: 1px solid gray;">
                   <div class="row">
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                       <div class="row">
                         <b><span>{{course.name}}</span></b>
                       </div>
@@ -41,7 +38,9 @@
                         <span> <i class="fas fa-eye"></i>{{course.viewed_lessons_count}} Comentarios: {{course.comments_count}}</span>
                       </div>
                       <div class="row">
-
+                        <button class="btn btn-lg btn-pink" style="color: white" (click)="navigateToCourse(course)">
+                          Editar curso
+                        </button>
                       </div>
                       <div class="row">
                         <span>Creado el: {{course.created_at | date: 'dd/MM/yyyy'}}</span>
@@ -78,14 +77,14 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
         <div class="row">
           <div class="col-md-12">
               <div class="card">
                   <div class="card-body">
                     <h5>Correo</h5>
                     <br>
-                    <button><i class="fas fa-edit"></i>Escribir</button>
+                    <button (click)="navigateToMessages()" class="btn btn-light"><i class="fas fa-edit"></i>Escribir</button>
                   </div>
                 </div>
           </div>
@@ -97,7 +96,9 @@
           <div class="col-md-12">
               <div class="card">
                   <div class="card-body">
-                      <i class="fas fa-user"></i> <h5>Perfil</h5>
+                    <button class="btn btn-light" (click)="navigateToProfile()">
+                        <i class="fas fa-user"></i> <h5>Perfil</h5>
+                    </button>
                   </div>
                 </div>
           </div>

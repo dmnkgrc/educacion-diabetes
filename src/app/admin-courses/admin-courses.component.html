@@ -15,7 +15,7 @@
                           <h2>
                             {{course.name}}
                             <i-feather name="trash-2" class="trash-icon" (click)="deleteCourse($event, course.id)"></i-feather>
-                            <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createCourseModal" (click)="editCourse($event, course)"></i-feather>
+                            <i-feather id="edit-courses-{{course.id}}" name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createCourseModal" (click)="editCourse($event, course)"></i-feather>
                           </h2>
                       </div>
                       <div class="presentations">
