@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
+import { resolve } from 'path';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,6 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   submitted = false;
   success = false;
   token: string;
+  errors: string[];
   resetPasswordForm: FormGroup;
   constructor(
     public userService: UserService,
@@ -35,6 +37,8 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword() {
     this.submitted = true;
+    this.errors = null;
+    this.success = false;
     if (this.resetPasswordForm.invalid) {
       return;
     }
@@ -44,8 +48,17 @@ export class ResetPasswordComponent implements OnInit {
         this.resetPasswordForm.controls.confirm.value,
         this.token
       )
-      .subscribe(result => {
-        this.success = true;
-      });
+      .subscribe(
+        result => {
+          this.success = true;
+        },
+        ({ error }) => {
+          if (error.error) {
+            this.errors = ['Este token ya ha sido usado'];
+            return;
+          }
+          this.errors = error.errors;
+        }
+      );
   }
 }
