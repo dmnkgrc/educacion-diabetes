@@ -35,6 +35,8 @@ import { CreateMessageComponent } from './create-message/create-message.componen
 import { AdminAppComponent } from './admin-app/admin-app.component';
 import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -77,6 +79,8 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     AdminAppComponent,
     AdminLinkComponent,
     PrivacyComponent,
+    RecoverPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

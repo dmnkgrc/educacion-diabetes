@@ -9,6 +9,7 @@ import { SessionService } from './session.service';
 export class UserService {
   rootURL: string = config.rootURL;
   signupEndpoint: string = config.apiEndPoints.signup;
+  authEndpoint: string = config.apiEndPoints.auth;
   studentsEndpoint: string = config.apiEndPoints.students;
   getUserEndpoint: string = config.apiEndPoints.getUser;
   constructor(public http: HttpClient, public sessionService: SessionService) {}
@@ -68,7 +69,9 @@ export class UserService {
       Authorization: localStorage.getItem('token'),
     });
     return this.http
-      .get(this.rootURL + this.getUserEndpoint + userId + '/grades', { headers })
+      .get(this.rootURL + this.getUserEndpoint + userId + '/grades', {
+        headers,
+      })
       .pipe(
         tap((res: any) => {
           console.log(res);
@@ -138,7 +141,11 @@ export class UserService {
     );
   }
 
-  public completeLesson(type: 'presentation' | 'activity', id: number, grade= null) {
+  public completeLesson(
+    type: 'presentation' | 'activity',
+    id: number,
+    grade = null
+  ) {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -147,12 +154,38 @@ export class UserService {
     let data = null;
     if (type === 'activity') {
       data = {
-        grade
+        grade,
       };
     }
     return this.http.post(
       this.rootURL + this.getUserEndpoint + `view/${type}/${id}`,
       data,
+      { headers }
+    );
+  }
+
+  public recoverPassword(email: string) {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    return this.http
+      .post(
+        `${this.rootURL}${this.authEndpoint}recover`,
+        { email },
+        { headers }
+      )
+      .pipe(catchError(error => of(error)));
+  }
+
+  public resetPassword(password: string, passwordConfirmation: string, token: string) {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    return this.http.put(
+      `${this.rootURL}${this.authEndpoint}recover/${token}`,
+      { password, password_confirmation: passwordConfirmation },
       { headers }
     );
   }
