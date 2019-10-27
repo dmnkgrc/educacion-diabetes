@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../services/session.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as jwt_decode from 'jwt-decode';
-import { User } from '../models/user.model';
 import { Store } from '@ngrx/store';
+import * as jwt_decode from 'jwt-decode';
+
 import { AppState } from '../store/state/app.state';
+import { GoogleAnalyticsService } from '../google-analytics.service';
+import { SessionService } from '../services/session.service';
 import { SetCurrentUser } from '../store/actions/user.actions';
-import { selectCurrentUser } from '../store/selectors/user.selectors';
-import { tokenReference } from '@angular/compiler';
+import { User } from '../models/user.model';
+
+declare let ga: any;
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent implements OnInit {
     public sessionService: SessionService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public googleAnalyticsService: GoogleAnalyticsService
   ) { }
 
   ngOnInit() {
@@ -69,8 +72,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/admin');
         return;
       }
+      this.SendLoginEvent(currentUser.user_id, currentUser.email);
       this.router.navigateByUrl('/');
     });
+  }
+
+  SendLoginEvent(id: number, email: string) {
+    this.googleAnalyticsService.setUserId(id);
+    this.googleAnalyticsService.eventEmitter('loginPage', 'login', 'loginAction', email);
   }
 
   getDecodedAccessToken(token: string): any {

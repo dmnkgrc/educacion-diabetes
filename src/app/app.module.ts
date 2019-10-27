@@ -37,6 +37,8 @@ import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {GoogleAnalyticsService} from './google-analytics.service';
+
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -92,10 +94,10 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     IconsModule,
-    StoreModule.forRoot(appReducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
-  ],
-  providers: [UserService, SessionService, HttpClient],
-  bootstrap: [AppComponent],
-})
+      StoreModule.forRoot(appReducers, { metaReducers }),
+      StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    ],
+    providers: [UserService, SessionService, HttpClient, GoogleAnalyticsService],
+    bootstrap: [AppComponent],
+  })
 export class AppModule {}

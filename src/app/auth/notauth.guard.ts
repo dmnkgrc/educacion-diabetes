@@ -1,12 +1,19 @@
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  CanActivate,
+  Router
+} from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+
+import { GoogleAnalyticsService } from '../google-analytics.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotauthGuard implements CanActivate {
-  constructor(private router: Router) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
 
   }
 
@@ -17,6 +24,7 @@ export class NotauthGuard implements CanActivate {
     if (token) {
       const user = this.getDecodedAccessToken(token);
       if (!user.admin) {
+        this.googleAnalyticsService.setUserId(user.user_id);
         this.router.navigate(['/inicio']);
         return true;
       }
