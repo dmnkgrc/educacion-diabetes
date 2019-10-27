@@ -1,0 +1,9 @@
+{
+  "login": "username",
+  "permissions": [
+    "Create roles",
+    "Read roles",
+    "Update roles",
+    "Delete roles"
+  ]
+}
