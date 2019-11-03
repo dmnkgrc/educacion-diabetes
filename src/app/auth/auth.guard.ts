@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (res) {
       const user = this.getDecodedAccessToken(token);
       this.googleAnalyticsService.setUserId(user.user_id);
-
     }
     return res;
   }

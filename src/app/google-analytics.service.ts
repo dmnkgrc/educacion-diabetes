@@ -22,5 +22,6 @@ export class GoogleAnalyticsService {
 
   public setUserId(id: number)  {
     ga('set', 'userId', id.toString());
+    ga('send', 'pageview');
   }
 }
