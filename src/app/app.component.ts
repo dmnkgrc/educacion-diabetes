@@ -19,13 +19,21 @@ export class AppComponent {
   ) {
     // subscribe to router events and send page views to Google Analytics
     this.router.events.subscribe(event => {
-
       if (event instanceof NavigationEnd) {
-        ga('set', 'page', event.urlAfterRedirects);
-        ga('send', 'pageview');
+        this.sendPageView(event.urlAfterRedirects);
 
       }
-
     });
+  }
+
+  sendPageView(url: string) {
+    if (window.ga) {
+      ga('set', 'page', url);
+      ga('send', 'pageview');
+      return;
+    }
+    setTimeout(() => {
+      this.sendPageView(url);
+    }, 500);
   }
 }

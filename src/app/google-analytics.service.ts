@@ -22,8 +22,16 @@ export class GoogleAnalyticsService {
   }
 
   public setUserId(id: number)  {
-    gtag('set', {user_id: id.toString()});
-    ga('set', 'userId', id.toString());
-    ga('send', 'pageview');
+    console.log(id);
+    if (window.ga) {
+      gtag('set', {user_id: id.toString()});
+      ga('set', 'userId', id.toString());
+      ga('send', 'pageview');
+      return;
+    }
+    setTimeout(() => {
+      this.setUserId(id);
+    }, 500);
   }
+
 }
