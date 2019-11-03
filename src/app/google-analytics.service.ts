@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 declare let ga: any;
-declare let gtag: any;
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,6 @@ export class GoogleAnalyticsService {
   public setUserId(id: number)  {
     console.log(id);
     if (window.ga) {
-      gtag('set', {user_id: id.toString()});
       ga('set', 'userId', id.toString());
       ga('send', 'pageview');
       return;
