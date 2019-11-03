@@ -6,6 +6,10 @@ import { AppState } from './store/state/app.state';
 // declare ga as a function to set and sent the events
 declare let ga: any;
 
+declare global {
+    interface Window { ga: any; }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
