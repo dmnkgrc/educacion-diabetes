@@ -54,14 +54,12 @@ export class CourseService {
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('token'),
     });
-    return this.http
-      .get(`${this.rootURL}/last_courses`, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+    return this.http.get(`${this.rootURL}/last_courses`, { headers }).pipe(
+      tap((res: any) => {
+        console.log(res);
+      }),
+      catchError(error => of(error))
+    );
   }
 
   public getPresentationBibliography(id): Observable<any> {
@@ -133,7 +131,8 @@ export class CourseService {
     const course = {
       name: data.name,
       description: data.description,
-      users: data.users,
+      users: data.users || [],
+      clusters: data.clusters || [],
     };
     return this.http
       .post(
@@ -160,7 +159,8 @@ export class CourseService {
     const course = {
       name: data.name,
       description: data.description,
-      users: data.users,
+      users: data.users || [],
+      clusters: data.clusters || [],
     };
     return this.http
       .put(

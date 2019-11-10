@@ -39,6 +39,7 @@ export class AdminCoursesComponent implements OnInit {
   public selectedCourse: any;
   public coursesId: number;
   public usersId: number[];
+  public clustersId: number[];
   public questions: any[] = [
     {
       title: '',
@@ -48,6 +49,7 @@ export class AdminCoursesComponent implements OnInit {
   ];
   public times: any;
   public courses$: Observable<any>;
+  public clusters$: Observable<any>;
   public currentSlide: any = 1;
   public frameUrl: SafeResourceUrl;
   public students$: Observable<any>;
@@ -101,7 +103,10 @@ export class AdminCoursesComponent implements OnInit {
       });
     });
     this.students$ = this.userService.getAllStudents();
-    this.store.select(selectCurrentUser).subscribe((user) => this.userId = user.user_id);
+    this.clusters$ = this.userService.getAllClusters();
+    this.store
+      .select(selectCurrentUser)
+      .subscribe(user => (this.userId = user.user_id));
   }
 
   public toggleCourse() {
@@ -140,9 +145,9 @@ export class AdminCoursesComponent implements OnInit {
     const data = {
       content: this.content,
       user: this.userId,
-      presentation: this.selectedCourse.id
+      presentation: this.selectedCourse.id,
     };
-    this.commentService.createComment(data).subscribe((res) => {
+    this.commentService.createComment(data).subscribe(res => {
       this.comments.push(res);
       this.content = '';
     });
@@ -155,25 +160,32 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public getComments() {
-    this.courseService.getPresentationComments(this.selectedCourse.id).subscribe(res => { this.comments = res; });
+    this.courseService
+      .getPresentationComments(this.selectedCourse.id)
+      .subscribe(res => {
+        this.comments = res;
+      });
   }
 
   public createReference() {
     const data = {
       body: this.bibBody,
       url: this.bibUrl,
-      presentation: this.selectedCourse.id
+      presentation: this.selectedCourse.id,
     };
-    this.bibliographyService.createBibliography(data).subscribe((res) => {
+    this.bibliographyService.createBibliography(data).subscribe(res => {
       this.references.push(res);
       this.content = '';
     });
   }
 
   public getReferences() {
-    this.courseService.getPresentationBibliography(this.selectedCourse.id).subscribe(res => { this.references = res; });
+    this.courseService
+      .getPresentationBibliography(this.selectedCourse.id)
+      .subscribe(res => {
+        this.references = res;
+      });
   }
-
 
   public selectActivity(activity: any, event: any) {
     if (typeof event.target.className !== 'string') {
@@ -297,6 +309,7 @@ export class AdminCoursesComponent implements OnInit {
         name: this.name,
         description: this.description,
         users: this.usersId || [],
+        clusters: this.clustersId || [],
       };
       if (this.editCourseMode) {
         this.editCourseMode = false;
@@ -333,12 +346,13 @@ export class AdminCoursesComponent implements OnInit {
     this.activityId = activity.id;
   }
 
-  public editCourse(event: any, course: any, popModal= false) {
+  public editCourse(event: any, course: any, popModal = false) {
     this.name = course.name;
     this.description = course.description;
     this.editCourseMode = true;
     this.courseId = course.id;
     this.usersId = course.users.map(user => user.id);
+    this.clustersId = course.clusters.map(cluster => cluster.id);
     if (popModal) {
       setTimeout(() => {
         const search = 'edit-courses-' + this.courseId;

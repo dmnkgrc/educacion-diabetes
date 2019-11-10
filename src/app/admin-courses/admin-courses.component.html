@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12 content-container" style="padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async} as values">
+  <div class="col-md-12 content-container" style="padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async, clusters: clusters$ | async} as values">
       <div class="row" *ngIf="!showCourse && !showActivity" style="padding: 0 10px; height: 100%;">
         <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
           <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
@@ -124,10 +124,21 @@
                   bindValue="id"
                   [closeOnSelect]="false"
                   [multiple]="true"
-                  [searchable]="false"
+                  [searchable]="true"
                   bindLabel="first_name"
                   placeholder="Seleccionar alumnos"
                   [(ngModel)]="usersId"
+                  style="margin-bottom: 20px">
+                </ng-select>
+                <ng-select
+                  [items]="values.clusters"
+                  bindValue="id"
+                  [closeOnSelect]="false"
+                  [multiple]="true"
+                  [searchable]="true"
+                  bindLabel="name"
+                  placeholder="Seleccionar clusters"
+                  [(ngModel)]="clustersId"
                   style="margin-bottom: 20px">
                 </ng-select>
             </div>
