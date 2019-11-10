@@ -5,6 +5,7 @@ export const config: any = {
     auth: '/auth/',
     signup: '/sign-up',
     students: '/users/students',
+    clusters: '/clusters',
     getUser: '/users/',
     courses: '/courses/',
     presentations: '/presentations/',

@@ -1,0 +1,101 @@
+<div *ngIf="{students: students$ | async, clusters: clusters$ | async} as values">
+  <div class="row">
+    <div class="col-md-10 content-container" style="padding: 40px 40px;">
+      <div class="row">
+        <div class="col-12 col-md-9">
+          <h1>Clusters</h1>
+        </div>
+        <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;">
+          <button
+            class="col-12 create-button"
+            data-toggle="modal"
+            data-target="#createClusterModal"
+          >
+            Crear Cluster
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cluster of values.clusters">
+                <th scope="row">{{ cluster.name }}</th>
+                <td style="text-align: right;">
+                  <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createClusterModal" (click)="editCluster($event, cluster)"></i-feather>
+                  <i-feather name="trash-2" class="trash-icon" (click)="deleteCluster($event, cluster.id)"></i-feather>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade create-cluster-modal"
+    id="createClusterModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="createClusterModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createClusterModalLabel">Crear Cluster</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="name"
+            placeholder="Nombre del cluster (requerido)"
+            style="margin-bottom: 20px;"
+          />
+          <ng-select
+            [items]="values.students"
+            bindValue="id"
+            [closeOnSelect]="false"
+            [multiple]="true"
+            [searchable]="true"
+            bindLabel="first_name"
+            placeholder="Seleccionar miembros"
+            [(ngModel)]="usersId"
+            style="margin-bottom: 20px"
+          >
+          </ng-select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="createCluster()"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

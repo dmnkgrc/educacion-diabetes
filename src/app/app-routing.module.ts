@@ -25,6 +25,7 @@ import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
       {
         path: 'alumnos',
         component: AdminStudentsComponent,
+        canActivateChild: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'clusters',
+        component: AdminClustersComponent,
         canActivateChild: [AuthGuard, AdminGuard],
       },
       {

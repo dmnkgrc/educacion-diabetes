@@ -23,6 +23,7 @@ import { appReducers } from './store/reducers/app.reducers';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
+import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 import { EscapeHtmlPipe } from './escape-html.pipe';
@@ -37,8 +38,7 @@ import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import {GoogleAnalyticsService} from './google-analytics.service';
-
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -62,6 +62,7 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     AppComponent,
     HomeComponent,
     AdminLoginComponent,
+    AdminClustersComponent,
     AdminStudentsComponent,
     AdminHomeComponent,
     AdminProfileComponent,
@@ -94,10 +95,10 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     IconsModule,
-      StoreModule.forRoot(appReducers, { metaReducers }),
-      StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    ],
-    providers: [UserService, SessionService, HttpClient, GoogleAnalyticsService],
-    bootstrap: [AppComponent],
-  })
+    StoreModule.forRoot(appReducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+  ],
+  providers: [UserService, SessionService, HttpClient, GoogleAnalyticsService],
+  bootstrap: [AppComponent],
+})
 export class AppModule {}

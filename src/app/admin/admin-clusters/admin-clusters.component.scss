@@ -1,0 +1,38 @@
+.create-button {
+  background: #1288ca;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 0px;
+  box-shadow: none;
+  border: none;
+  border-radius: 10px;
+  margin: 0px 0px;
+  outline: none;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.edit-icon,
+.trash-icon {
+  margin: 0 10px;
+  width: 20px;
+  height: 20px;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.edit-icon {
+  color: #1c86ee;
+}
+
+.trash-icon {
+  color: #ff2800;
+}

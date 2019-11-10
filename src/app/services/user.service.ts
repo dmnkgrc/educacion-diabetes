@@ -11,6 +11,7 @@ export class UserService {
   signupEndpoint: string = config.apiEndPoints.signup;
   authEndpoint: string = config.apiEndPoints.auth;
   studentsEndpoint: string = config.apiEndPoints.students;
+  clustersEndpoint: string = config.apiEndPoints.clusters;
   getUserEndpoint: string = config.apiEndPoints.getUser;
   constructor(public http: HttpClient, public sessionService: SessionService) {}
 
@@ -28,6 +29,17 @@ export class UserService {
         }),
         catchError(error => of(error))
       );
+  }
+
+  public getAllClusters(): Observable<any[]> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .get(this.rootURL + this.clustersEndpoint, { headers })
+      .pipe(catchError(error => of(error)));
   }
 
   public getAllStudents(): Observable<any> {
@@ -178,7 +190,11 @@ export class UserService {
       .pipe(catchError(error => of(error)));
   }
 
-  public resetPassword(password: string, passwordConfirmation: string, token: string) {
+  public resetPassword(
+    password: string,
+    passwordConfirmation: string,
+    token: string
+  ) {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -188,5 +204,75 @@ export class UserService {
       { password, password_confirmation: passwordConfirmation },
       { headers }
     );
+  }
+
+  public createCluster(data: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const cluster = {
+      name: data.name,
+      users: data.users,
+    };
+    return this.http
+      .post(
+        `${this.rootURL}${this.clustersEndpoint}`,
+        {
+          cluster,
+        },
+        { headers }
+      )
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
+  public editCluster(data: any, id: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    const cluster = {
+      name: data.name,
+      users: data.users,
+    };
+    return this.http
+      .put(
+        `${this.rootURL}${this.clustersEndpoint}/${id}`,
+        {
+          cluster,
+        },
+        { headers }
+      )
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
+
+  public deleteCluster(clusterId: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    });
+    return this.http
+      .delete(`${this.rootURL}${this.clustersEndpoint}/${clusterId}`, {
+        headers,
+      })
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+        }),
+        catchError(error => of(error))
+      );
   }
 }
