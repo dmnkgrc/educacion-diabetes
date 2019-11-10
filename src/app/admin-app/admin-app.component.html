@@ -29,6 +29,13 @@
       <li
         class="nav-item"
         routerLinkActive="active"
+        [routerLink]="['/admin/clusters']"
+      >
+        <i class="fa fa-users"></i> <span>Clusters</span>
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
         [routerLink]="['/admin/cursos']"
       >
         <i class="fa fa-chalkboard"></i> <span>Cursos</span>
@@ -62,52 +69,57 @@
     </ul>
   </nav>
   <nav id="bottombar">
-      <ul class="list-unstyled components">
-          <li
-            class="nav-item"
-            routerLinkActive="active"
-            [routerLink]="['/admin/perfil']"
-          >
-            <i class="far fa-user"></i>
-          </li>
-          <li
-            class="nav-item"
-            routerLinkActive="active"
-            [routerLink]="['/admin/alumnos']"
-          >
-            <i class="fa fa-apple-alt"></i>
-          </li>
-          <li
-            class="nav-item"
-            routerLinkActive="active"
-            [routerLink]="['/admin/cursos']"
-          >
-            <i class="fa fa-chalkboard"></i>
-          </li>
-          <li
-            class="nav-item"
-            routerLinkActive="active"
-            [routerLink]="['/admin/mensajes']"
-          >
-            <i class="far fa-envelope"></i>
-          </li>
-          <li
-            class="nav-item"
-            routerLinkActive="active"
-            [routerLink]="['/admin/configuracion']"
-          >
-            <i class="fa fa-cog"></i>
-          </li>
-          <li class="nav-item logout" (click)="logout()">
-            <i class="fa fa-sign-out-alt"></i>
-          </li>
-        </ul>
+    <ul class="list-unstyled components">
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLink]="['/admin/perfil']"
+      >
+        <i class="far fa-user"></i>
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLink]="['/admin/alumnos']"
+      >
+        <i class="fa fa-apple-alt"></i>
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLink]="['/admin/cursos']"
+      >
+        <i class="fa fa-chalkboard"></i>
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLink]="['/admin/mensajes']"
+      >
+        <i class="far fa-envelope"></i>
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLink]="['/admin/configuracion']"
+      >
+        <i class="fa fa-cog"></i>
+      </li>
+      <li class="nav-item logout" (click)="logout()">
+        <i class="fa fa-sign-out-alt"></i>
+      </li>
+    </ul>
   </nav>
 
   <div class="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="sidebar-header">
-        <img src="../../assets/diabetes.png" class="logo-nav-black" alt="" [routerLink]="['/inicio']" />
+        <img
+          src="../../assets/diabetes.png"
+          class="logo-nav-black"
+          alt=""
+          [routerLink]="['/inicio']"
+        />
       </div>
     </nav>
     <router-outlet></router-outlet>
