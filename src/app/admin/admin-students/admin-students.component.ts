@@ -10,16 +10,13 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-admin-students',
   templateUrl: './admin-students.component.html',
-  styleUrls: ['./admin-students.component.css']
+  styleUrls: ['./admin-students.component.css'],
 })
 export class AdminStudentsComponent implements OnInit {
   collapsedSideBar = true;
   public students: any[];
   currentUser$: Observable<User>;
-  constructor(
-    public store: Store<AppState>,
-    public userService: UserService
-  ) { }
+  constructor(public store: Store<AppState>, public userService: UserService) {}
 
   ngOnInit() {
     this.userService.getAllStudents().subscribe(res => {
@@ -29,5 +26,9 @@ export class AdminStudentsComponent implements OnInit {
 
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;
+  }
+
+  getClusters(student: any): string {
+    return student.clusters.map(c => c.name).join(', ');
   }
 }
