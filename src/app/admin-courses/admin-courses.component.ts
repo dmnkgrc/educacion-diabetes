@@ -351,7 +351,7 @@ export class AdminCoursesComponent implements OnInit {
     this.description = course.description;
     this.editCourseMode = true;
     this.courseId = course.id;
-    this.usersId = course.users.map(user => user.id);
+    this.usersId = course.all_users.map(user => user.id);
     this.clustersId = course.clusters.map(cluster => cluster.id);
     if (popModal) {
       setTimeout(() => {
