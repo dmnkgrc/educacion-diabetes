@@ -263,7 +263,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="checkbox text-muted" style="text-align: left">
                       <label>
                         <input
@@ -271,8 +271,7 @@
                           [(ngModel)]="acceptance"
                           [ngModelOptions]="{ standalone: true }"
                         />
-                        He leído y acepto los términos y condiciones de
-                        privacidad
+                        He leído y acepto el <a routerLink="/privacidad" style="text-decoration: underline;">Aviso de Privacidad</a>, la <a routerLink="/legal" style="text-decoration: underline;">Declaración Legal</a> y la <a routerLink="/cookies" style="text-decoration: underline;">Política sobre cookies</a>
                       </label>
                     </div>
                   </div>

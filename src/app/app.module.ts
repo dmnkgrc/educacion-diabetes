@@ -39,6 +39,9 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { GoogleAnalyticsService } from './google-analytics.service';
+import { LegalComponent } from './legal/legal.component';
+import { CookiesComponent } from './cookies/cookies.component';
+import { FooterComponent } from './footer/footer.component';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -84,6 +87,9 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     PrivacyComponent,
     RecoverPasswordComponent,
     ResetPasswordComponent,
+    LegalComponent,
+    CookiesComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

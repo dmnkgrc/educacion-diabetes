@@ -26,6 +26,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
+import { LegalComponent } from './legal/legal.component';
+import { CookiesComponent } from './cookies/cookies.component';
 
 const routes: Routes = [
   {
@@ -52,6 +54,14 @@ const routes: Routes = [
   {
     path: 'privacidad',
     component: PrivacyComponent,
+  },
+  {
+    path: 'legal',
+    component: LegalComponent,
+  },
+  {
+    path: 'cookies',
+    component: CookiesComponent,
   },
   {
     path: 'signup',

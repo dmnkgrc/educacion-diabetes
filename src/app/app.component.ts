@@ -1,31 +1,30 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {Router, NavigationEnd} from '@angular/router'; // import Router and NavigationEnd
+import { Router, NavigationEnd } from '@angular/router'; // import Router and NavigationEnd
 import { AppState } from './store/state/app.state';
 
 // declare ga as a function to set and sent the events
 declare let ga: any;
 
 declare global {
-    interface Window { ga: any; }
+  interface Window {
+    ga: any;
+  }
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'educamed';
-  constructor(
-    private store: Store<AppState>,
-    public router: Router
-  ) {
+  constructor(private store: Store<AppState>, public router: Router) {
     // subscribe to router events and send page views to Google Analytics
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.sendPageView(event.urlAfterRedirects);
-
+        window.scrollTo(0, 0);
       }
     });
   }
