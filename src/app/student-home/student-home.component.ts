@@ -42,7 +42,7 @@ export class StudentHomeComponent {
     if (!this.progress[course.id]) {
       return 0;
     }
-    const newIndex = (course.elements.length * this.progress[course.id]) / 100;
+    const newIndex = Math.round((course.elements.length * this.progress[course.id]) / 100);
     if (newIndex >= course.elements.length) {
       return 0;
     }
