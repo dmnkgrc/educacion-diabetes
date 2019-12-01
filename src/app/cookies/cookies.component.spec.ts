@@ -8,9 +8,8 @@ describe('CookiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CookiesComponent ]
-    })
-    .compileComponents();
+      declarations: [CookiesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -12,10 +12,9 @@ import { map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-student-profile',
   templateUrl: './student-profile.component.html',
-  styleUrls: ['./student-profile.component.css']
+  styleUrls: ['./student-profile.component.css'],
 })
 export class StudentProfileComponent implements OnInit {
-
   public user: any;
   currentUser$: Observable<User>;
   collapsedSideBar = true;
@@ -27,7 +26,7 @@ export class StudentProfileComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -37,33 +36,41 @@ export class StudentProfileComponent implements OnInit {
           this.user = user;
           this.grades = this.user.courses_grades;
           this.actions = this.user.actions;
-          this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
-            if (!courses.error) {
-              this.courses = courses;
-            }
-          });
+          this.userService
+            .getUserCourses(this.user.user_id)
+            .subscribe((courses: any) => {
+              if (!courses.error) {
+                this.courses = courses;
+              }
+            });
         });
       } else {
         const token = localStorage.getItem('token');
         const user = jwtDecode(token);
         // tslint:disable-next-line: no-shadowed-variable
         this.currentUser$.subscribe(
-            // tslint:disable-next-line: no-shadowed-variable
-            (user: User) => {
-              this.user = user;
-              this.userService.getUserGrades(this.user.user_id).subscribe((res: any) => {
+          // tslint:disable-next-line: no-shadowed-variable
+          (user: User) => {
+            this.user = user;
+            this.userService
+              .getUserGrades(this.user.user_id)
+              .subscribe((res: any) => {
                 this.grades = res.courses_grades;
               });
-              this.userService.getUserCourses(this.user.user_id).subscribe((courses: any) => {
+            this.userService
+              .getUserCourses(this.user.user_id)
+              .subscribe((courses: any) => {
                 if (!courses.error) {
                   this.courses = courses;
                 }
               });
-              this.userService.getUserActions(this.user.user_id).subscribe((actions) => {
+            this.userService
+              .getUserActions(this.user.user_id)
+              .subscribe(actions => {
                 this.actions = actions;
               });
-            }
-          );
+          }
+        );
       }
     });
   }
@@ -83,8 +90,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   deleteUser() {
-    this.userService.deleteUserById(this.user.id)
-    .subscribe(() => {
+    this.userService.deleteUserById(this.user.id).subscribe(() => {
       this.router.navigateByUrl('/admin/alumnos');
     });
   }

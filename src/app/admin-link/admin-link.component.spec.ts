@@ -8,9 +8,8 @@ describe('AdminLinkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminLinkComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminLinkComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

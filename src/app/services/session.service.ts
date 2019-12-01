@@ -5,53 +5,69 @@ import { tap, catchError } from 'rxjs/operators';
 import { config } from '../config';
 
 @Injectable({ providedIn: 'root' })
-
-
 export class SessionService {
-    rootURL: string = config.rootURL;
-    authEndpoint: string = config.apiEndPoints.auth;
-    token: string;
-    currentUser: any;
-    constructor(
-        public http: HttpClient,
-      ) {}
+  rootURL: string = config.rootURL;
+  authEndpoint: string = config.apiEndPoints.auth;
+  authInsulinEndpoint: string = config.apiEndPoints.authInsulin;
+  token: string;
+  currentUser: any;
+  constructor(public http: HttpClient) {}
 
+  public authenticate(email: string, password: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    const body: any = {
+      email,
+      password,
+    };
+    return this.http
+      .post(this.rootURL + this.authEndpoint, body, { headers })
+      .pipe(
+        tap((res: any) => {
+          this.setToken(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
 
-    public authenticate(email: string, password: string): Observable<any> {
-        const headers: HttpHeaders = new HttpHeaders({
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        });
-        const body: any = {
-          email,
-          password
-        };
-        return this.http.post(this.rootURL + this.authEndpoint, body, { headers })
-          .pipe(
-            tap((res: any) => {
-              this.setToken(res);
-            }),
-            catchError(error => of(error))
-          );
-    }
+  public authenticateInsulin(email: string, password: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    const body: any = {
+      email,
+      password,
+    };
+    return this.http
+      .post(this.rootURL + this.authInsulinEndpoint, body, { headers })
+      .pipe(
+        tap((res: any) => {
+          this.setToken(res);
+        }),
+        catchError(error => of(error))
+      );
+  }
 
-    public setToken(token) {
-      this.token = token;
-    }
+  public setToken(token: string) {
+    this.token = token;
+  }
 
-    public getToken() {
-      return this.token;
-    }
+  public getToken() {
+    return this.token;
+  }
 
-    public deleteToken() {
-      this.token = null;
-    }
+  public deleteToken() {
+    this.token = null;
+  }
 
-    public setCurrentUser(user) {
-         this.currentUser = user;
-     }
+  public setCurrentUser(user) {
+    this.currentUser = user;
+  }
 
-    public getCurrentUser() {
-         return this.currentUser;
-     }
+  public getCurrentUser() {
+    return this.currentUser;
+  }
 }

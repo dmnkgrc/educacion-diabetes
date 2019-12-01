@@ -5,7 +5,7 @@ import { NotAdminGuard } from './not-admin.guard';
 describe('NotAdminGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotAdminGuard]
+      providers: [NotAdminGuard],
     });
   });
 

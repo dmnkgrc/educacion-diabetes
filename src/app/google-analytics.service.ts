@@ -3,24 +3,27 @@ import { Injectable } from '@angular/core';
 declare let ga: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GoogleAnalyticsService {
-
-  constructor() { }
+  constructor() {}
 
   // create our event emitter to send our data to Google Analytics
-  public eventEmitter(eventCategory: string, eventAction: string, eventLabel: string = null, eventValue: number | string = null) {
+  public eventEmitter(
+    eventCategory: string,
+    eventAction: string,
+    eventLabel: string = null,
+    eventValue: number | string = null
+  ) {
     ga('send', 'event', {
       eventCategory,
       eventLabel,
       eventAction,
-      eventValue
+      eventValue,
     });
-
   }
 
-  public setUserId(id: number)  {
+  public setUserId(id: number) {
     console.log(id);
     if (window.ga) {
       ga('set', 'userId', id.toString());
@@ -31,5 +34,4 @@ export class GoogleAnalyticsService {
       this.setUserId(id);
     }, 500);
   }
-
 }

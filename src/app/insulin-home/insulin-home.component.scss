@@ -1,0 +1,80 @@
+.locked-img {
+  margin-top: 30px;
+}
+
+.locked-icon {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 20%;
+  margin-left: 35%;
+}
+
+.course-card {
+  height: 200px;
+  width: 858px;
+  border: 1px solid #c8c8c8;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.courses-card {
+  .card-title {
+    color: #b4b4b4;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.7rem;
+  }
+  .course-name,
+  .course-actions {
+    display: flex;
+    align-items: center;
+    p {
+      margin-bottom: 0;
+    }
+    button {
+      margin-top: 0;
+    }
+  }
+}
+
+.card-text {
+  color: #113f67;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.tag {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #ffffff;
+  width: 100%;
+  max-width: 1000px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.main-title {
+  font-family: 'Monserrat';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 80px;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  .banner {
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

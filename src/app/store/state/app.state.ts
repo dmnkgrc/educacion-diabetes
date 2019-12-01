@@ -5,7 +5,7 @@ export interface AppState {
 }
 
 export const initialAppState: AppState = {
-  users: initialUserState
+  users: initialUserState,
 };
 
 export function getInitialState(): AppState {

@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+  <a class="navbar-brand" href="#">
+    <img src="../../assets/diabetesblanco.png" class="logo-nav" alt="" />
+  </a>
+</nav>
+<section class="img-section">
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 col-xs-12 no-padding">
+          <div class="card">
+            <div class="card-body">
+              <form
+                class="form-signin"
+                [formGroup]="loginForm"
+                (ngSubmit)="login()"
+              >
+                <div class="text-center mb-4">
+                  <h1>INICIA SESIÓN</h1>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input
+                      type="email"
+                      id="inputEmail"
+                      class="form-control"
+                      placeholder="Correo electrónico"
+                      required
+                      autofocus
+                      formControlName="email"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label-group" style="text-align:start">
+                    <input
+                      type="password"
+                      id="inputPassword"
+                      class="form-control"
+                      placeholder="Contraseña"
+                      required
+                      formControlName="password"
+                    />
+                  </div>
+                </div>
+                <div class="checkbox text-muted" style="text-align: left">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> Recordarme
+                  </label>
+                </div>
+                <div>
+                  <a routerLink="/recover-password">Olvidé mi contraseña</a>
+                </div>
+                <button class="btn btn-lg btn-pink" style="color: white">
+                  Inicia sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-xs-12 no-padding">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

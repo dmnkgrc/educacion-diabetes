@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.css']
+  styleUrls: ['./admin-home.component.css'],
 })
 export class AdminHomeComponent implements OnInit {
   collapsedSideBar = true;
@@ -16,7 +16,7 @@ export class AdminHomeComponent implements OnInit {
     private courseService: CourseService,
     private commentsService: CommentService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.courses$ = this.courseService.getLastCourses();

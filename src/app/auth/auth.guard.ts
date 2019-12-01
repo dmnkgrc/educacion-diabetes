@@ -3,7 +3,7 @@ import {
   RouterStateSnapshot,
   CanActivate,
   Router,
-  CanActivateChild
+  CanActivateChild,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -12,16 +12,18 @@ import * as jwt_decode from 'jwt-decode';
 import { GoogleAnalyticsService } from '../google-analytics.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private router: Router,  private googleAnalyticsService: GoogleAnalyticsService) {
-
-  }
+  constructor(
+    private router: Router,
+    private googleAnalyticsService: GoogleAnalyticsService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot
+  ): boolean {
     const token = localStorage.getItem('token');
     if (!token) {
       this.router.navigate(['/login']);
@@ -36,15 +38,16 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivateChild(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot
+  ): boolean {
     return this.canActivate(route, state);
   }
 
   getDecodedAccessToken(token: string): any {
     try {
-        return jwt_decode(token);
+      return jwt_decode(token);
     } catch (Error) {
-        return null;
+      return null;
     }
   }
 }

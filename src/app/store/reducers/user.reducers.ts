@@ -12,22 +12,22 @@ export function userReducers(
       return {
         ...state,
         currentUser: action.payload,
-        lastFetch: moment().format()
+        lastFetch: moment().format(),
       };
     case EUserActions.SetCurrentUser:
       return {
         ...state,
         currentUser: {
-          ...action.payload
+          ...action.payload,
         },
-        lastFetch: moment().format()
+        lastFetch: moment().format(),
       };
     case EUserActions.GetUsersSuccess:
       let byId = state.byId;
-      action.payload.forEach((e: any) => byId = {...byId, [e.id]: e });
-      return{
+      action.payload.forEach((e: any) => (byId = { ...byId, [e.id]: e }));
+      return {
         ...state,
-        byId
+        byId,
       };
     default:
       return state;

@@ -24,7 +24,8 @@ export class CommentService {
       user_id: data.user,
       presentation_id: data.presentation,
     };
-    return this.http.post(`${this.rootURL}${this.commentEndpoint}`, {comment}, { headers })
+    return this.http
+      .post(`${this.rootURL}${this.commentEndpoint}`, { comment }, { headers })
       .pipe(
         tap((res: any) => {
           console.log(res);
@@ -39,13 +40,11 @@ export class CommentService {
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('token'),
     });
-    return this.http
-      .get(`${this.rootURL}/last_comments`, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+    return this.http.get(`${this.rootURL}/last_comments`, { headers }).pipe(
+      tap((res: any) => {
+        console.log(res);
+      }),
+      catchError(error => of(error))
+    );
   }
 }

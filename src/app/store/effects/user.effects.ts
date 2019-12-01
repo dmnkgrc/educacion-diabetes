@@ -17,7 +17,7 @@ import { of, forkJoin } from 'rxjs';
 import {
   selectLastUserFetch,
   selectCurrentUser,
-  selectUsersState
+  selectUsersState,
 } from '../selectors/user.selectors';
 
 @Injectable()
@@ -46,13 +46,11 @@ export class UserEffects {
   );
 
   @Effect()
-  getUsers$ = this.actions$
-  .pipe(
+  getUsers$ = this.actions$.pipe(
     ofType<GetUsers>(EUserActions.GetUsers),
-    switchMap((action) => this.userService.getAllStudents()),
+    switchMap(action => this.userService.getAllStudents()),
     switchMap((users: User[]) => {
       return of(new GetUsersSuccess(users));
     })
   );
-
 }

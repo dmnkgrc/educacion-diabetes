@@ -24,7 +24,12 @@ export class BibliographyService {
       url: data.url,
       presentation_id: data.presentation,
     };
-    return this.http.post(`${this.rootURL}${this.bibliographiesEndpoint}`, {bibliography}, { headers })
+    return this.http
+      .post(
+        `${this.rootURL}${this.bibliographiesEndpoint}`,
+        { bibliography },
+        { headers }
+      )
       .pipe(
         tap((res: any) => {
           console.log(res);

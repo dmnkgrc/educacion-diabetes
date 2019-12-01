@@ -12,7 +12,7 @@ import { selectCurrentUser } from '../../store/selectors/user.selectors';
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.css']
+  styleUrls: ['./admin-login.component.css'],
 })
 export class AdminLoginComponent implements OnInit {
   email: string;
@@ -24,15 +24,17 @@ export class AdminLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private store: Store<AppState>
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   login() {
     this.submitted = true;
@@ -41,35 +43,39 @@ export class AdminLoginComponent implements OnInit {
       return;
     }
     // tslint:disable:no-string-literal
-    this.sessionService.authenticate(this.loginForm.controls['email'].value,
-    this.loginForm.controls['password'].value).subscribe(result => {
-      const tokenInfo = this.getDecodedAccessToken(result.token);
-      console.log(tokenInfo.admin, 'admin');
-      const currentUser: User = new User({
-        user_id: tokenInfo.user_id,
-        first_name: tokenInfo.first_name,
-        last_name: tokenInfo.last_name,
-        speciality: tokenInfo.speciality,
-        city: tokenInfo.city,
-        address: tokenInfo.address,
-        phone: tokenInfo.phone,
-        admin: tokenInfo.admin,
-        cellphone: tokenInfo.cellphone,
-        professional_license: tokenInfo.professional_license,
-        exp: tokenInfo.exp,
-        actions: tokenInfo.actions
+    this.sessionService
+      .authenticate(
+        this.loginForm.controls['email'].value,
+        this.loginForm.controls['password'].value
+      )
+      .subscribe(result => {
+        const tokenInfo = this.getDecodedAccessToken(result.token);
+        console.log(tokenInfo.admin, 'admin');
+        const currentUser: User = new User({
+          user_id: tokenInfo.user_id,
+          first_name: tokenInfo.first_name,
+          last_name: tokenInfo.last_name,
+          speciality: tokenInfo.speciality,
+          city: tokenInfo.city,
+          address: tokenInfo.address,
+          phone: tokenInfo.phone,
+          admin: tokenInfo.admin,
+          cellphone: tokenInfo.cellphone,
+          professional_license: tokenInfo.professional_license,
+          exp: tokenInfo.exp,
+          actions: tokenInfo.actions,
+        });
+        this.store.dispatch(new SetCurrentUser(currentUser));
+        localStorage.setItem('token', result.token);
+        this.router.navigateByUrl('admin-home');
       });
-      this.store.dispatch(new SetCurrentUser(currentUser));
-      localStorage.setItem('token', result.token);
-      this.router.navigateByUrl('admin-home');
-    });
   }
 
   getDecodedAccessToken(token: string): any {
     try {
-        return jwt_decode(token);
+      return jwt_decode(token);
     } catch (Error) {
-        return null;
+      return null;
     }
   }
 }

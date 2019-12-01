@@ -1,15 +1,15 @@
-.nav-tabs .nav-item a{
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
-    margin-right: 10px;
-    line-height: 24px;
+.nav-tabs .nav-item a {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 10px;
+  line-height: 24px;
 }
 
-.active{
-    color: #113F67 !important;
-    border-bottom: solid;
-    border-bottom-color: #113F67;
+.active {
+  color: #113f67 !important;
+  border-bottom: solid;
+  border-bottom-color: #113f67;
 }
 
 .element-container {

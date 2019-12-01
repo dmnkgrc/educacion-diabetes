@@ -192,33 +192,40 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     const data = {
       content: this.content,
       user: this.userId,
-      presentation: this.presentationId
+      presentation: this.presentationId,
     };
-    this.commentService.createComment(data).subscribe((res) => {
+    this.commentService.createComment(data).subscribe(res => {
       this.comments.push(res);
       this.content = '';
     });
   }
 
   public getComments() {
-    this.courseService.getPresentationComments(this.presentationId).subscribe(res => { this.comments = res; });
+    this.courseService
+      .getPresentationComments(this.presentationId)
+      .subscribe(res => {
+        this.comments = res;
+      });
   }
 
   public createReference() {
-
     const data = {
       body: this.bibBody,
       url: this.bibUrl,
-      presentation: this.presentationId
+      presentation: this.presentationId,
     };
-    this.bibliographyService.createBibliography(data).subscribe((res) => {
+    this.bibliographyService.createBibliography(data).subscribe(res => {
       this.references.push(res);
       this.content = '';
     });
   }
 
   public getReferences() {
-    this.courseService.getPresentationBibliography(this.presentationId).subscribe(res => { this.references = res; });
+    this.courseService
+      .getPresentationBibliography(this.presentationId)
+      .subscribe(res => {
+        this.references = res;
+      });
   }
 
   public selectActivity(activity: any) {
@@ -259,9 +266,13 @@ export class CourseShowComponent implements OnInit, OnDestroy {
           switchMap(element => {
             const correct = result.getCorrectedAnswerCount();
             const questionCount = result.getAllQuestions().length;
-            const grade = correct / questionCount * 10;
+            const grade = (correct / questionCount) * 10;
             this.finished = true;
-            return this.userService.completeLesson('activity', element.id, grade);
+            return this.userService.completeLesson(
+              'activity',
+              element.id,
+              grade
+            );
           }))
         )
         .subscribe(res => {

@@ -9,5 +9,5 @@ export interface UserState {
 export const initialUserState: UserState = {
   byId: {},
   currentUser: null,
-  lastFetch: null
+  lastFetch: null,
 };

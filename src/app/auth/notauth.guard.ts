@@ -2,7 +2,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivate,
-  Router
+  Router,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
@@ -10,22 +10,28 @@ import * as jwt_decode from 'jwt-decode';
 import { GoogleAnalyticsService } from '../google-analytics.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotauthGuard implements CanActivate {
-  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
-
-  }
+  constructor(
+    private router: Router,
+    private googleAnalyticsService: GoogleAnalyticsService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot
+  ): boolean {
     const token = localStorage.getItem('token');
     if (token) {
       const user = this.getDecodedAccessToken(token);
       if (!user.admin) {
         this.googleAnalyticsService.setUserId(user.user_id);
-        this.router.navigate(['/inicio']);
+        const insulinPortal = localStorage.getItem('insulinPortal');
+        if (!insulinPortal) {
+          this.router.navigate(['/inicio']);
+        }
+        this.router.navigate(['/insulina']);
         return true;
       }
       this.router.navigate(['/admin']);
@@ -35,9 +41,9 @@ export class NotauthGuard implements CanActivate {
 
   getDecodedAccessToken(token: string): any {
     try {
-        return jwt_decode(token);
+      return jwt_decode(token);
     } catch (Error) {
-        return null;
+      return null;
     }
   }
 }

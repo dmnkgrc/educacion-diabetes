@@ -3,17 +3,15 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-admin-link',
   templateUrl: './admin-link.component.html',
-  styleUrls: ['./admin-link.component.scss']
+  styleUrls: ['./admin-link.component.scss'],
 })
 export class AdminLinkComponent implements OnInit {
-
   activo = true; // Cambiar a variable por parametro de base de datos
   message;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   // Sin relevancia, solo es para que sea legible para el usuario
   mensaje(): string {
     if (this.activo === true) {

@@ -4,5 +4,5 @@ export enum EUserActions {
   GetCurrentUser = '[User] Get Current User',
   GetCurrentUserSuccess = '[User] Get Current User Success',
   SaveUser = '[User] Save User',
-  SetCurrentUser = '[User] Set Current User'
+  SetCurrentUser = '[User] Set Current User',
 }

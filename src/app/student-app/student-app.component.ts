@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-student-app',
   templateUrl: './student-app.component.html',
-  styleUrls: ['./student-app.component.sass']
+  styleUrls: ['./student-app.component.sass'],
 })
 export class StudentAppComponent implements OnInit {
   collapsedSideBar = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   logout() {
     localStorage.clear();

@@ -7,7 +7,6 @@ import { CoursesIndexComponent } from './courses-index/courses-index.component';
 import { CourseShowComponent } from './course-show/course-show.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
@@ -28,6 +27,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
 import { LegalComponent } from './legal/legal.component';
 import { CookiesComponent } from './cookies/cookies.component';
+import { InsulinLoginComponent } from 'src/app/insulin-login/insulin-login.component';
+import { InsulinAppComponent } from 'src/app/insulin-app/insulin-app.component';
+import { InsulinGuard } from 'src/app/auth/insulin.guard';
+import { InsulinHomeComponent } from 'src/app/insulin-home/insulin-home.component';
+import { InsulinCoursesComponent } from './insulin-courses/insulin-courses.component';
+import { InsulinGlossaryComponent } from './insulin-glossary/insulin-glossary.component';
+import { InsulinFaqComponent } from './insulin-faq/insulin-faq.component';
 
 const routes: Routes = [
   {
@@ -49,6 +55,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [NotauthGuard],
+  },
+  {
+    path: 'insulina/login',
+    component: InsulinLoginComponent,
     canActivate: [NotauthGuard],
   },
   {
@@ -122,6 +133,45 @@ const routes: Routes = [
         path: '',
         component: AdminHomeComponent,
         canActivateChild: [AuthGuard, AdminGuard],
+      },
+    ],
+  },
+  {
+    path: 'insulina',
+    component: InsulinAppComponent,
+    canActivate: [AuthGuard, NotAdminGuard, InsulinGuard],
+    children: [
+      {
+        path: '',
+        component: InsulinHomeComponent,
+        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
+      },
+      {
+        path: 'cursos',
+        component: InsulinCoursesComponent,
+        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
+      },
+      {
+        path: 'cursos/:id',
+        component: CourseIntroComponent,
+        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
+        children: [
+          {
+            path: ':element_index',
+            component: CourseShowComponent,
+            canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
+          },
+        ],
+      },
+      {
+        path: 'glosario',
+        component: InsulinGlossaryComponent,
+        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
+      },
+      {
+        path: 'faq',
+        component: InsulinFaqComponent,
+        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
       },
     ],
   },

@@ -3,7 +3,10 @@ import { MessageService } from '../services/message.service';
 import { AppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { GetUsers, GetUsersSuccess } from '../store/actions/user.actions';
-import { selectAllUsersById, selectCurrentUser } from '../store/selectors/user.selectors';
+import {
+  selectAllUsersById,
+  selectCurrentUser,
+} from '../store/selectors/user.selectors';
 import { UserService } from '../services/user.service';
 import { filter, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -31,16 +34,25 @@ export class CreateMessageComponent implements OnInit {
     public router: Router,
     public courseService: CourseService
   ) {
-    this.userService.getAllStudents().toPromise().then(students => {
-      this.store.dispatch(new GetUsersSuccess(students));
-    });
-    this.store.select(selectCurrentUser).pipe(
-      filter(e => !!e),
-      tap(user => this.currentUser = user),
-    ).subscribe();
-    this.courseService.getAllCourses().toPromise().then(courses => {
-      this.allCourses = courses;
-    });
+    this.userService
+      .getAllStudents()
+      .toPromise()
+      .then(students => {
+        this.store.dispatch(new GetUsersSuccess(students));
+      });
+    this.store
+      .select(selectCurrentUser)
+      .pipe(
+        filter(e => !!e),
+        tap(user => (this.currentUser = user))
+      )
+      .subscribe();
+    this.courseService
+      .getAllCourses()
+      .toPromise()
+      .then(courses => {
+        this.allCourses = courses;
+      });
   }
   ngOnInit() {
     this.store.dispatch(new GetUsers());
@@ -71,7 +83,7 @@ export class CreateMessageComponent implements OnInit {
       recipients: this.messageRecipients,
       subject: this.subject,
       content: this.content,
-      sender_id: this.currentUser.user_id
+      sender_id: this.currentUser.user_id,
     };
     console.log('data', data);
     this.messageService.createMessage(data).subscribe(() => {
@@ -84,12 +96,11 @@ export class CreateMessageComponent implements OnInit {
       courses_ids: this.selectedCourses,
       subject: this.subject,
       content: this.content,
-      sender_id: this.currentUser.user_id
+      sender_id: this.currentUser.user_id,
     };
     console.log('data', data);
     this.messageService.createCourseMessage(data).subscribe(() => {
       this.router.navigateByUrl('/messages');
     });
   }
-
 }
