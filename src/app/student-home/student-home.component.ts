@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../services/course.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-student-home',
@@ -27,6 +27,19 @@ export class StudentHomeComponent {
   };
   constructor(private courseService: CourseService) {
     this.courses$ = courseService.getAllCourses().pipe(
+      map(courses => {
+        return courses.filter(course => {
+          if (
+            !course.clusters ||
+            course.clusters.length === 0 ||
+            course.clusters.length > 1
+          ) {
+            return true;
+          }
+          const cluster = course.clusters.find(cl => cl.id === 3);
+          return !cluster;
+        });
+      }),
       tap(res => {
         console.log(res);
         res.forEach(course => {

@@ -47,7 +47,9 @@
                   aria-valuemin="0"
                   aria-valuemax="100"
                 >
-                  {{ progress[course.id].toFixed(2) }}%
+                  {{
+                    progress[course.id] ? progress[course.id].toFixed(2) : 0
+                  }}%
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insulin-app',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./insulin-app.component.scss'],
 })
 export class InsulinAppComponent implements OnInit {
-  constructor() {}
+  collapsedSideBar = false;
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
+
+  toggleSideBar() {
+    this.collapsedSideBar = !this.collapsedSideBar;
+  }
 }
