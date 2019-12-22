@@ -1,5 +1,7 @@
+$blue: #113f67;
 .img-section {
   height: 100vh !important;
+  background: $blue;
 }
 @media screen and (max-width: 765px) {
   .img-section {
