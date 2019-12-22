@@ -1,136 +1,208 @@
 <div>
-   <br>
-    <div class="row">
-      <div class="col-md-7 md-offset-1">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-2 student-initials">
-                    <h3>{{getInitials(user)}}</h3>
-                  </div>
-                  <div class="col-md-9 md-offset-1">
-                      <span class="card-title">{{user?.first_name}} {{user?.last_name}}</span>
-                  </div>
-            </div>
-            <hr>
-            <div>
-                <table>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <b>Nombre</b>
-                        </td>
-                        <td>
-                          {{user?.first_name}} {{user?.last_name}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Correo electrónico</b>
-                        </td>
-                        <td>
-                          {{user?.email}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Teléfono</b>
-                        </td>
-                        <td>
-                          {{user?.telephone}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Inscripción</b>
-                        </td>
-                        <td>
-                            {{user?.created_at | date: 'dd/MM/yyyy HH:mm'}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                            <b>Última conexión</b>
-                          </td>
-                          <td>
-                              {{user?.last_log_in_at | date: 'dd/MM/yyyy HH:mm'}}
-                          </td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <hr *ngIf="courses">
-            <div *ngIf="courses">
-              <h5>Cursos</h5>
-              <p *ngFor="let course of courses">
-                {{ course.name }}
-              </p>
-            </div>
-            <hr>
-            <div>
-              <h5>Actividad reciente</h5>
-              <ul>
-                <li *ngFor="let action of actions | slice:0:5">
-                  {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
-                  {{ action?.content }}
-                </li>
-              </ul>
-            </div>
+  <br />
+  <div class="row">
+    <div class="col-md-7 md-offset-1">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-2 student-initials">
+            <h3>{{ getInitials(user) }}</h3>
+          </div>
+          <div class="col-md-9 md-offset-1">
+            <span class="card-title"
+              >{{ user?.first_name }} {{ user?.last_name }}</span
+            >
+          </div>
+        </div>
+        <hr />
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <b>Nombre</b>
+                </td>
+                <td>{{ user?.first_name }} {{ user?.last_name }}</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Correo electrónico</b>
+                </td>
+                <td>
+                  {{ user?.email }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Teléfono</b>
+                </td>
+                <td>
+                  {{ user?.telephone }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Inscripción</b>
+                </td>
+                <td>
+                  {{ user?.created_at | date: 'dd/MM/yyyy HH:mm' }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Última conexión</b>
+                </td>
+                <td>
+                  {{ user?.last_log_in_at | date: 'dd/MM/yyyy HH:mm' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr *ngIf="courses" />
+        <div *ngIf="courses">
+          <h5>Cursos</h5>
+          <p *ngFor="let course of courses">
+            {{ course.name }}
+          </p>
+        </div>
+        <hr />
+        <div>
+          <h5>Actividad reciente</h5>
+          <ul>
+            <li *ngFor="let action of actions | slice: 0:5">
+              {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
+              {{ action?.content }}
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="col-md-4 md-offset-1">
-          <div class="card">
-            <h3>Calificaciones</h3>
-            <div *ngFor="let grade of grades">
-              <b><span style="margin-left: 5%">{{grade.name}}</span>: </b>  <span>{{grade.grade | number:'1.1-2'}}</span>
-              <hr style="margin-bottom: 0;">
+    </div>
+    <div class="col-md-4 md-offset-1">
+      <div class="card">
+        <h3 style="padding: 10px;">Calificaciones</h3>
+        <div class="accordion" id="gradesAccordion">
+          <div *ngFor="let grade of grades; index as i" class="card">
+            <div class="card-header">
+              <h2
+                class="mb-0 grade-header"
+                data-toggle="collapse"
+                [attr.data-target]="'#collapse' + i"
+                aria-expanded="true"
+                [attr.aria-controls]="'collapse' + i"
+              >
+                "{{ grade.name }}"
+              </h2>
+              <div class="grade">
+                {{ grade.grade | number: '1.1-2' }}
+              </div>
+            </div>
+            <div
+              *ngIf="
+                grade.activities_grades && grade.activities_grades.length > 0
+              "
+              [attr.id]="'collapse' + i"
+              class="collapse"
+              data-parent="#gradesAccordion"
+            >
+              <div class="card-body">
+                <div
+                  class="sub-grade-container"
+                  *ngFor="let ag of grade.activities_grades"
+                >
+                  <h2 class="sub-grade-header">"{{ ag.name }}"</h2>
+                  <div class="grade">
+                    {{ ag.grade | number: '1.1-2' }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
       </div>
-    </div>
-    <br>
-    <br>
-    <div class="row" *ngIf="currentUser$ | async as currentUser">
-      <div class="col-md-7 md-offset-1" *ngIf="currentUser.admin">
-          <div class="card">
+      <br />
+      <br />
+      <div class="row" *ngIf="currentUser$ | async as currentUser">
+        <div class="col-md-7 md-offset-1" *ngIf="currentUser.admin">
+          <div class="card"></div>
+        </div>
 
-          </div>
-      </div>
-
-      <div class="col-md-11 md-offset-1" *ngIf="!currentUser.admin && currentUser.id === user.id">
+        <div
+          class="col-md-11 md-offset-1"
+          *ngIf="!currentUser.admin && currentUser.id === user.id"
+        >
           <div class="card">
             <h5>Editar perfil</h5>
             <div>
               <span>Nombre</span>
-              <input type="text" class="form-control" [(ngModel)]="user.first_name">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.first_name"
+              />
             </div>
             <div>
               <span>Apellido</span>
-              <input type="text" class="form-control" [(ngModel)]="user.last_name">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.last_name"
+              />
             </div>
             <div>
               <span>Correo</span>
-              <input type="text" class="form-control" [(ngModel)]="user.email">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.email"
+              />
             </div>
             <div>
               <span>Teléfono</span>
-              <input type="number"class="form-control" [(ngModel)]="user.telephone">
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="user.telephone"
+              />
             </div>
-            <br>
-            <br>
-            <button type="button" class="btn btn-info" *ngIf="currentUser?.id === user?.id" (click)="updateUser()">Guardar usuario</button>
+            <br />
+            <br />
+            <button
+              type="button"
+              class="btn btn-info"
+              *ngIf="currentUser?.id === user?.id"
+              (click)="updateUser()"
+            >
+              Guardar usuario
+            </button>
           </div>
-      </div>
+        </div>
 
-      <div class="col-md-3 md-offset-1" *ngIf="currentUser?.admin">
+        <div class="col-md-3 md-offset-1" *ngIf="currentUser?.admin">
           <div>
-              <div>
-                  <button type="button" class="btn btn-info" *ngIf="currentUser?.admin && currentUser?.id !== user?.id" (click)="sendMessage()">Enviar correo</button>
-              </div>
-              <br><br>
-              <div>
-                  <button type="button" class="btn btn-danger" *ngIf="currentUser?.admin && currentUser?.id !== user?.id" (click)="deleteUser()">Eliminar usuario</button>
-              </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-info"
+                *ngIf="currentUser?.admin && currentUser?.id !== user?.id"
+                (click)="sendMessage()"
+              >
+                Enviar correo
+              </button>
+            </div>
+            <br /><br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-danger"
+                *ngIf="currentUser?.admin && currentUser?.id !== user?.id"
+                (click)="deleteUser()"
+              >
+                Eliminar usuario
+              </button>
+            </div>
           </div>
+        </div>
       </div>
     </div>
+  </div>
 </div>

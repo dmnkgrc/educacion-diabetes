@@ -67,3 +67,33 @@ td {
   padding-bottom: 3%;
   padding-left: 2%;
 }
+
+.grade-header,
+.sub-grade-header {
+  color: #000;
+  font-size: 16px;
+}
+
+.sub-grade-header {
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-header,
+.sub-grade-container {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+}
+
+.grade {
+  font-size: 32px;
+  text-align: right;
+  color: #48A4FF;
+  font-weight: 600;
+  flex: 1;
+}
