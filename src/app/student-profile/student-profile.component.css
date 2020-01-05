@@ -90,7 +90,35 @@ td {
   flex-direction: row;
 }
 
+.card-header.selectable {
+  position: relative;
+  cursor: pointer;
+}
+
+.card-header.selectable:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content:"\f078";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+}
+
+.card-header.selectable[aria-expanded="false"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content:"\f054";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+}
+
 .grade {
+  margin-right: 10px;
   font-size: 32px;
   text-align: right;
   color: #48A4FF;

@@ -82,19 +82,26 @@
         <h3 style="padding: 10px;">Calificaciones</h3>
         <div class="accordion" id="gradesAccordion">
           <div *ngFor="let grade of grades; index as i" class="card">
-            <div class="card-header">
-              <h2
-                class="mb-0 grade-header"
-                data-toggle="collapse"
-                [attr.data-target]="'#collapse' + i"
-                aria-expanded="true"
-                [attr.aria-controls]="'collapse' + i"
-              >
-                "{{ grade.name }}"
-              </h2>
+            <div
+              data-toggle="collapse"
+              [attr.data-target]="'#collapse' + i"
+              aria-expanded="false"
+              [attr.aria-controls]="'collapse' + i"
+              [ngClass]="{
+                'card-header': true,
+                selectable:
+                  grade.activities_grades && grade.activities_grades.length > 0
+              }"
+            >
+              <h2 class="mb-0 grade-header">"{{ grade.name }}"</h2>
               <div class="grade">
                 {{ grade.grade | number: '1.1-2' }}
               </div>
+              <div
+                *ngIf="
+                  grade.activities_grades && grade.activities_grades.length > 0
+                "
+              ></div>
             </div>
             <div
               *ngIf="
