@@ -55,7 +55,11 @@
             </div>
             <div class="col-md-2 offset-md-1">
               <a
-                [routerLink]="['/inicio/cursos', course.id, getNext(course)]"
+                [routerLink]="[
+                  '/' + routeRoot + '/cursos',
+                  course.id,
+                  getNext(course)
+                ]"
                 class="btn btn-lg btn-pink"
                 style="color: white"
               >

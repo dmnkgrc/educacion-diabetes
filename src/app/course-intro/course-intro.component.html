@@ -2,42 +2,46 @@
   <div
     class="col-md-12"
     style="height: calc(100vh - 60px); padding: 0; border-left: 1px solid rgba(0, 0, 0, 0.5);"
-    *ngIf="{ course: course$ | async, currentIndex: currentIndex$ | async } as values"
+    *ngIf="{
+      course: course$ | async,
+      currentIndex: currentIndex$ | async
+    } as values"
   >
-  <div class="course" *ngIf="values.course">
-        <h1 class="d-md-none course-name">{{values.course?.name}}</h1>
-        <div class="row" style="height: 100%;">
-          <div class="col-4 col-lg-3 course-info d-none d-md-flex">
-            <h4>{{ values.course?.name }}</h4>
-            <div>
-              <ul>
-                <li
-                  *ngFor="let element of values.course.elements; let i = index"
-                  routerLinkActive="element-active"
-                  class="presentation"
-                  [ngClass]="{
-                    'element-completed': values.currentIndex > i
-                  }"
-                  [routerLink]="['/inicio/cursos', values.course.id, i]"
-                >
-                  <div
-                    *ngIf="element.frame; else activity"
-                    class="element-div"
-                  >
-                    {{ element.title }}
+    <div class="course" *ngIf="values.course">
+      <h1 class="d-md-none course-name">{{ values.course?.name }}</h1>
+      <div class="row" style="height: 100%;">
+        <div class="col-4 col-lg-3 course-info d-none d-md-flex">
+          <h4>{{ values.course?.name }}</h4>
+          <div>
+            <ul>
+              <li
+                *ngFor="let element of values.course.elements; let i = index"
+                routerLinkActive="element-active"
+                class="presentation"
+                [ngClass]="{
+                  'element-completed': values.currentIndex > i
+                }"
+                [routerLink]="[
+                  '/' + routeRoot + '/cursos',
+                  values.course.id,
+                  i
+                ]"
+              >
+                <div *ngIf="element.frame; else activity" class="element-div">
+                  {{ element.title }}
+                </div>
+                <ng-template #activity>
+                  <div class="element-div">
+                    {{ element.name }}
                   </div>
-                  <ng-template #activity>
-                    <div class="element-div">
-                      {{ element.name }}
-                    </div>
-                  </ng-template>
-                </li>
-              </ul>
-            </div>
+                </ng-template>
+              </li>
+            </ul>
           </div>
-          <div class="col-12 col-md-8 col-lg-9 course-element">
-            <router-outlet></router-outlet>
-          </div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-9 course-element">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>

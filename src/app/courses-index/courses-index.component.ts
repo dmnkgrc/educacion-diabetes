@@ -11,9 +11,14 @@ export class CoursesIndexComponent implements OnInit {
   courses: any;
   progress: { [key: string]: any } = {};
   collapsedSideBar = true;
+  routeRoot = 'inicio';
 
   @Input() activo: boolean;
-  constructor(public courseService: CourseService) {}
+  constructor(public courseService: CourseService) {
+    if (window.location.href.includes('insulina')) {
+      this.routeRoot = 'insulina';
+    }
+  }
 
   ngOnInit() {
     this.courseService.getAllCourses().subscribe(res => {
