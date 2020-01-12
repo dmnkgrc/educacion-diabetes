@@ -45,7 +45,7 @@ jobs:
 
       - run:
           name: Build Angular
-          command: npm run build --prod
+          command: NODE_ENV=production npm run build --prod
       # Cache the dist folder for the deploy job
       - save_cache:
           key: v2-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
