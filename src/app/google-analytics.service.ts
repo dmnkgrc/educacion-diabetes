@@ -24,7 +24,6 @@ export class GoogleAnalyticsService {
   }
 
   public setUserId(id: number) {
-    console.log(id);
     if (window.ga) {
       ga('set', 'userId', id.toString());
       ga('send', 'pageview');
