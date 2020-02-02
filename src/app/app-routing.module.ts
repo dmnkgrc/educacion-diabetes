@@ -42,10 +42,8 @@ const routes: Routes = [
   },
   {
     path: 'recover-password',
-    loadChildren: () =>
-      import('./recover-password/recover-password.module').then(
-        m => m.RecoverPasswordModule
-      ),
+    loadChildren:
+      './recover-password/recover-password.module#RecoverPasswordModule',
     canActivate: [NotauthGuard],
   },
   {
