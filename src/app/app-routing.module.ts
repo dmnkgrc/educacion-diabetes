@@ -22,8 +22,6 @@ import { AdminAppComponent } from './admin-app/admin-app.component';
 import { AdminGuard } from './auth/admin.guard';
 import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
-import { RecoverPasswordComponent } from './recover-password/recover-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
 import { LegalComponent } from './legal/legal.component';
 import { CookiesComponent } from './cookies/cookies.component';
@@ -44,12 +42,10 @@ const routes: Routes = [
   },
   {
     path: 'recover-password',
-    component: RecoverPasswordComponent,
-    canActivate: [NotauthGuard],
-  },
-  {
-    path: 'recover-password/:token',
-    component: ResetPasswordComponent,
+    loadChildren: () =>
+      import('./recover-password/recover-password.module').then(
+        m => m.RecoverPasswordModule
+      ),
     canActivate: [NotauthGuard],
   },
   {

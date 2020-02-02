@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { User } from '../models/user.model';
-import { SetCurrentUser } from '../store/actions/user.actions';
 
 @Component({
   selector: 'app-recover-password',
