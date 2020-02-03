@@ -17,24 +17,11 @@ import { CoursesIndexComponent } from './courses-index/courses-index.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CourseShowComponent } from './course-show/course-show.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
-import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
 import { appReducers } from './store/reducers/app.reducers';
-import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
-import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
-import { AdminClustersComponent } from './admin/admin-clusters/admin-clusters.component';
-import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
-import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
-import { EscapeHtmlPipe } from './escape-html.pipe';
-import { FormatDatePipe } from './format-date.pipe';
 import { CourseIntroComponent } from './course-intro/course-intro.component';
 import { IconsModule } from './icons/icons.module';
 import { StudentAppComponent } from './student-app/student-app.component';
-import { MessagesComponent } from './messages/messages.component';
-import { CreateMessageComponent } from './create-message/create-message.component';
-import { AdminAppComponent } from './admin-app/admin-app.component';
-import { AdminLinkComponent } from './admin-link/admin-link.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { GoogleAnalyticsService } from './google-analytics.service';
 import { LegalComponent } from './legal/legal.component';
@@ -46,6 +33,7 @@ import { InsulinHomeComponent } from './insulin-home/insulin-home.component';
 import { InsulinCoursesComponent } from './insulin-courses/insulin-courses.component';
 import { InsulinFaqComponent } from './insulin-faq/insulin-faq.component';
 import { InsulinGlossaryComponent } from './insulin-glossary/insulin-glossary.component';
+import { SharedModule } from './shared/shared.module';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   // tslint:disable-next-line:only-arrow-functions
@@ -68,26 +56,13 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
   declarations: [
     AppComponent,
     HomeComponent,
-    AdminLoginComponent,
-    AdminClustersComponent,
-    AdminStudentsComponent,
-    AdminHomeComponent,
-    AdminProfileComponent,
     LoginComponent,
     SignupComponent,
     CoursesIndexComponent,
     CourseShowComponent,
     StudentHomeComponent,
-    StudentProfileComponent,
-    AdminCoursesComponent,
     CourseIntroComponent,
-    MessagesComponent,
-    CreateMessageComponent,
-    EscapeHtmlPipe,
-    FormatDatePipe,
     StudentAppComponent,
-    AdminAppComponent,
-    AdminLinkComponent,
     PrivacyComponent,
     LegalComponent,
     CookiesComponent,
@@ -105,12 +80,12 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     HttpClientModule,
     FormsModule,
     NgSelectModule,
-    NgSelectModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     IconsModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    SharedModule,
   ],
   providers: [UserService, SessionService, HttpClient, GoogleAnalyticsService],
   bootstrap: [AppComponent],
