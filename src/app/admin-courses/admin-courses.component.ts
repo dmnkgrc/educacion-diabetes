@@ -75,7 +75,7 @@ export class AdminCoursesComponent implements OnInit {
   onMessage(e) {
     if (
       e.origin.includes('localhost') ||
-      e.origin.includes('dialogodiabetescare.com')
+      e.origin.includes('educacionendiabetes.com')
     ) {
       return false;
     }
