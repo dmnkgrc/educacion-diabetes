@@ -8,7 +8,6 @@ import { config } from '../config';
 export class SessionService {
   rootURL: string = config.rootURL;
   authEndpoint: string = config.apiEndPoints.auth;
-  authInsulinEndpoint: string = config.apiEndPoints.authInsulin;
   token: string;
   currentUser: any;
   constructor(public http: HttpClient) {}
@@ -24,25 +23,6 @@ export class SessionService {
     };
     return this.http
       .post(this.rootURL + this.authEndpoint, body, { headers })
-      .pipe(
-        tap((res: any) => {
-          this.setToken(res);
-        }),
-        catchError(error => of(error))
-      );
-  }
-
-  public authenticateInsulin(email: string, password: string): Observable<any> {
-    const headers: HttpHeaders = new HttpHeaders({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    });
-    const body: any = {
-      email,
-      password,
-    };
-    return this.http
-      .post(this.rootURL + this.authInsulinEndpoint, body, { headers })
       .pipe(
         tap((res: any) => {
           this.setToken(res);

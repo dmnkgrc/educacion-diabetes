@@ -17,20 +17,18 @@
                   <div class="col-md-8 course-name">
                     <p>{{ course.name }}</p>
                   </div>
-                  <div class="col-md-4 course-actions"><button class="btn-pink dialogo-btn" [routerLink]="['/inicio/cursos', course.id, getNext(course)]">Iniciar</button></div>
-                  <!-- <div class="col-md-4">
-                          <div class="progress" style="margin-top: 10%;">
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              [style.width]="lesson.progress + '%'"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                            >
-                              {{ lesson.progress }}%
-                            </div>
-                          </div>
-                        </div> -->
+                  <div class="col-md-4 course-actions">
+                    <button
+                      class="btn-pink dialogo-btn"
+                      [routerLink]="[
+                        '/inicio/cursos',
+                        course.id,
+                        getNext(course)
+                      ]"
+                    >
+                      Iniciar
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -41,18 +39,6 @@
           </div>
         </div>
       </div>
-<!--
-      <div>
-
-        <a href="http://bomba.educacionendiabetes.com/bombaInsulina/index.htm" target="_blank">
-          <img  src="/assets/bombasinsulina.jpg" style="width: 400px; max-width: 100%;"></a>
-      </div>
-
-      -->
     </div>
-
-    <!--Seccion para Link a portal de bomba de insulina -->
-
-    <!--Fin Seccion para Link a portal de bomba de insulina-->
   </div>
 </div>

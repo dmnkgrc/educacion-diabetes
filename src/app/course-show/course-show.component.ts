@@ -154,9 +154,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     this.finished = false;
     this.changeDetector.markForCheck();
     let routeRoot = 'inicio';
-    if (window.location.href.includes('insulina')) {
-      routeRoot = 'insulina';
-    }
     if (this.isLastLesson) {
       this.router.navigate([`/${routeRoot}/cursos`]);
       return;

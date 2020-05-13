@@ -27,12 +27,6 @@ import { GoogleAnalyticsService } from './google-analytics.service';
 import { LegalComponent } from './legal/legal.component';
 import { CookiesComponent } from './cookies/cookies.component';
 import { FooterComponent } from './footer/footer.component';
-import { InsulinLoginComponent } from './insulin-login/insulin-login.component';
-import { InsulinAppComponent } from './insulin-app/insulin-app.component';
-import { InsulinHomeComponent } from './insulin-home/insulin-home.component';
-import { InsulinCoursesComponent } from './insulin-courses/insulin-courses.component';
-import { InsulinFaqComponent } from './insulin-faq/insulin-faq.component';
-import { InsulinGlossaryComponent } from './insulin-glossary/insulin-glossary.component';
 import { SharedModule } from './shared/shared.module';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -67,12 +61,6 @@ export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
     LegalComponent,
     CookiesComponent,
     FooterComponent,
-    InsulinLoginComponent,
-    InsulinAppComponent,
-    InsulinHomeComponent,
-    InsulinCoursesComponent,
-    InsulinFaqComponent,
-    InsulinGlossaryComponent,
   ],
   imports: [
     BrowserModule,

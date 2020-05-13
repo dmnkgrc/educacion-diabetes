@@ -15,13 +15,6 @@ import { AdminGuard } from './auth/admin.guard';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { LegalComponent } from './legal/legal.component';
 import { CookiesComponent } from './cookies/cookies.component';
-import { InsulinLoginComponent } from 'src/app/insulin-login/insulin-login.component';
-import { InsulinAppComponent } from 'src/app/insulin-app/insulin-app.component';
-import { InsulinGuard } from 'src/app/auth/insulin.guard';
-import { InsulinHomeComponent } from 'src/app/insulin-home/insulin-home.component';
-import { InsulinCoursesComponent } from './insulin-courses/insulin-courses.component';
-import { InsulinGlossaryComponent } from './insulin-glossary/insulin-glossary.component';
-import { InsulinFaqComponent } from './insulin-faq/insulin-faq.component';
 
 const routes: Routes = [
   {
@@ -39,11 +32,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [NotauthGuard],
-  },
-  {
-    path: 'insulina/login',
-    component: InsulinLoginComponent,
     canActivate: [NotauthGuard],
   },
   {
@@ -67,45 +55,6 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [AuthGuard, AdminGuard],
     loadChildren: './admin/admin.module#AdminModule',
-  },
-  {
-    path: 'insulina',
-    component: InsulinAppComponent,
-    canActivate: [AuthGuard, NotAdminGuard, InsulinGuard],
-    children: [
-      {
-        path: '',
-        component: InsulinHomeComponent,
-        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-      },
-      {
-        path: 'cursos',
-        component: InsulinCoursesComponent,
-        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-      },
-      {
-        path: 'cursos/:id',
-        component: CourseIntroComponent,
-        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-        children: [
-          {
-            path: ':element_index',
-            component: CourseShowComponent,
-            canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-          },
-        ],
-      },
-      {
-        path: 'glosario',
-        component: InsulinGlossaryComponent,
-        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-      },
-      {
-        path: 'faq',
-        component: InsulinFaqComponent,
-        canActivateChild: [AuthGuard, NotAdminGuard, InsulinGuard],
-      },
-    ],
   },
   {
     path: 'inicio',

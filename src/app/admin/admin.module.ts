@@ -15,7 +15,6 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AdminCoursesComponent } from '../admin-courses/admin-courses.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { CreateMessageComponent } from '../create-message/create-message.component';
-import { AdminLinkComponent } from '../admin-link/admin-link.component';
 import { AdminClustersComponent } from './admin-clusters/admin-clusters.component';
 
 const adminRoutes: Routes = [
@@ -55,11 +54,6 @@ const adminRoutes: Routes = [
         canActivate: [AuthGuard, AdminGuard],
       },
       {
-        path: 'link',
-        component: AdminLinkComponent,
-        canActivate: [AuthGuard, AdminGuard],
-      },
-      {
         path: 'mensajes/enviar',
         component: CreateMessageComponent,
         canActivate: [AuthGuard, AdminGuard],
@@ -89,7 +83,6 @@ const adminRoutes: Routes = [
     AdminCoursesComponent,
     MessagesComponent,
     CreateMessageComponent,
-    AdminLinkComponent,
     AdminClustersComponent,
   ],
   imports: [
@@ -109,7 +102,6 @@ const adminRoutes: Routes = [
     AdminCoursesComponent,
     MessagesComponent,
     CreateMessageComponent,
-    AdminLinkComponent,
     AdminClustersComponent,
   ],
 })

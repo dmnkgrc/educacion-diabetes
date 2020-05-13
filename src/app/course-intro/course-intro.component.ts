@@ -19,11 +19,7 @@ export class CourseIntroComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private route: ActivatedRoute
-  ) {
-    if (window.location.href.includes('insulina')) {
-      this.routeRoot = 'insulina';
-    }
-  }
+  ) {}
 
   ngOnInit() {
     this.currentIndex$ = this.route.firstChild.params.pipe(

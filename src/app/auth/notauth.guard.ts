@@ -27,11 +27,7 @@ export class NotauthGuard implements CanActivate {
       const user = this.getDecodedAccessToken(token);
       if (!user.admin) {
         this.googleAnalyticsService.setUserId(user.user_id);
-        const insulinPortal = localStorage.getItem('insulinPortal');
-        if (!insulinPortal) {
-          this.router.navigate(['/inicio']);
-        }
-        this.router.navigate(['/insulina']);
+        this.router.navigate(['/inicio']);
         return true;
       }
       this.router.navigate(['/admin']);
