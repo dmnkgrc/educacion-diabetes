@@ -59,21 +59,26 @@
           </table>
         </div>
         <hr *ngIf="courses" />
-        <div *ngIf="courses">
+        <div *ngIf="courses" style="padding-left: 10px;">
           <h5>Cursos</h5>
-          <p *ngFor="let course of courses">
+          <p *ngFor="let course of courses" style="color: #333;">
             {{ course.name }}
           </p>
         </div>
         <hr />
-        <div>
+        <div style="padding-left: 10px;">
           <h5>Actividad reciente</h5>
-          <ul>
-            <li *ngFor="let action of actions | slice: 0:5">
-              {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
-              {{ action?.content }}
-            </li>
-          </ul>
+          <cdk-virtual-scroll-viewport
+            itemSize="20"
+            class="virtual-scroll-viewport"
+          >
+            <ul>
+              <li *cdkVirtualFor="let action of actions">
+                {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
+                {{ action?.content }}
+              </li>
+            </ul>
+          </cdk-virtual-scroll-viewport>
         </div>
       </div>
     </div>
@@ -129,10 +134,6 @@
       <br />
       <br />
       <div class="row" *ngIf="currentUser$ | async as currentUser">
-        <div class="col-md-7 md-offset-1" *ngIf="currentUser.admin">
-          <div class="card"></div>
-        </div>
-
         <div
           class="col-md-11 md-offset-1"
           *ngIf="!currentUser.admin && currentUser.id === user.id"
@@ -184,20 +185,24 @@
           </div>
         </div>
 
-        <div class="col-md-3 md-offset-1" *ngIf="currentUser?.admin">
-          <div>
-            <div>
+        <div
+          class="col-12"
+          style="text-align: center;"
+          *ngIf="currentUser?.admin"
+        >
+          <div class="row">
+            <div class="col-12 col-md-6">
               <button
                 type="button"
                 class="btn btn-info"
+                style="margin-bottom: 10px;"
                 *ngIf="currentUser?.admin && currentUser?.id !== user?.id"
                 (click)="sendMessage()"
               >
                 Enviar correo
               </button>
             </div>
-            <br /><br />
-            <div>
+            <div class="col-12 col-md-6">
               <button
                 type="button"
                 class="btn btn-danger"

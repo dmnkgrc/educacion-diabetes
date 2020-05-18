@@ -12,7 +12,7 @@
             <h3 class="card-title">
               <div class="row">
                 <div class="col-md-2 initials">
-                  {{getInitials(values.currentUser)}}
+                  {{ getInitials(values.currentUser) }}
                 </div>
                 <div class="col-md-9 md-offset-1">
                   {{ values.currentUser.first_name }}
@@ -47,25 +47,36 @@
                 <b>Inscripción</b>
               </div>
               <div class="col-md-8">
-                <p>{{values.currentUser.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+                <p>
+                  {{ values.currentUser.created_at | date: 'dd/MM/yyyy HH:mm' }}
+                </p>
               </div>
               <div class="col-md-4">
                 <b>Ultima conexión</b>
               </div>
               <div class="col-md-8">
-                <p>{{values.currentUser.last_log_in_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+                <p>
+                  {{
+                    values.currentUser.last_log_in_at | date: 'dd/MM/yyyy HH:mm'
+                  }}
+                </p>
               </div>
             </div>
             <hr />
             <p><i class="fas fa-sync"></i> Actividad Reciente</p>
             <hr />
             <div>
-              <ul>
-                <li *ngFor="let action of actions | slice:0:5">
-                  {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
-                  {{ action?.content }}
-                </li>
-              </ul>
+              <cdk-virtual-scroll-viewport
+                itemSize="20"
+                class="virtual-scroll-viewport"
+              >
+                <ul>
+                  <li *cdkVirtualFor="let action of actions">
+                    {{ action?.created_at | date: 'dd/MM/yyyy HH:mm' }}:
+                    {{ action?.content }}
+                  </li>
+                </ul>
+              </cdk-virtual-scroll-viewport>
             </div>
           </div>
         </div>

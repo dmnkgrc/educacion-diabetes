@@ -16,6 +16,7 @@ import { AdminCoursesComponent } from '../admin-courses/admin-courses.component'
 import { MessagesComponent } from '../messages/messages.component';
 import { CreateMessageComponent } from '../create-message/create-message.component';
 import { AdminClustersComponent } from './admin-clusters/admin-clusters.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const adminRoutes: Routes = [
   {
@@ -93,6 +94,7 @@ const adminRoutes: Routes = [
     SharedModule,
     NgSelectModule,
     RouterModule.forChild(adminRoutes),
+    ScrollingModule,
   ],
   exports: [
     AdminAppComponent,

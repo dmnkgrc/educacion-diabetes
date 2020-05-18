@@ -16,7 +16,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let student of students">
-              <th scope="row">{{ student.first_name }}</th>
+              <th scope="row">
+                {{ student.first_name }} {{ student.last_name }}
+              </th>
               <td>{{ getClusters(student) }}</td>
               <td>{{ student.professional_license }}</td>
               <td>{{ student.city }}</td>

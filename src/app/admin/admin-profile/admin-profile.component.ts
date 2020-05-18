@@ -44,7 +44,7 @@ export class AdminProfileComponent implements OnInit {
         return;
       }
       this.userService.getUserActions(user.user_id).subscribe(res => {
-        this.actions = res;
+        this.actions = res.reverse();
       });
     });
   }

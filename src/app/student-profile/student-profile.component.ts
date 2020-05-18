@@ -35,9 +35,9 @@ export class StudentProfileComponent implements OnInit {
         this.userService.getUserById(params.id).subscribe((user: User) => {
           this.user = user;
           this.grades = this.user.courses_grades;
-          this.actions = this.user.actions;
+          this.actions = this.user.actions.reverse();
           this.userService
-            .getUserCourses(this.user.user_id)
+            .getUserCourses(this.user.id)
             .subscribe((courses: any) => {
               if (!courses.error) {
                 this.courses = courses;
@@ -67,7 +67,7 @@ export class StudentProfileComponent implements OnInit {
             this.userService
               .getUserActions(this.user.user_id)
               .subscribe(actions => {
-                this.actions = actions;
+                this.actions = actions.reverse();
               });
           }
         );
@@ -77,7 +77,9 @@ export class StudentProfileComponent implements OnInit {
 
   getInitials(currentUser: User) {
     let initials = '';
-    initials = currentUser.first_name[0] + currentUser.last_name[0];
+    if (currentUser) {
+      initials = `${currentUser.first_name[0]} ${currentUser.last_name[0]}`;
+    }
     return initials;
   }
 

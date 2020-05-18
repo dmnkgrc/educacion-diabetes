@@ -50,12 +50,7 @@ export class UserService {
     });
     return this.http
       .get(this.rootURL + this.studentsEndpoint, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public getUserById(userId: any): Observable<any> {
@@ -66,12 +61,7 @@ export class UserService {
     });
     return this.http
       .get(this.rootURL + this.getUserEndpoint + userId, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public getUserGrades(userId: any): Observable<any> {
@@ -84,12 +74,7 @@ export class UserService {
       .get(this.rootURL + this.getUserEndpoint + userId + '/grades', {
         headers,
       })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public getUserCourses(userId: any): Observable<any> {
@@ -100,12 +85,7 @@ export class UserService {
     });
     return this.http
       .get(this.rootURL + `/users/${userId}/courses`, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public getUserActions(userId: any): Observable<any> {
@@ -116,12 +96,7 @@ export class UserService {
     });
     return this.http
       .get(this.rootURL + `/users/${userId}/actions`, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public deleteUserById(userId: any): Observable<any> {
@@ -132,12 +107,7 @@ export class UserService {
     });
     return this.http
       .delete(this.rootURL + this.getUserEndpoint + userId, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public updateUser(user: any): Observable<any> {
@@ -224,12 +194,7 @@ export class UserService {
         },
         { headers }
       )
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public editCluster(data: any, id: number): Observable<any> {
@@ -250,12 +215,7 @@ export class UserService {
         },
         { headers }
       )
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 
   public deleteCluster(clusterId: any): Observable<any> {
@@ -268,11 +228,6 @@ export class UserService {
       .delete(`${this.rootURL}${this.clustersEndpoint}/${clusterId}`, {
         headers,
       })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
+      .pipe(catchError(error => of(error)));
   }
 }

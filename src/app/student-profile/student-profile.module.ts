@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from '../auth/auth.guard';
 import { StudentProfileComponent } from './student-profile.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const studentProfileRoutes: Routes = [
   {
@@ -20,6 +21,7 @@ const studentProfileRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(studentProfileRoutes),
+    ScrollingModule,
   ],
   exports: [StudentProfileComponent],
 })
