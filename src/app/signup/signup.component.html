@@ -147,66 +147,6 @@
                     <div class="form-group">
                       <div class="form-label-group" style="text-align:start">
                         <input
-                          type="text"
-                          id="inputAddress"
-                          formControlName="address"
-                          class="form-control"
-                          placeholder="Dirección"
-                          [ngClass]="{
-                            'is-invalid': submitted && f.address.errors
-                          }"
-                          required
-                          autofocus
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <div class="form-label-group" style="text-align:start">
-                        <input
-                          type="number"
-                          pattern="[0-9]*"
-                          id="inputTelephone"
-                          formControlName="telephone"
-                          class="form-control"
-                          placeholder="Teléfono"
-                          [ngClass]="{
-                            'is-invalid': submitted && f.telephone.errors
-                          }"
-                          required
-                          autofocus
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <div class="form-label-group" style="text-align:start">
-                        <input
-                          type="number"
-                          pattern="[0-9]*"
-                          id="inputCellphone"
-                          formControlName="cellphone"
-                          class="form-control"
-                          placeholder="Celular"
-                          [ngClass]="{
-                            'is-invalid': submitted && f.cellphone.errors
-                          }"
-                          required
-                          autofocus
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <div class="form-label-group" style="text-align:start">
-                        <input
                           type="email"
                           id="inputEmail"
                           formControlName="email"
@@ -271,7 +211,23 @@
                           [(ngModel)]="acceptance"
                           [ngModelOptions]="{ standalone: true }"
                         />
-                        He leído y acepto el <a routerLink="/privacidad" style="text-decoration: underline;">Aviso de Privacidad</a>, la <a routerLink="/legal" style="text-decoration: underline;">Declaración Legal</a> y la <a routerLink="/cookies" style="text-decoration: underline;">Política sobre cookies</a>
+                        He leído y acepto el
+                        <a
+                          routerLink="/privacidad"
+                          style="text-decoration: underline;"
+                          >Aviso de Privacidad</a
+                        >, la
+                        <a
+                          routerLink="/legal"
+                          style="text-decoration: underline;"
+                          >Declaración Legal</a
+                        >
+                        y la
+                        <a
+                          routerLink="/cookies"
+                          style="text-decoration: underline;"
+                          >Política sobre cookies</a
+                        >
                       </label>
                     </div>
                   </div>
