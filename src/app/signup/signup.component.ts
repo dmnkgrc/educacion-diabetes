@@ -77,7 +77,7 @@ export class SignupComponent implements OnInit {
     this.userService.signup(data).subscribe(res => {
       if (!res.error) {
         this.sessionService.setCurrentUser(res);
-        this.router.navigateByUrl('courses');
+        this.router.navigateByUrl('/');
         return;
       }
 
