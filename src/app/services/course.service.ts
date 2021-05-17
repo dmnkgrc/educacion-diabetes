@@ -32,22 +32,6 @@ export class CourseService {
     return course;
   }
 
-  public getPresentationComments(id): Observable<any> {
-    const headers: HttpHeaders = new HttpHeaders({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('token'),
-    });
-    return this.http
-      .get(`${this.rootURL}/presentations/${id}/comments`, { headers })
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-        }),
-        catchError(error => of(error))
-      );
-  }
-
   public getLastCourses(): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       Accept: 'application/json',

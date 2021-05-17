@@ -35,7 +35,7 @@
                         <b><span>{{course.name}}</span></b>
                       </div>
                       <div class="row">
-                        <span> <i class="fas fa-eye"></i>{{course.viewed_lessons_count}} Comentarios: {{course.comments_count}}</span>
+                        <span> <i class="fas fa-eye"></i>{{course.viewed_lessons_count}}</span>
                       </div>
                       <div class="row">
                         <button class="btn btn-lg btn-pink" style="color: white" (click)="navigateToCourse(course)">
@@ -49,32 +49,6 @@
                   </div>
                 </div>
               </div>
-        </div>
-      </div>
-      <div class="col-md-5 md-offset-1" style="overflow-y: scroll; height:400px;">
-        <div class="card">
-          <div *ngIf="comments$ | async as comments" class="card-body">
-            <h5>Comentarios</h5>
-            <div *ngFor="let comment of comments" style="border-bottom: 1px solid gray;">
-              <div class="row">
-                <div class="col-md-2 student-initials">
-                    <h3>{{getInitials(comment?.user)}}</h3>
-                </div>
-                <div class="col-md-5">
-                  <b><span>{{comment?.user.first_name}} {{comment?.user.last_name}}</span></b>
-                </div>
-                <div class="col-md-4">
-                  <span>{{comment?.created_at | date: 'dd/MM/yyyy'}}</span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  {{comment?.content}}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="col-md-3">

@@ -1,278 +1,508 @@
 <div class="row">
-  <div class="col-md-12 content-container" style="padding: 0px 40px;" *ngIf="{courses: courses$ | async, students: students$ | async, clusters: clusters$ | async} as values">
-      <div class="row" *ngIf="!showCourse && !showActivity" style="padding: 0 10px; height: 100%;">
-        <div class="col-12 col-md-3" style="padding: 0 20px; height: 100%;" *ngIf="!showCourse">
-          <button class="col-12 create-button" data-toggle="modal" data-target="#createCourseModal">Crear Curso</button>
-          <button class="col-12 create-button" data-toggle="modal" data-target="#createPresentationModal">Crear Presentación</button>
-          <button class="col-12 create-button" data-toggle="modal" data-target="#createActivityModal">Crear Actividad</button>
-        </div>
-        <div class="col-12 col-md-9">
-          <div class="courses">
-              <div class="course" *ngFor="let course of values.courses">
-                  <div class="row" style="padding: 0px !important;">
-                    <div class="col-12 course-info">
-                      <div class="upper">
-                          <h2>
-                            {{course.name}}
-                            <i-feather name="trash-2" class="trash-icon" (click)="deleteCourse($event, course.id)"></i-feather>
-                            <i-feather id="edit-courses-{{course.id}}" name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createCourseModal" (click)="editCourse($event, course)"></i-feather>
-                          </h2>
-                      </div>
-                      <div class="presentations">
-                        <ul>
-                          <li *ngFor="let element of course.elements" class="presentation">
-                            <div *ngIf="element.frame; else activity" (click)="selectPresentation(element, $event)" class="presentation-div">
-                                <span class="presentation-position">{{element.position}}</span>
-                                <span class="presentation-title">{{element.title}}</span>
-                                <span class="presentation-date">{{element.created_at | formatDate}}</span>
-                                <span class="presentation-icons">
-                                  <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createPresentationModal" (click)="editPresentation($event, element, course.id)"></i-feather>
-                                  <i-feather name="trash-2" class="trash-icon" (click)="deletePresentation($event, element.id)"></i-feather>
-                                </span>
-                            </div>
-                            <ng-template #activity>
-                              <div class="presentation-div" (click)="selectActivity(element, $event)">
-                                <span class="presentation-position">{{element.position}}</span>
-                                <span class="presentation-title"><i class="fa fa-clipboard-list"></i> {{element.name}}</span>
-                                <span class="presentation-date">{{element.created_at | formatDate}}</span>
-                                <span class="presentation-icons">
-                                  <i-feather name="edit-2" class="edit-icon" data-toggle="modal" data-target="#createActivityModal" (click)="editActivity($event, element, course.id)"></i-feather>
-                                  <i-feather name="trash-2" class="trash-icon" (click)="deleteActivity($event, element.id)"></i-feather>
-                                </span>
-                              </div>
-                            </ng-template>
-
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+  <div
+    class="col-md-12 content-container"
+    style="padding: 0px 40px;"
+    *ngIf="{
+      courses: courses$ | async,
+      students: students$ | async,
+      clusters: clusters$ | async
+    } as values"
+  >
+    <div
+      class="row"
+      *ngIf="!showCourse && !showActivity"
+      style="padding: 0 10px; height: 100%;"
+    >
+      <div
+        class="col-12 col-md-3"
+        style="padding: 0 20px; height: 100%;"
+        *ngIf="!showCourse"
+      >
+        <button
+          class="col-12 create-button"
+          data-toggle="modal"
+          data-target="#createCourseModal"
+        >
+          Crear Curso
+        </button>
+        <button
+          class="col-12 create-button"
+          data-toggle="modal"
+          data-target="#createPresentationModal"
+        >
+          Crear Presentación
+        </button>
+        <button
+          class="col-12 create-button"
+          data-toggle="modal"
+          data-target="#createActivityModal"
+        >
+          Crear Actividad
+        </button>
+      </div>
+      <div class="col-12 col-md-9">
+        <div class="courses">
+          <div class="course" *ngFor="let course of values.courses">
+            <div class="row" style="padding: 0px !important;">
+              <div class="col-12 course-info">
+                <div class="upper">
+                  <h2>
+                    {{ course.name }}
+                    <i-feather
+                      name="trash-2"
+                      class="trash-icon"
+                      (click)="deleteCourse($event, course.id)"
+                    ></i-feather>
+                    <i-feather
+                      id="edit-courses-{{ course.id }}"
+                      name="edit-2"
+                      class="edit-icon"
+                      data-toggle="modal"
+                      data-target="#createCourseModal"
+                      (click)="editCourse($event, course)"
+                    ></i-feather>
+                  </h2>
                 </div>
-          </div>
-
-        </div>
-      </div>
-
-      <button *ngIf="showCourse || showActivity" class="back-button" (click)="showCourse ? toggleCourse() : toggleActivity()">
-       Volver
-      </button>
-      <div *ngIf="showCourse" class="embed-responsive embed-responsive-16by9" style="margin-top: 40px">
-        <iframe [src]="this.frameUrl" class="resp-iframe" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </div>
-
-      <div *ngIf="showCourse && selectedCourse.audio_url">
-        <audio autoplay style="display: none;" id="player">
-          <source [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]" type="audio/mpeg">
-        Your browser does not support the audio element.
-        </audio>
-      </div>
-
-      <div *ngIf="showActivity" id="show-activity">
-
-      </div>
-
-      <div class="modal fade create-presentation-modal" id="createPresentationModal" tabindex="-1" role="dialog" aria-labelledby="createPresentationModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="createPresentationModalLabel">Crear Presentación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <input type="text" class="form-control" [(ngModel)]="title" placeholder="Título de la presentación (requerido)" />
-                <input type="text" class="form-control" [(ngModel)]="frame" placeholder="Url de la presentación (requerido)" />
-                <ng-select
-                  [items]="values.courses"
-                  bindValue="id"
-                  [closeOnSelect]="true"
-                  [searchable]="false"
-                  bindLabel="name"
-                  placeholder="Seleccionar cursos (requerido)"
-                  [(ngModel)]="coursesId"
-                  style="margin-bottom: 20px">
-                </ng-select>
-                <input type="text" class="form-control" [(ngModel)]="position" placeholder="Posición de la presentación (requerido)" />
-                <input class="form-control" type="text" [(ngModel)]="audioUrl" placeholder="URL del audio"/>
-                <textarea class="form-control" [(ngModel)]="audioSync" placeholder='Sync de audio con presentación, ejemplo: "1":"0,5","1.1":"5,16","2":"16,37"'>
-                </textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createPresentation()">Guardar</button>
-              </div>
-            </div>
-          </div>
-      </div>
-
-      <div class="modal fade create-course-modal" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="createCourseModalLabel">Crear Curso</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre del curso (requerido)" />
-              <textarea class="form-control" [(ngModel)]="description" placeholder="Descripción del curso (requerido)">
-              </textarea>
-              <ng-select
-                  [items]="values.students"
-                  bindValue="id"
-                  [closeOnSelect]="false"
-                  [multiple]="true"
-                  [searchable]="true"
-                  bindLabel="first_name"
-                  placeholder="Seleccionar alumnos"
-                  [(ngModel)]="usersId"
-                  style="margin-bottom: 20px">
-                </ng-select>
-                <ng-select
-                  [items]="values.clusters"
-                  bindValue="id"
-                  [closeOnSelect]="false"
-                  [multiple]="true"
-                  [searchable]="true"
-                  bindLabel="name"
-                  placeholder="Seleccionar clusters"
-                  [(ngModel)]="clustersId"
-                  style="margin-bottom: 20px">
-                </ng-select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createCourse()">Guardar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-    <br>
-    <div *ngIf="showCourse">
-        <div>
-            <div class="row">
-              <div class="col-md-4">
-                  <span (click)="changeOption('comments')" [ngClass]="{'bolder': chosenOption === 'comments'}">Comentarios</span>
-              </div>
-              <div class="col-md-4">
-                  <span (click)="changeOption('bibliography')" [ngClass]="{'bolder': chosenOption === 'bibliography'}">Bibliografía</span>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div *ngIf="chosenOption ==='comments'">
-            <div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-4">
-                    <label>Nuevo comentario</label>
-                  </div>
-                  <div class="col-md-4"></div>
-                  <div class="col-md-4">
-                    <button class="btn btn-primary" (click)="createComment()">Crear comentario</button>
-                  </div>
-                </div>
-                <br>
-                <textarea class="form-control" rows="5" [disabled]="content === null ? true : false" [(ngModel)]="content">{{content}}</textarea>
-              </div>
-            </div>
-            <div>
-                <div>
-                    <div class="card" *ngFor="let comment of comments" style="margin-bottom: 5%">
-                        <div class="card-body">
-                          <div class="row">
-                              <div class="col-md-1 initials">
-                                <h3>{{getInitials(comment?.user)}}</h3>
-                              </div>
-                              <div class="col-md-10 md-offset-1">
-                                <h5 class="card-title">{{comment?.user.first_name}} {{comment?.user.last_name}}</h5>
-                                <span class="card-text pull-left">{{comment.content}}</span>
-                              </div>
-                          </div>
+                <div class="presentations">
+                  <ul>
+                    <li
+                      *ngFor="let element of course.elements"
+                      class="presentation"
+                    >
+                      <div
+                        *ngIf="element.frame; else activity"
+                        (click)="selectPresentation(element, $event)"
+                        class="presentation-div"
+                      >
+                        <span class="presentation-position">{{
+                          element.position
+                        }}</span>
+                        <span class="presentation-title">{{
+                          element.title
+                        }}</span>
+                        <span class="presentation-date">{{
+                          element.created_at | formatDate
+                        }}</span>
+                        <span class="presentation-icons">
+                          <i-feather
+                            name="edit-2"
+                            class="edit-icon"
+                            data-toggle="modal"
+                            data-target="#createPresentationModal"
+                            (click)="
+                              editPresentation($event, element, course.id)
+                            "
+                          ></i-feather>
+                          <i-feather
+                            name="trash-2"
+                            class="trash-icon"
+                            (click)="deletePresentation($event, element.id)"
+                          ></i-feather>
+                        </span>
+                      </div>
+                      <ng-template #activity>
+                        <div
+                          class="presentation-div"
+                          (click)="selectActivity(element, $event)"
+                        >
+                          <span class="presentation-position">{{
+                            element.position
+                          }}</span>
+                          <span class="presentation-title"
+                            ><i class="fa fa-clipboard-list"></i>
+                            {{ element.name }}</span
+                          >
+                          <span class="presentation-date">{{
+                            element.created_at | formatDate
+                          }}</span>
+                          <span class="presentation-icons">
+                            <i-feather
+                              name="edit-2"
+                              class="edit-icon"
+                              data-toggle="modal"
+                              data-target="#createActivityModal"
+                              (click)="editActivity($event, element, course.id)"
+                            ></i-feather>
+                            <i-feather
+                              name="trash-2"
+                              class="trash-icon"
+                              (click)="deleteActivity($event, element.id)"
+                            ></i-feather>
+                          </span>
                         </div>
-                        <div style="position:absolute; right: 10px; top: 20px;">{{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</div>
-                      </div>
+                      </ng-template>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
           </div>
-          <div *ngIf="chosenOption ==='bibliography'">
-              <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Nueva bibliografía</label>
-                    </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                      <button class="btn btn-primary" (click)="createReference()">Crear bibliografía</button>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="col">
-                        <label for="">Datos de referencia</label>
-                        <input class="form-control" type="text" [(ngModel)]="bibBody">
-                    </div>
-                    <div class="col">
-                        <label for="">Url</label>
-                        <input class="form-control" type="text" [(ngModel)]="bibUrl">
-                    </div>
-                  </div>
-                </div>
-              <div>
-                <h3>Bibliografía</h3>
-                <ul>
-                  <li *ngFor="let ref of references">
-                    <span>{{ref.body}} {{ref.url}}</span>
-                  </li>
-                </ul>
-              </div>
-          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="modal fade create-activity-modal" id="createActivityModal" tabindex="-1" role="dialog" aria-labelledby="createActivityModalLabel" aria-hidden="true">
+    <button
+      *ngIf="showCourse || showActivity"
+      class="back-button"
+      (click)="showCourse ? toggleCourse() : toggleActivity()"
+    >
+      Volver
+    </button>
+    <div
+      *ngIf="showCourse"
+      class="embed-responsive embed-responsive-16by9"
+      style="margin-top: 40px"
+    >
+      <iframe
+        [src]="this.frameUrl"
+        class="resp-iframe"
+        scrolling="no"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div *ngIf="showCourse && selectedCourse.audio_url">
+      <audio autoplay style="display: none;" id="player">
+        <source
+          [src]="selectedCourse.audio_url + '#t=' + times[currentSlide]"
+          type="audio/mpeg"
+        />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div *ngIf="showActivity" id="show-activity"></div>
+
+    <div
+      class="modal fade create-presentation-modal"
+      id="createPresentationModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="createPresentationModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="createActivityModalLabel">Crear Actividad</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title" id="createPresentationModalLabel">
+              Crear Presentación
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nombre de la actividad (requerido)" />
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="title"
+              placeholder="Título de la presentación (requerido)"
+            />
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="frame"
+              placeholder="Url de la presentación (requerido)"
+            />
             <ng-select
-                  [items]="values.courses"
-                  bindValue="id"
-                  [closeOnSelect]="true"
-                  [searchable]="false"
-                  bindLabel="name"
-                  placeholder="Seleccionar cursos (requerido)"
-                  [(ngModel)]="coursesId"
-                  style="margin-bottom: 20px">
+              [items]="values.courses"
+              bindValue="id"
+              [closeOnSelect]="true"
+              [searchable]="false"
+              bindLabel="name"
+              placeholder="Seleccionar cursos (requerido)"
+              [(ngModel)]="coursesId"
+              style="margin-bottom: 20px"
+            >
             </ng-select>
-            <input type="text" class="form-control" [(ngModel)]="position" placeholder="Posición de la actividad (requerido)" />
-            <div *ngFor="let question of questions; let i = index">
-              <h3>Pregunta {{i + 1}}</h3>
-              <input type="text" class="form-control" [(ngModel)]="question.title" placeholder="Título de la pregunta (requerido)" />
-              <div *ngFor="let choice of question.choices; let j = index">
-                <h4>Opción {{j + 1}}</h4>
-                <input type="text" class="form-control" [(ngModel)]="question.choices[j]" placeholder="Opción (requerido)" />
-              </div>
-              <button (click)="addChoice(i)" class="agregar-el">Agregar opción</button>
-              <button (click)="removeChoice(i)" class="eliminar-el" *ngIf="question.choices.length > 1">Eliminar opción</button>
-              <input type="text" class="form-control" [(ngModel)]="question.correctAnswer" placeholder="Respuesta correcta (requerido), ejemplo: Diabetes Tipo 1" />
-            </div>
-            <button (click)="addQuestion()" class="agregar-el">Agregar pregunta</button>
-            <button (click)="removeQuestion()" class="eliminar-el" *ngIf="questions.length > 1">Eliminar pregunta</button>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="position"
+              placeholder="Posición de la presentación (requerido)"
+            />
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="audioUrl"
+              placeholder="URL del audio"
+            />
+            <textarea
+              class="form-control"
+              [(ngModel)]="audioSync"
+              placeholder='Sync de audio con presentación, ejemplo: "1":"0,5","1.1":"5,16","2":"16,37"'
+            >
+            </textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createActivity()">Guardar</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              (click)="createPresentation()"
+            >
+              Guardar
+            </button>
           </div>
         </div>
       </div>
+    </div>
+
+    <div
+      class="modal fade create-course-modal"
+      id="createCourseModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="createCourseModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createCourseModalLabel">Crear Curso</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              placeholder="Nombre del curso (requerido)"
+            />
+            <textarea
+              class="form-control"
+              [(ngModel)]="description"
+              placeholder="Descripción del curso (requerido)"
+            >
+            </textarea>
+            <ng-select
+              [items]="values.students"
+              bindValue="id"
+              [closeOnSelect]="false"
+              [multiple]="true"
+              [searchable]="true"
+              bindLabel="full_name"
+              placeholder="Seleccionar alumnos"
+              [(ngModel)]="usersId"
+              style="margin-bottom: 20px"
+            >
+            </ng-select>
+            <ng-select
+              [items]="values.clusters"
+              bindValue="id"
+              [closeOnSelect]="false"
+              [multiple]="true"
+              [searchable]="true"
+              bindLabel="name"
+              placeholder="Seleccionar clusters"
+              [(ngModel)]="clustersId"
+              style="margin-bottom: 20px"
+            >
+            </ng-select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              (click)="createCourse()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div *ngIf="showCourse">
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <span
+              (click)="changeOption('bibliography')"
+              [ngClass]="{ bolder: chosenOption === 'bibliography' }"
+              >Bibliografía</span
+            >
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div *ngIf="chosenOption === 'bibliography'">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nueva bibliografía</label>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <button class="btn btn-primary" (click)="createReference()">
+                Crear bibliografía
+              </button>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col">
+              <label for="">Datos de referencia</label>
+              <input class="form-control" type="text" [(ngModel)]="bibBody" />
+            </div>
+            <div class="col">
+              <label for="">Url</label>
+              <input class="form-control" type="text" [(ngModel)]="bibUrl" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Bibliografía</h3>
+          <ul>
+            <li *ngFor="let ref of references">
+              <span>{{ ref.body }} {{ ref.url }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade create-activity-modal"
+      id="createActivityModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="createActivityModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createActivityModalLabel">
+              Crear Actividad
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              placeholder="Nombre de la actividad (requerido)"
+            />
+            <ng-select
+              [items]="values.courses"
+              bindValue="id"
+              [closeOnSelect]="true"
+              [searchable]="false"
+              bindLabel="name"
+              placeholder="Seleccionar cursos (requerido)"
+              [(ngModel)]="coursesId"
+              style="margin-bottom: 20px"
+            >
+            </ng-select>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="position"
+              placeholder="Posición de la actividad (requerido)"
+            />
+            <div *ngFor="let question of questions; let i = index">
+              <h3>Pregunta {{ i + 1 }}</h3>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="question.title"
+                placeholder="Título de la pregunta (requerido)"
+              />
+              <div *ngFor="let choice of question.choices; let j = index">
+                <h4>Opción {{ j + 1 }}</h4>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="question.choices[j]"
+                  placeholder="Opción (requerido)"
+                />
+              </div>
+              <button (click)="addChoice(i)" class="agregar-el">
+                Agregar opción
+              </button>
+              <button
+                (click)="removeChoice(i)"
+                class="eliminar-el"
+                *ngIf="question.choices.length > 1"
+              >
+                Eliminar opción
+              </button>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="question.correctAnswer"
+                placeholder="Respuesta correcta (requerido), ejemplo: Diabetes Tipo 1"
+              />
+            </div>
+            <button (click)="addQuestion()" class="agregar-el">
+              Agregar pregunta
+            </button>
+            <button
+              (click)="removeQuestion()"
+              class="eliminar-el"
+              *ngIf="questions.length > 1"
+            >
+              Eliminar pregunta
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              (click)="createActivity()"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </div>

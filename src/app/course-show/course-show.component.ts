@@ -17,7 +17,6 @@ import { UserService } from '../services/user.service';
 import { AppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
-import { CommentService } from '../services/comment.service';
 import { BibliographyService } from '../services/bibliography.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { User } from '../models/user.model';
@@ -42,8 +41,7 @@ export class CourseShowComponent implements OnInit, OnDestroy {
   presentationId: any;
   userId: number;
   content: any;
-  comments: any;
-  chosenOption = 'comments';
+  chosenOption = 'bibliography';
   bibBody: any;
   bibUrl: any;
   references: any;
@@ -54,7 +52,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private userService: UserService,
     private store: Store<AppState>,
-    private commentService: CommentService,
     private changeDetector: ChangeDetectorRef,
     private bibliographyService: BibliographyService
   ) {
@@ -174,7 +171,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
 
   public selectPresentation(presentation: any) {
     this.presentationId = presentation.id;
-    this.getComments();
     this.getReferences();
     this.store.select(selectCurrentUser).subscribe(user => {
       this.userId = user.user_id;
@@ -186,26 +182,6 @@ export class CourseShowComponent implements OnInit, OnDestroy {
       audioSync = `{${audioSync}}`;
       this.times = JSON.parse(audioSync);
     }
-  }
-
-  public createComment() {
-    const data = {
-      content: this.content,
-      user: this.userId,
-      presentation: this.presentationId,
-    };
-    this.commentService.createComment(data).subscribe(res => {
-      this.comments.push(res);
-      this.content = '';
-    });
-  }
-
-  public getComments() {
-    this.courseService
-      .getPresentationComments(this.presentationId)
-      .subscribe(res => {
-        this.comments = res;
-      });
   }
 
   public createReference() {

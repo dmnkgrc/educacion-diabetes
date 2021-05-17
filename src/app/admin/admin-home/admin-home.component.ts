@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
-import { CommentService } from 'src/app/services/comment.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,16 +10,10 @@ import { Router } from '@angular/router';
 export class AdminHomeComponent implements OnInit {
   collapsedSideBar = true;
   courses$: any;
-  comments$: any;
-  constructor(
-    private courseService: CourseService,
-    private commentsService: CommentService,
-    private router: Router
-  ) {}
+  constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit() {
     this.courses$ = this.courseService.getLastCourses();
-    this.comments$ = this.commentsService.getLastComments();
   }
   toggleSideBar() {
     this.collapsedSideBar = !this.collapsedSideBar;

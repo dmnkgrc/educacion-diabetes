@@ -6,7 +6,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserService } from '../services/user.service';
 import { map } from 'rxjs/operators';
 import * as Survey from 'survey-angular';
-import { CommentService } from '../services/comment.service';
 import { AppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from '../store/selectors/user.selectors';
@@ -56,8 +55,7 @@ export class AdminCoursesComponent implements OnInit {
   collapsedSideBar = true;
   content: any;
   userId: any;
-  chosenOption = 'comments';
-  comments: any;
+  chosenOption = 'bibliography';
   bibBody: any;
   bibUrl: any;
   references: any;
@@ -66,7 +64,6 @@ export class AdminCoursesComponent implements OnInit {
     private courseService: CourseService,
     private sanitizer: DomSanitizer,
     private userService: UserService,
-    private commentService: CommentService,
     private store: Store<AppState>,
     private bibliographyService: BibliographyService,
     public route: ActivatedRoute
@@ -75,7 +72,7 @@ export class AdminCoursesComponent implements OnInit {
   onMessage(e) {
     if (
       e.origin.includes('localhost') ||
-      e.origin.includes('educacionendiabetes.com')
+      e.origin.includes('dialogodiabetescare.com')
     ) {
       return false;
     }
@@ -94,10 +91,12 @@ export class AdminCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.courses$ = this.courseService.getAllCourses();
-    this.courses$.subscribe(courses => {
-      this.route.params.subscribe(params => {
+    this.courses$.subscribe((courses) => {
+      this.route.params.subscribe((params) => {
         if (params.id) {
-          const course = courses.find(c => Number(c.id) === Number(params.id));
+          const course = courses.find(
+            (c) => Number(c.id) === Number(params.id)
+          );
           this.editCourse(null, course, true);
         }
       });
@@ -106,7 +105,7 @@ export class AdminCoursesComponent implements OnInit {
     this.clusters$ = this.userService.getAllClusters();
     this.store
       .select(selectCurrentUser)
-      .subscribe(user => (this.userId = user.user_id));
+      .subscribe((user) => (this.userId = user.user_id));
   }
 
   public toggleCourse() {
@@ -126,7 +125,6 @@ export class AdminCoursesComponent implements OnInit {
       return;
     }
     this.selectedCourse = presentation;
-    this.getComments();
     this.getReferences();
     this.frameUrl = this.getUrl(presentation.frame);
     let audioSync = presentation.audio_sync;
@@ -141,30 +139,10 @@ export class AdminCoursesComponent implements OnInit {
     this.chosenOption = option;
   }
 
-  public createComment() {
-    const data = {
-      content: this.content,
-      user: this.userId,
-      presentation: this.selectedCourse.id,
-    };
-    this.commentService.createComment(data).subscribe(res => {
-      this.comments.push(res);
-      this.content = '';
-    });
-  }
-
   getInitials(currentUser: User) {
     let initials = '';
     initials = currentUser.first_name[0] + currentUser.last_name[0];
     return initials;
-  }
-
-  public getComments() {
-    this.courseService
-      .getPresentationComments(this.selectedCourse.id)
-      .subscribe(res => {
-        this.comments = res;
-      });
   }
 
   public createReference() {
@@ -173,7 +151,7 @@ export class AdminCoursesComponent implements OnInit {
       url: this.bibUrl,
       presentation: this.selectedCourse.id,
     };
-    this.bibliographyService.createBibliography(data).subscribe(res => {
+    this.bibliographyService.createBibliography(data).subscribe((res) => {
       this.references.push(res);
       this.content = '';
     });
@@ -182,7 +160,7 @@ export class AdminCoursesComponent implements OnInit {
   public getReferences() {
     this.courseService
       .getPresentationBibliography(this.selectedCourse.id)
-      .subscribe(res => {
+      .subscribe((res) => {
         this.references = res;
       });
   }
@@ -214,7 +192,7 @@ export class AdminCoursesComponent implements OnInit {
     };
     const survey = new Survey.Model(json);
 
-    survey.onComplete.add(result => {
+    survey.onComplete.add((result) => {
       console.log(result);
     });
 
@@ -237,13 +215,13 @@ export class AdminCoursesComponent implements OnInit {
         this.editPresentationMode = false;
         return this.courseService
           .editPresentation(data, this.presentationId)
-          .subscribe(presentation => {
+          .subscribe((presentation) => {
             this.courses$ = this.courseService.getAllCourses();
           });
       }
       return this.courseService
         .createPresentation(data)
-        .subscribe(presentation => {
+        .subscribe((presentation) => {
           this.courses$ = this.courseService.getAllCourses();
         });
     }
@@ -253,7 +231,7 @@ export class AdminCoursesComponent implements OnInit {
   public createActivity() {
     let validQuestions = false;
     if (this.questions) {
-      validQuestions = this.questions.every(question => {
+      validQuestions = this.questions.every((question) => {
         return (
           question.title &&
           question.correctAnswer &&
@@ -272,7 +250,7 @@ export class AdminCoursesComponent implements OnInit {
         this.editActivityMode = false;
         return this.courseService
           .editActivity(data, this.activityId)
-          .subscribe(presentation => {
+          .subscribe((presentation) => {
             this.courses$ = this.courseService.getAllCourses();
           });
       }
@@ -351,8 +329,8 @@ export class AdminCoursesComponent implements OnInit {
     this.description = course.description;
     this.editCourseMode = true;
     this.courseId = course.id;
-    this.usersId = course.all_users.map(user => user.id);
-    this.clustersId = course.clusters.map(cluster => cluster.id);
+    this.usersId = course.all_users.map((user) => user.id);
+    this.clustersId = course.clusters.map((cluster) => cluster.id);
     if (popModal) {
       setTimeout(() => {
         const search = 'edit-courses-' + this.courseId;
