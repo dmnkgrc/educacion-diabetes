@@ -1,18 +1,18 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { CourseService } from '../services/course.service';
-import { Observable } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { UserService } from '../services/user.service';
-import { map } from 'rxjs/operators';
+import {Component, OnInit, HostListener} from '@angular/core';
+import {CourseService} from '../services/course.service';
+import {Observable} from 'rxjs';
+import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {UserService} from '../services/user.service';
+import {map} from 'rxjs/operators';
 import * as Survey from 'survey-angular';
-import { AppState } from '../store/state/app.state';
-import { Store } from '@ngrx/store';
-import { selectCurrentUser } from '../store/selectors/user.selectors';
-import { BibliographyService } from '../services/bibliography.service';
-import { User } from '../models/user.model';
-import { ActivatedRoute } from '@angular/router';
-import { $ } from 'protractor';
+import {AppState} from '../store/state/app.state';
+import {Store} from '@ngrx/store';
+import {selectCurrentUser} from '../store/selectors/user.selectors';
+import {BibliographyService} from '../services/bibliography.service';
+import {User} from '../models/user.model';
+import {ActivatedRoute} from '@angular/router';
+import {$} from 'protractor';
 
 @Component({
   selector: 'app-admin-courses',
@@ -197,7 +197,7 @@ export class AdminCoursesComponent implements OnInit {
     });
 
     setTimeout(() => {
-      Survey.SurveyNG.render('show-activity', { model: survey });
+      Survey.SurveyNG.render('show-activity', {model: survey});
     }, 100);
   }
 
@@ -370,3 +370,4 @@ export class AdminCoursesComponent implements OnInit {
     this.collapsedSideBar = !this.collapsedSideBar;
   }
 }
+
